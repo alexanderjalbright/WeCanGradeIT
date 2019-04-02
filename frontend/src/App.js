@@ -34,7 +34,17 @@ class App extends Component {
     ));
     return (
       <Router>
-        <nav>{assignLinks}</nav>
+        <nav>
+          <h1>
+            <span className="we">We</span>
+            <span className="can">Can</span>
+            <span className="grade">
+              {`{`}Grade{`}`}
+            </span>
+            <span className="it">IT</span>
+          </h1>
+          {assignLinks}
+        </nav>
         <div className="App">{parseAssignments}</div>
       </Router>
     );
