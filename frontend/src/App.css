@@ -1,0 +1,44 @@
+:root {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+
+  --we: rgb(213, 36, 103);
+  --can: rgb(82, 139, 69);
+  --grade: rgb(66, 156, 211);
+  --it: rgb(242, 103, 34);
+  --dark-color: #333;
+}
+
+nav {
+  background-color: var(--dark-color);
+  display: flex;
+  align-items: center;
+}
+
+nav span {
+  font-family: "Imprima", sans-serif;
+}
+
+nav a {
+  text-decoration: none;
+  color: #ddd;
+  margin: 0 1em;
+}
+
+.we {
+  color: var(--we);
+}
+
+.can {
+  color: var(--can);
+}
+
+.grade {
+  color: var(--grade);
+}
+
+.it {
+  color: var(--it);
+}
