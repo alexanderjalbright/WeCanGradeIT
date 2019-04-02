@@ -27,6 +27,7 @@ namespace WeCanGradeIT
             modelBuilder.Entity<Assignment>().HasData(
                 new Assignment()
                 {
+                    AssignmentId = 1,
                     Name = "University Clinic Hospital",
                     Type = "Individual",
                     Description = "Create a set of classes that contain information on employees at University Clinic Hospital.",
@@ -35,6 +36,7 @@ namespace WeCanGradeIT
                 },
                 new Assignment()
                 {
+                    AssignmentId = 2,
                     Name = "Professional Portfolio",
                     Type = "Individual",
                     Description = "Create a portfolio site highlighting your work that can be shared with potential employers.",
