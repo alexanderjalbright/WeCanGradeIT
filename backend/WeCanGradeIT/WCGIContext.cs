@@ -30,8 +30,7 @@ namespace WeCanGradeIT
                     Name = "University Clinic Hospital",
                     Type = "Individual",
                     Description = "Create a set of classes that contain information on employees at University Clinic Hospital.",
-                    Requirements = new List<string>()
-                        { "Base Class", "Derived Class", "Abstract Class"},
+                    Requirements = "* Base Class  * Derived Class  * Abstract Class  ",
                     DueDate = new DateTime(2019, 4, 24, 9, 30, 0)
                 },
                 new Assignment()
@@ -39,11 +38,9 @@ namespace WeCanGradeIT
                     Name = "Professional Portfolio",
                     Type = "Individual",
                     Description = "Create a portfolio site highlighting your work that can be shared with potential employers.",
-                    Requirements = new List<string>()
-                        { "HTML", "CSS", "CSS Grid or Flexbox" },
+                    Requirements = "* HTML  * CSS  * CSS Grid or Flexbox  ",
                     DueDate = new DateTime(2019, 3, 15, 9, 30, 0)
                 }
-
             );
         }
     }
