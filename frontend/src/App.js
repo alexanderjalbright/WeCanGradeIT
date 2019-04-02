@@ -23,7 +23,7 @@ class App extends Component {
     ) )
     return (
       <div className="App">
-        <p></p>
+        {parseAssignments}
       </div>
       
     );
