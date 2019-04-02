@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WeCanGradeIT.Models;
+using WeCanGradeIT.Repositories;
 
 namespace WeCanGradeIT.Controllers
 {
@@ -12,10 +13,17 @@ namespace WeCanGradeIT.Controllers
     [ApiController]
     public class AssignmentController : ControllerBase
     {
+        IAssignmentRepository repo;
+        public AssignmentController(IAssignmentRepository repo)
+        {
+            this.repo = repo;
+        }
+
         [HttpGet]
         public ActionResult<IEnumerable<Assignment>> Get()
         {
-            return new List<Assignment> { new Assignment(), new Assignment() };
+            var assignments = repo.GetAll().ToArray();
+            return assignments;
         }
     }
 }
