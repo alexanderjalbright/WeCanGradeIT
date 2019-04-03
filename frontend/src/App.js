@@ -11,7 +11,9 @@ class App extends Component {
     this.state = {
       assignments: [],
       students: [{ name: "Instructor", userName: "Instructor", studentId: 0 }],
-      user: { name: "" }, newName: ""
+      user: { name: "" }, 
+      newName: "", 
+      newUserName: ""
     };
   }
 
@@ -28,6 +30,33 @@ class App extends Component {
   }
 
   setNewName = text => {this.setState({newName: text})};
+  
+  setNewUserName = text => {this.setState({newUserName: text})};
+
+  submitNewStudent = () => {
+    const newStudent = {
+      name: this.state.newName,
+      userName: this.state.newUserName,
+    };
+    fetch("https://localhost:44397/api/student", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(newStudent)
+    }).then(res => {
+      if (res.ok) {
+        const newStudents = [...this.state.students, newStudent];
+        this.setState({
+          students: newStudents, newName: "", newUserName: ""
+        });
+        const addForm = document.querySelector(".add-form");
+        addForm.style.display = "none";
+        const addButton = document.querySelector(".add-button");
+        addButton.style.display = "block";
+      }
+    });
+    };
 
   render() {
     const parseAssignments = this.state.assignments.map(assignment => (
@@ -136,7 +165,10 @@ class App extends Component {
           {parseStudents}
           <Students roster={this.state.students} 
                     newName={this.state.newName}
-                    setNewName={this.setNewName}/>
+                    setNewName={this.setNewName}
+                    newUserName={this.state.newUserName}
+                    setNewUserName={this.setNewUserName}
+                    submitNewStudent={this.submitNewStudent}/>
         </div>
       </Router>
     );

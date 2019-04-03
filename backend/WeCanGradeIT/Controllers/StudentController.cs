@@ -37,6 +37,7 @@ namespace WeCanGradeIT.Controllers
         [HttpPost]
         public ActionResult<bool> Post([FromBody] Student student)
         {
+            student.StudentId = 0;
             repo.Create(student);
             return true;
         }
