@@ -10,7 +10,7 @@ class App extends Component {
     this.state = {
       assignments: [],
       students: [{ name: "Instructor", userName: "Instructor", studentId: 0 }],
-      user: {}
+      user: { name: "" }
     };
   }
 
@@ -29,11 +29,17 @@ class App extends Component {
   render() {
     const parseAssignments = this.state.assignments.map(assignment => (
       <Route
-        path={`/assignment/${assignment.assignmentId}`}
+        path={`/${this.state.user.userName}/assignments/${
+          assignment.assignmentId
+        }`}
         exact={true}
-        component={() => (
-          <Assignment key={assignment.assignmentId} assignment={assignment} />
-        )}
+        component={() =>
+          this.state.user.name === "Instructor" ? (
+            <h1>INSTRUCTOR PAGE</h1>
+          ) : (
+            <Assignment key={assignment.assignmentId} assignment={assignment} />
+          )
+        }
       />
     ));
 
@@ -46,9 +52,22 @@ class App extends Component {
     ));
 
     const assignLinks = this.state.assignments.map(assignment => (
-      <Link to={`/assignment/${assignment.assignmentId}`}>
-        {assignment.name}
-      </Link>
+      <Route
+        path={
+          this.state.user.userName === ""
+            ? ""
+            : `/${this.state.user.userName}/assignments`
+        }
+        component={() => (
+          <Link
+            to={`/${this.state.user.userName}/assignments/${
+              assignment.assignmentId
+            }`}
+          >
+            {assignment.name}
+          </Link>
+        )}
+      />
     ));
 
     const selectUserLinks = this.state.students.map(student => (
@@ -71,6 +90,16 @@ class App extends Component {
             </span>
             <span className="it">IT</span>
           </h1>
+          <Route
+            path={`/${this.state.user.userName}`}
+            exact={true}
+            component={() => (
+              <Link to={`/${this.state.user.userName}/assignments`}>
+                Assignments
+              </Link>
+            )}
+          />
+
           {assignLinks}
         </nav>
         <div className="App">
@@ -79,17 +108,21 @@ class App extends Component {
             exact={true}
             component={() => (
               <div>
+                <label>Select user:&nbsp;</label>
                 <select>{selectUserLinks}</select>
                 <Link
-                  to={`/${
+                  to={
                     this.state.user.name === "Instructor"
-                      ? `instructor`
-                      : `${this.state.user.userName}`
-                  }`}
+                      ? `/instructor`
+                      : `/${this.state.user.userName}`
+                  }
                 >
                   <button>Enter</button>
                 </Link>
-                <h2>{this.state.user.name} has been selected!</h2>
+                <h2>
+                  {this.state.user.name}
+                  {this.state.user.name === "" ? `` : ` has been selected!`}
+                </h2>
               </div>
             )}
           />
