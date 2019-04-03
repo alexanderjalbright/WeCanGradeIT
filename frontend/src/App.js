@@ -2,7 +2,9 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
 import React, { Component } from "react";
 import Assignment from "./components/Assignment";
+import Students from "./components/Students";
 import "./App.css";
+import { timingSafeEqual } from "crypto";
 
 class App extends Component {
   constructor() {
@@ -131,6 +133,7 @@ class App extends Component {
           />
           {parseAssignments}
           {parseStudents}
+          <Students roster={this.state.students}/>
         </div>
       </Router>
     );
