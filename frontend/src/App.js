@@ -109,7 +109,10 @@ class App extends Component {
             component={() => (
               <div>
                 <label>Select user:&nbsp;</label>
-                <select>{selectUserLinks}</select>
+                <select>
+                  <option />
+                  {selectUserLinks}
+                </select>
                 <Link
                   to={
                     this.state.user.name === "Instructor"
