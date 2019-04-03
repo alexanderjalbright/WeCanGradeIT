@@ -25,13 +25,16 @@ export default class Assignment extends Component {
           return (dueDate.slice(12,13))
         }
     }
+    var day = (dueDate.slice(8, 9) >= 1) ? dueDate.slice(8, 10) : dueDate.slice(9, 10);
+    var month = (dueDate.slice(5, 6) >= 1) ? dueDate.slice(5, 7) : dueDate.slice(6, 7);
 
     return (
       <div>
         <h1>{name}</h1>
         <p>{description}</p>
         <h2>{type}</h2>
-        <h2>Due: {dueDate.slice(5,7)}/{dueDate.slice(8,10)}/{dueDate.slice(0,4)} <br></br>{militaryToStandardTime()}{dueDate.slice(13,16)} {amPm()}</h2>
+        <h2>Due: {month}/{day}/{dueDate.slice(0,4)} 
+          <br></br>{militaryToStandardTime()}{dueDate.slice(13,16)} {amPm()}</h2>
         <ul>{renderArrayToHTMLList}</ul>
       </div>
     )
