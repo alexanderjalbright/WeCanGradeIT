@@ -11,6 +11,10 @@ namespace WeCanGradeIT.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        
+        [HttpGet("{id}")]
+        public ActionResult<Student> Get(int id)
+        {
+            return "value";
+        }
     }
 }
