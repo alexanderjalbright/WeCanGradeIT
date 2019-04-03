@@ -11,6 +11,7 @@ namespace WeCanGradeIT
     {
         
         public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<Student> Students { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -42,6 +43,21 @@ namespace WeCanGradeIT
                     Description = "Create a portfolio site highlighting your work that can be shared with potential employers.",
                     Requirements = "* HTML  * CSS  * CSS Grid or Flexbox  ",
                     DueDate = new DateTime(2019, 3, 15, 9, 30, 0)
+                }
+            );
+
+            modelBuilder.Entity<Student>().HasData(
+                new Student()
+                {
+                    StudentId = 1,
+                    Name = "Alex Albright",
+                    UserName = "alexanderjalbright"
+                },
+                new Student()
+                {
+                    StudentId = 2,
+                    Name = "Mary McGeary",
+                    UserName = "MaryMcGeary"
                 }
             );
         }
