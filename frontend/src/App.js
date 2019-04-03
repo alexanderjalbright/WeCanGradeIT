@@ -71,12 +71,7 @@ class App extends Component {
     ));
 
     const selectUserLinks = this.state.students.map(student => (
-      <option
-        value={student.name}
-        onClick={() => this.setState({ user: student })}
-      >
-        {student.name}
-      </option>
+      <option value={student.studentId}>{student.name}</option>
     ));
 
     return (
@@ -113,6 +108,14 @@ class App extends Component {
                   <option />
                   {selectUserLinks}
                 </select>
+                <button
+                  onClick={() => {
+                    const index = document.querySelector("select").value;
+                    this.setState({ user: this.state.students[index] });
+                  }}
+                >
+                  Select
+                </button>
                 <Link
                   to={
                     this.state.user.name === "Instructor"
