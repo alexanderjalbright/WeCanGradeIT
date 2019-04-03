@@ -3,7 +3,6 @@
   margin: 0;
   box-sizing: border-box;
   text-decoration: none;
-
   --we: rgb(213, 36, 103);
   --can: rgb(82, 139, 69);
   --grade: rgb(66, 156, 211);
@@ -18,7 +17,7 @@ nav {
 }
 
 nav span {
-  font-family: "Imprima", sans-serif;
+  font-family: 'Imprima', sans-serif;
 }
 
 nav a {
