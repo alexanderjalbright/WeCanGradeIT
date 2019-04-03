@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import Assignment from "./components/Assignment";
 import Students from "./components/Students";
 import "./App.css";
-import { timingSafeEqual } from "crypto";
 
 class App extends Component {
   constructor() {
@@ -12,7 +11,7 @@ class App extends Component {
     this.state = {
       assignments: [],
       students: [{ name: "Instructor", userName: "Instructor", studentId: 0 }],
-      user: { name: "" }
+      user: { name: "" }, newName: ""
     };
   }
 
@@ -27,6 +26,8 @@ class App extends Component {
         this.setState({ students: json });
       });
   }
+
+  setNewName = text => {this.setState({newName: text})};
 
   render() {
     const parseAssignments = this.state.assignments.map(assignment => (
@@ -133,7 +134,9 @@ class App extends Component {
           />
           {parseAssignments}
           {parseStudents}
-          <Students roster={this.state.students}/>
+          <Students roster={this.state.students} 
+                    newName={this.state.newName}
+                    setNewName={this.setNewName}/>
         </div>
       </Router>
     );
