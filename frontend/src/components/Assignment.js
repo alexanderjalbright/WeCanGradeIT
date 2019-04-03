@@ -30,9 +30,9 @@ export default class Assignment extends Component {
 
     return (
       <div>
-        <h1>{name}</h1>
+        <h1 style={{display:"inline"}}>{name}</h1>
+        <small> ({type})</small>
         <p>{description}</p>
-        <h2>{type}</h2>
         <h2>Due: {month}/{day}/{dueDate.slice(0,4)} 
           <br></br>{militaryToStandardTime()}{dueDate.slice(13,16)} {amPm()}</h2>
         <ul>{renderArrayToHTMLList}</ul>
