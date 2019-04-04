@@ -6,6 +6,7 @@ import Students from "./components/Students";
 import Nav from "./components/Nav";
 import Home from "./components/Home";
 import Grades from "./components/Grades";
+import {apiUrl} from "./lib/constants";
 import "./App.css";
 
 class App extends Component {
@@ -19,10 +20,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("https://localhost:44397/api/assignment")
+    fetch(`${apiUrl}assignment`)
       .then(res => res.json())
       .then(json => this.setState({ assignments: json }));
-    fetch("https://localhost:44397/api/student")
+    fetch(`${apiUrl}student`)
       .then(res => res.json())
       .then(json => {
         json.unshift(this.state.students[0]);
@@ -35,7 +36,7 @@ class App extends Component {
       name: newName,
       userName: newUserName
     };
-    fetch("https://localhost:44397/api/student", {
+    fetch(`${apiUrl}student`, {
       method: "POST",
       headers: {
         "Content-type": "application/json"
