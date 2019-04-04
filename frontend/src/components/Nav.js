@@ -33,6 +33,10 @@ export default class Nav extends Component {
           )}
         />
         <Route
+          path={`/${user.userName}`}
+          component={() => <Link to={`/${user.userName}/grades`}>Grades</Link>}
+        />
+        <Route
           path={`/instructor`}
           component={() => (
             <Link to={`/${user.userName}/students`}>Students</Link>
