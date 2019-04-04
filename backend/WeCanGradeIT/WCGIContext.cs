@@ -60,6 +60,42 @@ namespace WeCanGradeIT
                     UserName = "MaryMcGeary"
                 }
             );
+
+            modelBuilder.Entity<Grade>().HasData(
+                new Grade()
+                {
+                    GradeId = 1,
+                    AssignmentId = 1,
+                    StudentId = 1, 
+                    Value = 100,
+                    Comment = "Great Job!"
+                },
+                new Grade()
+                {
+                    GradeId = 2,
+                    AssignmentId = 1,
+                    StudentId = 2,
+                    Value = 96,
+                    Comment = "Fantastic!"
+                },
+                new Grade()
+                {
+                    GradeId = 3,
+                    AssignmentId = 2,
+                    StudentId = 1,
+                    Value = 97,
+                    Comment = "You're the Best!"
+                },
+                new Grade()
+                {
+                    GradeId = 4,
+                    AssignmentId = 2,
+                    StudentId = 2,
+                    Value = 100,
+                    Comment = "Can't be any better!"
+                }
+            );
+
         }
     }
 }
