@@ -77,7 +77,7 @@ class App extends Component {
     const parseStudents = this.state.students.map(student => (
       <Route
         key={student.studentId}
-        path={`/student/${student.studentId}`}
+        path={`/${student.username}/`}
         exact={true}
         component={() => <h1>Hi, {this.state.user.name}</h1>}
       />
@@ -92,7 +92,6 @@ class App extends Component {
             user={this.state.user}
             setUser={this.setUser}
           />
-
           {parseAssignments}
           {parseStudents}
           <Route

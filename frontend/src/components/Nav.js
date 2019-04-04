@@ -28,14 +28,12 @@ export default class Nav extends Component {
         </h1>
         <Route
           path={`/${user.userName}`}
-          exact={true}
           component={() => (
             <Link to={`/${user.userName}/assignments`}>Assignments</Link>
           )}
         />
         <Route
           path={`/instructor`}
-          exact={true}
           component={() => (
             <Link to={`/${user.userName}/students`}>Students</Link>
           )}
