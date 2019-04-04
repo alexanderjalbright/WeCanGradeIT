@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import React, { Component } from "react";
 import Assignment from "./components/Assignment";
 import Students from "./components/Students";
+import Nav from "./components/Nav";
+import Home from "./components/Home";
 import "./App.css";
 
 class App extends Component {
@@ -27,14 +29,6 @@ class App extends Component {
       });
   }
 
-  setNewName = text => {
-    this.setState({ newName: text });
-  };
-
-  setNewUserName = text => {
-    this.setState({ newUserName: text });
-  };
-
   submitNewStudent = (newName, newUserName) => {
     const newStudent = {
       name: newName,
@@ -58,9 +52,14 @@ class App extends Component {
     });
   };
 
+  setUser = student => {
+    this.setState({ user: student });
+  };
+
   render() {
     const parseAssignments = this.state.assignments.map(assignment => (
       <Route
+        key={assignment.assignmentId}
         path={`/${this.state.user.userName}/assignments/${
           assignment.assignmentId
         }`}
@@ -77,100 +76,23 @@ class App extends Component {
 
     const parseStudents = this.state.students.map(student => (
       <Route
+        key={student.studentId}
         path={`/student/${student.studentId}`}
         exact={true}
         component={() => <h1>Hi, {this.state.user.name}</h1>}
       />
     ));
 
-    const assignLinks = this.state.assignments.map(assignment => (
-      <Route
-        path={
-          this.state.user.userName === ""
-            ? ""
-            : `/${this.state.user.userName}/assignments`
-        }
-        component={() => (
-          <Link
-            to={`/${this.state.user.userName}/assignments/${
-              assignment.assignmentId
-            }`}
-          >
-            {assignment.name}
-          </Link>
-        )}
-      />
-    ));
-
-    const selectUserLinks = this.state.students.map(student => (
-      <option value={student.studentId}>{student.name}</option>
-    ));
-
     return (
       <Router>
-        <nav>
-          <h1>
-            <span className="we">We</span>
-            <span className="can">Can</span>
-            <span className="grade">
-              {`{`}Grade{`}`}
-            </span>
-            <span className="it">IT</span>
-          </h1>
-          <Route
-            path={`/${this.state.user.userName}`}
-            exact={true}
-            component={() => (
-              <Link to={`/${this.state.user.userName}/assignments`}>
-                Assignments
-              </Link>
-            )}
-          />
-          <Route
-            path={`/instructor`}
-            exact={true}
-            component={() => (
-              <Link to={`/${this.state.user.userName}/students`}>Students</Link>
-            )}
+        <Nav user={this.state.user} assignments={this.state.assignments} />
+        <div className="App">
+          <Home
+            students={this.state.students}
+            user={this.state.user}
+            setUser={this.setUser}
           />
 
-          {assignLinks}
-        </nav>
-        <div className="App">
-          <Route
-            path={`/`}
-            exact={true}
-            component={() => (
-              <div>
-                <label>Select user:&nbsp;</label>
-                <select>
-                  <option />
-                  {selectUserLinks}
-                </select>
-                <button
-                  onClick={() => {
-                    const index = document.querySelector("select").value;
-                    this.setState({ user: this.state.students[index] });
-                  }}
-                >
-                  Select
-                </button>
-                <Link
-                  to={
-                    this.state.user.name === "Instructor"
-                      ? `/instructor`
-                      : `/${this.state.user.userName}`
-                  }
-                >
-                  <button>Enter</button>
-                </Link>
-                <h2>
-                  {this.state.user.name}
-                  {this.state.user.name === "" ? `` : ` has been selected!`}
-                </h2>
-              </div>
-            )}
-          />
           {parseAssignments}
           {parseStudents}
           <Route
