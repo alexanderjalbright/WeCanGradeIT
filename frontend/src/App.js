@@ -64,7 +64,7 @@ class App extends Component {
         key={student.studentId}
         path={`/${student.username}/`}
         exact={true}
-        component={() => <h1>Hi, {this.state.user.name}</h1>}
+        component={ () => <h1>Hi, {this.state.user.name}</h1>}
       />
     ));
 
