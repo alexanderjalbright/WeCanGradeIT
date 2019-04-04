@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import parseMarkdown from '../parseMarkdown';
+import parseMarkdown from '../lib/parseMarkdown';
 
 export default class Assignment extends Component {
   render() {
