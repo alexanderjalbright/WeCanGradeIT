@@ -27,5 +27,11 @@ namespace WeCanGradeIT.Repositories
 
             return students;
         }
+
+        public void Create(Student student)
+        {
+            db.Add(student);
+            db.SaveChanges();
+        }
     }
 }

@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
 import React, { Component } from "react";
 import Assignment from "./components/Assignment";
+import Students from "./components/Students";
 import "./App.css";
 
 class App extends Component {
@@ -25,6 +26,37 @@ class App extends Component {
         this.setState({ students: json });
       });
   }
+
+  setNewName = text => {
+    this.setState({ newName: text });
+  };
+
+  setNewUserName = text => {
+    this.setState({ newUserName: text });
+  };
+
+  submitNewStudent = (newName, newUserName) => {
+    const newStudent = {
+      name: newName,
+      userName: newUserName
+    };
+    fetch("https://localhost:44397/api/student", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(newStudent)
+    }).then(res => {
+      if (res.ok) {
+        const newStudents = [...this.state.students, newStudent];
+        this.setState({ students: newStudents });
+        const addForm = document.querySelector(".add-form");
+        addForm.style.display = "none";
+        const addButton = document.querySelector(".add-button");
+        addButton.style.display = "block";
+      }
+    });
+  };
 
   render() {
     const parseAssignments = this.state.assignments.map(assignment => (
@@ -94,6 +126,13 @@ class App extends Component {
               </Link>
             )}
           />
+          <Route
+            path={`/instructor`}
+            exact={true}
+            component={() => (
+              <Link to={`/${this.state.user.userName}/students`}>Students</Link>
+            )}
+          />
 
           {assignLinks}
         </nav>
@@ -134,6 +173,20 @@ class App extends Component {
           />
           {parseAssignments}
           {parseStudents}
+          <Route
+            path={`/instructor/students`}
+            exact={true}
+            component={() => (
+              <Students
+                roster={this.state.students}
+                newName={this.state.newName}
+                setNewName={this.setNewName}
+                newUserName={this.state.newUserName}
+                setNewUserName={this.setNewUserName}
+                submitNewStudent={this.submitNewStudent}
+              />
+            )}
+          />
         </div>
       </Router>
     );

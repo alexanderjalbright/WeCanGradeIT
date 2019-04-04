@@ -37,5 +37,12 @@ namespace WeCanGradeIT.Tests
             var result = underTest.Get();
             Assert.Equal(2, result.Value.Count());
         }
+
+        [Fact]
+        public void Post_Creates_Student()
+        {
+            var result = underTest.Post(new Student());
+            Assert.True(result.Value);
+        }
     }
 }

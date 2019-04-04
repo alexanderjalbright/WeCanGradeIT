@@ -5,11 +5,9 @@ export default function parseMarkdown(reqs) {
     var useSpace = false;
 
     for (const c of reqs) {
-        if (c == '*') {
-            console.log(c);
+        if (c === '*') {
             reqNum++;
         } else {
-            console.log('char:' + c);
             if (c === ' ') {
                 useSpace = true;
             } else if (c === ' ' && prevChar === ' ') {

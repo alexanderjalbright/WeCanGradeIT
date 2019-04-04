@@ -3,7 +3,7 @@ import parseMarkdown from '../parseMarkdown';
 
 export default class Assignment extends Component {
   render() {
-    const {assignmentId, name, type, description, requirements, dueDate} = this.props.assignment;
+    const {name, type, description, requirements, dueDate} = this.props.assignment;
 
     const requirementsArray = parseMarkdown(requirements);
 
