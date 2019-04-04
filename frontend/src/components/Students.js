@@ -23,12 +23,12 @@ export default class Students extends Component {
 
   render() {
     const { roster } = this.props;
-    const rosterList = roster.map(student => (
+    const studentHome = roster.map(student => (
       <h1>{student.name === "Instructor" ? "" : student.name}</h1>
     ));
     return (
       <div>
-        {rosterList}
+        {studentHome}
         <button
           className="add-button"
           onClick={() => {

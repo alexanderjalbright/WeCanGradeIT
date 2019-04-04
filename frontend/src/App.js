@@ -5,6 +5,7 @@ import Assignments from "./components/Assignments";
 import Students from "./components/Students";
 import Nav from "./components/Nav";
 import Home from "./components/Home";
+import Grades from "./components/Grades";
 import "./App.css";
 
 class App extends Component {
@@ -81,8 +82,13 @@ class App extends Component {
           />
           {parseStudents}
           <Route
+            path={`/${this.state.user.userName}/grades`}
+            exact
+            component={() => <Grades user={this.state.user} />}
+          />
+          <Route
             path={`/instructor/students`}
-            exact={true}
+            exact
             component={() => (
               <Students
                 roster={this.state.students}
