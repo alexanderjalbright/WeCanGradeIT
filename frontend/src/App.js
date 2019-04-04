@@ -11,9 +11,7 @@ class App extends Component {
     this.state = {
       assignments: [],
       students: [{ name: "Instructor", userName: "Instructor", studentId: 0 }],
-      user: { name: "" },
-      newName: "",
-      newUserName: ""
+      user: { name: "" }
     };
   }
 
@@ -37,10 +35,10 @@ class App extends Component {
     this.setState({ newUserName: text });
   };
 
-  submitNewStudent = () => {
+  submitNewStudent = (newName, newUserName) => {
     const newStudent = {
-      name: this.state.newName,
-      userName: this.state.newUserName
+      name: newName,
+      userName: newUserName
     };
     fetch("https://localhost:44397/api/student", {
       method: "POST",
@@ -51,11 +49,7 @@ class App extends Component {
     }).then(res => {
       if (res.ok) {
         const newStudents = [...this.state.students, newStudent];
-        this.setState({
-          students: newStudents,
-          newName: "",
-          newUserName: ""
-        });
+        this.setState({ students: newStudents });
         const addForm = document.querySelector(".add-form");
         addForm.style.display = "none";
         const addButton = document.querySelector(".add-button");
