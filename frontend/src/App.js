@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
 import React, { Component } from "react";
-import Assignment from "./components/Assignment";
+import Assignments from "./components/Assignments";
 import Students from "./components/Students";
 import Nav from "./components/Nav";
 import Home from "./components/Home";
@@ -57,23 +57,6 @@ class App extends Component {
   };
 
   render() {
-    const parseAssignments = this.state.assignments.map(assignment => (
-      <Route
-        key={assignment.assignmentId}
-        path={`/${this.state.user.userName}/assignments/${
-          assignment.assignmentId
-        }`}
-        exact={true}
-        component={() =>
-          this.state.user.name === "Instructor" ? (
-            <h1>INSTRUCTOR PAGE</h1>
-          ) : (
-            <Assignment key={assignment.assignmentId} assignment={assignment} />
-          )
-        }
-      />
-    ));
-
     const parseStudents = this.state.students.map(student => (
       <Route
         key={student.studentId}
@@ -92,7 +75,10 @@ class App extends Component {
             user={this.state.user}
             setUser={this.setUser}
           />
-          {parseAssignments}
+          <Assignments
+            assignments={this.state.assignments}
+            user={this.state.user}
+          />
           {parseStudents}
           <Route
             path={`/instructor/students`}
