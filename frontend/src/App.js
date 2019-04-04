@@ -11,8 +11,8 @@ class App extends Component {
     this.state = {
       assignments: [],
       students: [{ name: "Instructor", userName: "Instructor", studentId: 0 }],
-      user: { name: "" }, 
-      newName: "", 
+      user: { name: "" },
+      newName: "",
       newUserName: ""
     };
   }
@@ -29,14 +29,18 @@ class App extends Component {
       });
   }
 
-  setNewName = text => {this.setState({newName: text})};
-  
-  setNewUserName = text => {this.setState({newUserName: text})};
+  setNewName = text => {
+    this.setState({ newName: text });
+  };
+
+  setNewUserName = text => {
+    this.setState({ newUserName: text });
+  };
 
   submitNewStudent = () => {
     const newStudent = {
       name: this.state.newName,
-      userName: this.state.newUserName,
+      userName: this.state.newUserName
     };
     fetch("https://localhost:44397/api/student", {
       method: "POST",
@@ -48,7 +52,9 @@ class App extends Component {
       if (res.ok) {
         const newStudents = [...this.state.students, newStudent];
         this.setState({
-          students: newStudents, newName: "", newUserName: ""
+          students: newStudents,
+          newName: "",
+          newUserName: ""
         });
         const addForm = document.querySelector(".add-form");
         addForm.style.display = "none";
@@ -56,7 +62,7 @@ class App extends Component {
         addButton.style.display = "block";
       }
     });
-    };
+  };
 
   render() {
     const parseAssignments = this.state.assignments.map(assignment => (
@@ -131,6 +137,13 @@ class App extends Component {
               </Link>
             )}
           />
+          <Route
+            path={`/instructor`}
+            exact={true}
+            component={() => (
+              <Link to={`/${this.state.user.userName}/students`}>Students</Link>
+            )}
+          />
 
           {assignLinks}
         </nav>
@@ -163,12 +176,20 @@ class App extends Component {
           />
           {parseAssignments}
           {parseStudents}
-          <Students roster={this.state.students} 
-                    newName={this.state.newName}
-                    setNewName={this.setNewName}
-                    newUserName={this.state.newUserName}
-                    setNewUserName={this.setNewUserName}
-                    submitNewStudent={this.submitNewStudent}/>
+          <Route
+            path={`/instructor/students`}
+            exact={true}
+            component={() => (
+              <Students
+                roster={this.state.students}
+                newName={this.state.newName}
+                setNewName={this.setNewName}
+                newUserName={this.state.newUserName}
+                setNewUserName={this.setNewUserName}
+                submitNewStudent={this.submitNewStudent}
+              />
+            )}
+          />
         </div>
       </Router>
     );
