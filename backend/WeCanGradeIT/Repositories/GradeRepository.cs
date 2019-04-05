@@ -6,7 +6,7 @@ using WeCanGradeIT.Models;
 
 namespace WeCanGradeIT.Repositories
 {
-    public class GradeRepository
+    public class GradeRepository : IGradeRepository
     {
         WCGIContext db;
 
