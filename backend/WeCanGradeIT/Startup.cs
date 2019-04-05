@@ -38,6 +38,7 @@ namespace WeCanGradeIT
             services.AddDbContext<WCGIContext>();
             services.AddScoped<IAssignmentRepository, AssignmentRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<IGradeRepository, GradeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
