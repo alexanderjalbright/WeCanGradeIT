@@ -14,7 +14,11 @@ export default class Assignments extends Component {
           user.name === "Instructor" ? (
             <h1>INSTRUCTOR PAGE</h1>
           ) : (
-            <Assignment key={assignment.assignmentId} assignment={assignment} />
+            <Assignment
+              key={assignment.assignmentId}
+              assignment={assignment}
+              user={user}
+            />
           )
         }
       />
