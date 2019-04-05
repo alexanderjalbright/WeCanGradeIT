@@ -26,9 +26,22 @@ namespace WeCanGradeIT.Controllers
         public ActionResult<bool> Post(int studentId, int assignmentId, [FromBody] string repoUrl)
         {
             var student = studentRepo.GetById(studentId);
-            var theGrade = student.Grades.Single(grade => grade.AssignmentId == assignmentId);
+            bool exists = false;
+            foreach(var grade in student.Grades)
+            {
+                if(grade.AssignmentId == assignmentId)
+                {
+                    exists = true;
+                }
+            }
 
-            if (theGrade.GradeId == 0)
+            if (exists)
+            {
+                var theGrade = student.Grades.Single(grade => grade.AssignmentId == assignmentId);
+                theGrade.RepoUrl = repoUrl;
+                gradeRepo.Edit(theGrade);
+            }
+            else
             {
                 var newGrade = new Grade()
                 {
@@ -37,11 +50,6 @@ namespace WeCanGradeIT.Controllers
                     RepoUrl = repoUrl
                 };
                 gradeRepo.Create(newGrade);
-            }
-            else
-            {
-                theGrade.RepoUrl = repoUrl;
-                gradeRepo.Edit(theGrade);
             }
 
             return true;
