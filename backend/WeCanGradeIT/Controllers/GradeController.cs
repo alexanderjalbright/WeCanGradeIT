@@ -13,17 +13,17 @@ namespace WeCanGradeIT.Controllers
     [ApiController]
     public class GradeController : ControllerBase
     {
-        GradeRepository gradeRepo;
-        StudentRepository studentRepo;
+        IGradeRepository gradeRepo;
+        IStudentRepository studentRepo;
 
-        public GradeController(GradeRepository gradeRepo, StudentRepository studentRepo)
+        public GradeController(IGradeRepository gradeRepo, IStudentRepository studentRepo)
         {
             this.gradeRepo = gradeRepo;
             this.studentRepo = studentRepo;
         }
 
         [HttpPost("{studentId}/{assignmentId}")]
-        public void Post(int studentId, int assignmentId, [FromBody] string repoUrl)
+        public ActionResult<bool> Post(int studentId, int assignmentId, [FromBody] string repoUrl)
         {
             var student = studentRepo.GetById(studentId);
             var theGrade = student.Grades.Single(grade => grade.AssignmentId == assignmentId);
@@ -43,6 +43,8 @@ namespace WeCanGradeIT.Controllers
                 theGrade.RepoUrl = repoUrl;
                 gradeRepo.Edit(theGrade);
             }
+
+            return true;
         }   
     }
 }
