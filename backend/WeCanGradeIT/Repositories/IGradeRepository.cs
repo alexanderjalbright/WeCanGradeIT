@@ -9,7 +9,7 @@ namespace WeCanGradeIT.Repositories
     public interface IGradeRepository
     {
         //IEnumerable<Grade> GetAll();
-
+        
 
     }
 }
