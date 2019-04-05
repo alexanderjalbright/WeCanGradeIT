@@ -19,7 +19,6 @@ export default class Assignment extends Component {
     const url = `${apiUrl}grade/${user.studentId}/${assignment.assignmentId}`;
     fetch(url, {
       method: "POST",
-      mode: "no-cors",
       headers: {
         "Content-type": "application/json"
       },
