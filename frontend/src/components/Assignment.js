@@ -71,13 +71,14 @@ export default class Assignment extends Component {
         <h1 style={{ display: "inline" }}>{name}</h1>
         <small> ({type})</small>
         <p>{description}</p>
-        <h2>
+        <h3>Requirements</h3>
+        <ul>{renderArrayToHTMLList}</ul>
+        <h3>
           Due: {month}/{day}/{dueDate.slice(0, 4)}
           <br />
           {militaryToStandardTime()}
           {dueDate.slice(13, 16)} {amPm()}
-        </h2>
-        <ul>{renderArrayToHTMLList}</ul>
+        </h3>
         <div className="submit-url">
           <label>URL:&nbsp;</label>
           <input onChange={this.urlChange} value={this.state.url} />
