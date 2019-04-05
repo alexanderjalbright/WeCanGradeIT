@@ -11,5 +11,6 @@ namespace WeCanGradeIT.Controllers
     [ApiController]
     public class GradeController : ControllerBase
     {
+
     }
 }
