@@ -16,8 +16,13 @@ a {
 
 nav {
   background-color: var(--dark-color);
+}
+nav ul {
+  margin: 0;
   display: flex;
   align-items: center;
+  list-style: none;
+  padding-right: 5vw;
 }
 
 nav span {
@@ -48,4 +53,19 @@ nav a {
 
 .enter-site {
   display: none;
+}
+
+.nav-assign {
+  --assign-dropdown: none;
+}
+
+.nav-assign:hover {
+  --assign-dropdown: block;
+}
+
+.assign-dropdown {
+  list-style: none;
+  display: var(--assign-dropdown);
+  background-color: var(--dark-color);
+  padding: 5px 10px;
 }
