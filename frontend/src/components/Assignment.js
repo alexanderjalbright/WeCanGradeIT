@@ -66,6 +66,13 @@ export default class Assignment extends Component {
     var month =
       dueDate.slice(5, 6) >= 1 ? dueDate.slice(5, 7) : dueDate.slice(6, 7);
 
+    const userUrl = this.props.user.grades.forEach(grade => {
+      if (grade.repoUrl !== null) {
+        return <h2>Submitted:{grade.repoUrl}</h2>;
+      } else {
+        console.log("nope");
+      }
+    });
     return (
       <div>
         <h1 style={{ display: "inline" }}>{name}</h1>
@@ -79,6 +86,7 @@ export default class Assignment extends Component {
           {militaryToStandardTime()}
           {dueDate.slice(13, 16)} {amPm()}
         </h3>
+        {userUrl}
         <div className="submit-url">
           <label>URL:&nbsp;</label>
           <input onChange={this.urlChange} value={this.state.url} />

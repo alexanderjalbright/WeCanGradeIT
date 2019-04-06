@@ -6,6 +6,16 @@ export default class Home extends Component {
   setUserClick = student => {
     this.props.setUser(student);
   };
+
+  selectClick = () => {
+    const index = document.querySelector(".user-select").value;
+    if (index !== "") {
+      this.setUserClick(this.props.students[index]);
+      const enterSite = document.querySelector(".enter-site");
+      enterSite.style.display = "inline";
+    }
+  };
+
   render() {
     const { students, user } = this.props;
     const selectUserLinks = students.map(student => (
@@ -18,27 +28,20 @@ export default class Home extends Component {
       <Route
         path={`/`}
         exact={true}
-        component={() => (
+        render={() => (
           <div>
             <label>Select user:&nbsp;</label>
-            <select>
+            <select className="user-select">
               <option />
               {selectUserLinks}
             </select>
-            <button
-              onClick={() => {
-                const index = document.querySelector("select").value;
-                this.setUserClick(students[index]);
-              }}
-            >
-              Select
-            </button>
+            <button onClick={this.selectClick}>Select</button>
             <Link
               to={
                 user.name === "Instructor" ? `/instructor` : `/${user.userName}`
               }
             >
-              <button>Enter</button>
+              <button className="enter-site">Enter</button>
             </Link>
             <h2>
               {user.name}

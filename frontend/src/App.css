@@ -10,6 +10,10 @@
   --dark-color: #333;
 }
 
+a {
+  text-decoration: none;
+}
+
 nav {
   background-color: var(--dark-color);
   display: flex;
@@ -17,7 +21,7 @@ nav {
 }
 
 nav span {
-  font-family: 'Imprima', sans-serif;
+  font-family: "Imprima", sans-serif;
 }
 
 nav a {
@@ -40,4 +44,8 @@ nav a {
 
 .it {
   color: var(--it);
+}
+
+.enter-site {
+  display: none;
 }
