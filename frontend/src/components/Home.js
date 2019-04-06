@@ -29,24 +29,32 @@ export default class Home extends Component {
         path={`/`}
         exact={true}
         render={() => (
-          <div>
-            <label>Select user:&nbsp;</label>
+          <div className="login">
+            <h2>Select User</h2>
             <select className="user-select">
               <option />
               {selectUserLinks}
             </select>
-            <button onClick={this.selectClick}>Select</button>
+            <button className="user-select-btn" onClick={this.selectClick}>
+              Select
+            </button>
+
+            <h2>
+              {user.name}
+              {user.name === "" ? `` : ` has been selected!`}
+            </h2>
             <Link
               to={
                 user.name === "Instructor" ? `/instructor` : `/${user.userName}`
               }
             >
-              <button className="enter-site">Enter</button>
+              <button
+                className="user-select-btn enter-site"
+                style={{ width: "200px" }}
+              >
+                Enter
+              </button>
             </Link>
-            <h2>
-              {user.name}
-              {user.name === "" ? `` : ` has been selected!`}
-            </h2>
           </div>
         )}
       />

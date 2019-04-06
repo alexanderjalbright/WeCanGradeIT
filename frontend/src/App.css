@@ -1,13 +1,18 @@
 :root {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  text-decoration: none;
   --we: rgb(213, 36, 103);
   --can: rgb(82, 139, 69);
   --grade: rgb(66, 156, 211);
   --it: rgb(242, 103, 34);
   --dark-color: #333;
+  --light-color: #ddd;
+}
+
+html {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: var(--dark-color);
 }
 
 a {
@@ -16,6 +21,7 @@ a {
 
 nav {
   background-color: var(--dark-color);
+  font-size: 1.5em;
 }
 nav ul {
   margin: 0;
@@ -68,4 +74,30 @@ nav a {
   display: var(--assign-dropdown);
   background-color: var(--dark-color);
   padding: 5px 10px;
+}
+
+.assign-dropdown li:hover {
+  text-decoration: underline;
+}
+
+.login {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 30vh;
+  text-align: center;
+}
+
+.user-select {
+  padding: 5px 10px;
+  margin: 5px;
+  border: none;
+  background-color: #83d8ff;
+}
+
+.user-select-btn {
+  background-color: #83d8ff;
+  border: 2px solid var(--dark-color);
+  padding: 5px 10px;
+  margin: 5px;
 }
