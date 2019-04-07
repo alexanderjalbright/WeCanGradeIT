@@ -1,28 +1,47 @@
 :root {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  text-decoration: none;
   --we: rgb(213, 36, 103);
   --can: rgb(82, 139, 69);
   --grade: rgb(66, 156, 211);
   --it: rgb(242, 103, 34);
-  --dark-color: #333;
+  --dark-color: rgb(68, 68, 68);
+  --light-color: #fff;
+}
+
+html {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: var(--dark-color);
+  font-family: "Roboto", sans-serif;
+}
+
+a {
+  text-decoration: none;
 }
 
 nav {
   background-color: var(--dark-color);
+  font-size: 1.2em;
+  line-height: 1.5em;
+}
+nav ul {
+  margin: 0;
   display: flex;
   align-items: center;
+  list-style: none;
+}
+nav ul li {
+  margin-right: 0.5vw;
 }
 
 nav span {
-  font-family: 'Imprima', sans-serif;
+  font-family: "Imprima", sans-serif;
 }
 
 nav a {
   text-decoration: none;
-  color: #ddd;
+  color: var(--light-color);
   margin: 0 1em;
 }
 
@@ -40,4 +59,49 @@ nav a {
 
 .it {
   color: var(--it);
+}
+
+.enter-site {
+  display: none;
+}
+
+.nav-assign {
+  --assign-dropdown: none;
+}
+
+.nav-assign:hover {
+  --assign-dropdown: block;
+}
+
+.assign-dropdown {
+  list-style: none;
+  display: var(--assign-dropdown);
+  background-color: var(--dark-color);
+  padding: 5px 10px;
+}
+
+.assign-dropdown li:hover {
+  text-decoration: underline;
+}
+
+.login {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 30vh;
+  text-align: center;
+}
+
+.user-select {
+  padding: 5px 10px;
+  margin: 5px;
+  border: none;
+  background-color: #83d8ff;
+}
+
+.user-select-btn {
+  background-color: #83d8ff;
+  border: 2px solid var(--dark-color);
+  padding: 5px 10px;
+  margin: 5px;
 }
