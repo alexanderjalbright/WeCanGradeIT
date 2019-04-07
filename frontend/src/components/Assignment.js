@@ -1,19 +1,22 @@
 import React, { Component } from "react";
 import parseMarkdown from "../lib/parseMarkdown";
-import { apiUrl, gitHubUserUrl } from "../lib/constants";
+import { apiUrl, gitHubApi } from "../lib/constants";
 
 export default class Assignment extends Component {
   constructor() {
     super();
     this.state = {
       url: "",
-      repos: [{}]
+      repos: [{}],
+      repo: "",
+      branches: [{}],
+      branch: ""
     };
   }
 
   componentDidMount() {
     const { user } = this.props;
-    fetch(`${gitHubUserUrl}/${user.userName}/repos?sort=date`)
+    fetch(`${gitHubApi}/users/${user.userName}/repos?sort=date`)
       .then(res => res.json())
       .then(json => this.setState({ repos: json }));
   }
@@ -22,17 +25,34 @@ export default class Assignment extends Component {
     this.setState({ url: event.target.value });
   };
 
+  getBranches = repo => {
+    const { user } = this.props;
+    fetch(`${gitHubApi}/repos/${user.userName}/${repo}/branches`)
+      .then(res => res.json())
+      .then(json => this.setState({ branches: json }));
+  };
+
   submitRepo = () => {
     const repoName = document.querySelector(".repo-select").value;
     if (repoName !== "") {
       const repoUrl = `https://github.com/${
         this.props.user.userName
       }/${repoName}/`;
-      this.setState({ url: repoUrl });
+      this.setState({ url: repoUrl, repo: repoName });
       this.submitUrl();
+      this.getBranches(repoName);
+    }
+  };
 
-      // this.setState({url: repoUrl})
-      // this.setUserClick(this.props.students[index]);
+  submitBranch = () => {
+    const branchName = document.querySelector(".branch-select").value;
+    const { user } = this.props;
+    if (branchName !== "") {
+      const branchUrl = `https://github.com/${user.userName}/${
+        this.state.repo
+      }/tree/${branchName}`;
+      this.setState({ url: branchUrl, branch: branchName });
+      this.submitUrl();
     }
   };
 
@@ -99,6 +119,11 @@ export default class Assignment extends Component {
     const repoSelection = this.state.repos.map(repo => (
       <option>{repo.name}</option>
     ));
+
+    const branchSelection = this.state.branches.map(branch => (
+      <option>{branch.name}</option>
+    ));
+
     return (
       <div>
         <h1 style={{ display: "inline" }}>{name}</h1>
@@ -122,6 +147,11 @@ export default class Assignment extends Component {
           <label>Repo:&nbsp;</label>
           <select className="repo-select">{repoSelection}</select>
           <button onClick={this.submitRepo}>Submit Repo</button>
+        </div>
+        <div>
+          <label>Branch:&nbsp;</label>
+          <select className="branch-select">{branchSelection}</select>
+          <button onClick={this.submitBranch}>Submit Branch</button>
         </div>
       </div>
     );
