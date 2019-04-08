@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import React, { Component } from "react";
 import Assignments from "./components/Assignments";
 import Students from "./components/Students";
+import StudentLandingPage from "./components/StudentLandingPage";
 import Nav from "./components/Nav";
 import Home from "./components/Home";
 import Grades from "./components/Grades";
 import { apiUrl } from "./lib/constants";
+import Instructor from "./components/Instructor";
 import "./App.css";
 
 class App extends Component {
@@ -43,6 +45,7 @@ class App extends Component {
       name: newName,
       userName: newUserName
     };
+
     fetch(`${apiUrl}/student`, {
       method: "POST",
       headers: {
@@ -70,11 +73,23 @@ class App extends Component {
       <Router>
         <Nav user={this.state.user} assignments={this.state.assignments} />
         <div className="App">
-          <Home
-            students={this.state.students}
-            user={this.state.user}
-            setUser={this.setUser}
+          <Route
+            path={`/`}
+            exact={true}
+            component={props => {
+              return (
+                <Home
+                  {...props}
+                  students={this.state.students}
+                  user={this.state.user}
+                  setUser={this.setUser}
+                />
+              );
+            }}
           />
+
+          <Route path={`/student/:id`} component={StudentLandingPage} />
+
           <Assignments
             assignments={this.state.assignments}
             user={this.state.user}
@@ -89,6 +104,8 @@ class App extends Component {
             setNewUserName={this.setNewUserName}
             submitNewStudent={this.submitNewStudent}
           />
+
+          <Instructor />
         </div>
       </Router>
     );

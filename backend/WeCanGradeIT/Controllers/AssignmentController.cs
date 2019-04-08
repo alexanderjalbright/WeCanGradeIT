@@ -25,5 +25,13 @@ namespace WeCanGradeIT.Controllers
             var assignments = repo.GetAll().ToArray();
             return assignments;
         }
+
+        [HttpPost]
+        public ActionResult<bool> Post([FromBody] Assignment newAssignment)
+        {
+            repo.Create(newAssignment);
+
+            return true;
+        }
     }
 }
