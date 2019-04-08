@@ -69,7 +69,7 @@ export default class Instructor extends Component {
               <label>Description:</label>
               <input
                 onChange={this.addAssignment}
-                value={this.state.newAssignment}
+                value={this.state.newDescription}
               />
               <label>Requirements</label>
               <input
