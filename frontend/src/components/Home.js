@@ -1,19 +1,20 @@
-import { Link, Route } from "react-router-dom";
-
 import React, { Component } from "react";
 
 export default class Home extends Component {
+  constructor() {
+    super();
+    this.state = { selectedUserId: null };
+  }
   setUserClick = student => {
     this.props.setUser(student);
   };
 
   selectClick = () => {
-    const index = document.querySelector(".user-select").value;
-    if (index !== "") {
-      this.setUserClick(this.props.students[index]);
-      const enterSite = document.querySelector(".enter-site");
-      enterSite.style.display = "inline";
-    }
+    this.props.history.push(`/student/${this.state.selectedUserId}`);
+  };
+
+  pickUser = event => {
+    this.setState({ selectedUserId: event.target.value });
   };
 
   render() {
@@ -23,41 +24,17 @@ export default class Home extends Component {
         {student.name}
       </option>
     ));
-
     return (
-      <Route
-        path={`/`}
-        exact={true}
-        render={() => (
-          <div className="login">
-            <h2>Select User</h2>
-            <select className="user-select">
-              <option />
-              {selectUserLinks}
-            </select>
-            <button className="user-select-btn" onClick={this.selectClick}>
-              Select
-            </button>
-
-            <h2>
-              {user.name}
-              {user.name === "" ? `` : ` has been selected!`}
-            </h2>
-            <Link
-              to={
-                user.name === "Instructor" ? `/instructor` : `/${user.userName}`
-              }
-            >
-              <button
-                className="user-select-btn enter-site"
-                style={{ width: "200px" }}
-              >
-                Enter
-              </button>
-            </Link>
-          </div>
-        )}
-      />
+      <div className="login">
+        <h2>Select User</h2>
+        <select onChange={this.pickUser} className="user-select">
+          <option />
+          {selectUserLinks}
+        </select>
+        <button className="user-select-btn" onClick={this.selectClick}>
+          Select
+        </button>
+      </div>
     );
   }
 }
