@@ -6,6 +6,7 @@ import Students from "./components/Students";
 import Nav from "./components/Nav";
 import Home from "./components/Home";
 import Grades from "./components/Grades";
+import Instructor from "./components/Instructor";
 import { apiUrl } from "./lib/constants";
 import "./App.css";
 
@@ -89,6 +90,7 @@ class App extends Component {
             setNewUserName={this.setNewUserName}
             submitNewStudent={this.submitNewStudent}
           />
+          <Instructor />
         </div>
       </Router>
     );
