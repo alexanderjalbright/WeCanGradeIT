@@ -8,6 +8,9 @@ namespace WeCanGradeIT.Repositories
 {
     public interface IGradeRepository
     {
+        IEnumerable<Grade> GetAll();
+        bool CheckIfExists(int sId, int aId);
+        void CreateOrEdit(int sId, int aId, string repoUrl);
         void Create(Grade grade);
         void Edit(Grade grade);      
     }

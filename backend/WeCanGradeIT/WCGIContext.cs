@@ -13,6 +13,8 @@ namespace WeCanGradeIT
         public DbSet<Assignment> Assignments { get; set; }
         public DbSet<Student> Students { get; set; }
 
+        public DbSet<Grade> Grades { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionString = "Server=(localdb)\\mssqllocaldb;Database=WCGIDatabase;Trusted_Connection=True;";

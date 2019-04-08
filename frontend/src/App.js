@@ -28,10 +28,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(`${apiUrl}assignment`)
+    fetch(`${apiUrl}/assignment`)
       .then(res => res.json())
       .then(json => this.setState({ assignments: json }));
-    fetch(`${apiUrl}student`)
+    fetch(`${apiUrl}/student`)
       .then(res => res.json())
       .then(json => {
         json.unshift(this.state.students[0]);
@@ -45,7 +45,7 @@ class App extends Component {
       userName: newUserName
     };
 
-    fetch(`${apiUrl}student`, {
+    fetch(`${apiUrl}/student`, {
       method: "POST",
       headers: {
         "Content-type": "application/json"

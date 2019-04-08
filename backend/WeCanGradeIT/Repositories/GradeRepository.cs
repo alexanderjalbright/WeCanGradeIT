@@ -15,6 +15,12 @@ namespace WeCanGradeIT.Repositories
             this.db = db;
         }
 
+        public IEnumerable<Grade> GetAll()
+        {
+            var grades = db.Grades.ToList();
+            return grades;
+        }
+
         public void Create(Grade grade)
         {
             db.Add(grade);
@@ -27,6 +33,30 @@ namespace WeCanGradeIT.Repositories
             db.SaveChanges();
         }
 
+        public bool CheckIfExists(int sId, int aId)
+        {
+            var exists = db.Grades.Any(grade => grade.StudentId == sId && grade.AssignmentId == aId);
+            return exists;
+        }
 
+        public void CreateOrEdit(int sId, int aId, string repoUrl)
+        {
+            if (CheckIfExists(sId, aId))
+            {
+                var theGrade = db.Grades.Single(grade => grade.StudentId == sId && grade.AssignmentId == aId);
+                theGrade.RepoUrl = repoUrl;
+                Edit(theGrade);
+            }
+            else
+            {
+                var newGrade = new Grade()
+                {
+                    StudentId = sId,
+                    AssignmentId = aId,
+                    RepoUrl = repoUrl
+                };
+                Create(newGrade);
+            }
+        }
     }
 }
