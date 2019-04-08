@@ -27,5 +27,13 @@ namespace WeCanGradeIT.Tests
             var result = underTest.Get();
             Assert.Equal(2, result.Value.Count());
         }
+
+        [Fact]
+        public void Post_Creates_Assignment() 
+        {
+            var result = underTest.Post(new Assignment());
+
+            Assert.True(result.Value);
+        }
     }
 }

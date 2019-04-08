@@ -18,8 +18,8 @@ export default class Students extends Component {
   };
 
   submitClick = () => {
-    this.props.submitNewStudent(this.state.newName, this.state.newUserName);
-    this.setState({ newName: "", newUserName: "" });
+    this.props.submitNewStudent(this.state.newAssignment);
+    this.setState({ newAssignment: "" });
   };
 
   render() {

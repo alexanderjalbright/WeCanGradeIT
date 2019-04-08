@@ -7,6 +7,7 @@ import Nav from "./components/Nav";
 import Home from "./components/Home";
 import Grades from "./components/Grades";
 import { apiUrl } from "./lib/constants";
+import Instructor from "./components/Instructor";
 import "./App.css";
 
 class App extends Component {
@@ -43,6 +44,7 @@ class App extends Component {
       name: newName,
       userName: newUserName
     };
+
     fetch(`${apiUrl}student`, {
       method: "POST",
       headers: {
@@ -89,6 +91,8 @@ class App extends Component {
             setNewUserName={this.setNewUserName}
             submitNewStudent={this.submitNewStudent}
           />
+
+          <Instructor />
         </div>
       </Router>
     );

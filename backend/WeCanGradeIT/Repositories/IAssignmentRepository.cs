@@ -9,5 +9,7 @@ namespace WeCanGradeIT.Repositories
     public interface IAssignmentRepository
     {
         IEnumerable<Assignment> GetAll();
+
+        void Create(Assignment newAssignment);
     }
 }

@@ -20,5 +20,11 @@ namespace WeCanGradeIT.Repositories
 
             return assignments;
         }
+
+        public void Create(Assignment newAssignment)
+        {
+            db.Add(newAssignment);
+            db.SaveChanges();
+        }
     }
 }
