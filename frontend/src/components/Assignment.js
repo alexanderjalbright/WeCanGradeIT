@@ -10,7 +10,12 @@ export default class Assignment extends Component {
       repos: [{}],
       repo: "",
       branches: [{}],
-      branch: ""
+      branch: "",
+      editName: "",
+      editType: "",
+      editDescription: "",
+      editRequirements: "",
+      editDueDate: ""
     };
   }
 
@@ -152,6 +157,68 @@ export default class Assignment extends Component {
           <label>Branch:&nbsp;</label>
           <select className="branch-select">{branchSelection}</select>
           <button onClick={this.submitBranch}>Submit Branch</button>
+        </div>
+
+        <button
+          className="edit-assButton"
+          onClick={() => {
+            const addAssForm = document.querySelector(".edit-assForm");
+            addAssForm.style.display = "block";
+            const addAssButton = document.querySelector(".edit-assButton");
+            addAssButton.style.display = "none";
+            // const {
+            //   name,
+            //   type,
+            //   description,
+            //   requirements,
+            //   dueDate
+            // } = this.props.assignment;
+            this.setState({
+              editName: name,
+              editType: type,
+              editDescription: description,
+              editRequirements: requirements,
+              editDueDate: dueDate
+            });
+          }}
+        >
+          Edit Assignment
+        </button>
+        <div className="edit-assForm" style={{ display: "none" }}>
+          <div className="edit-assName">
+            <label>Name:&nbsp;</label>
+            <input onChange={this.nameChange} value={this.state.editName} />
+          </div>
+          <div className="edit-assType">
+            <label>Type:&nbsp;</label>
+            <select onChange={this.typeChange} id="selType">
+              <option value="" />
+              <option value="Individual">Individual</option>
+              <option value="Team">Team</option>
+            </select>
+          </div>
+          <div className="edit-assDescription">
+            <label>Description:&nbsp;</label>
+            <input
+              onChange={this.descriptionChange}
+              value={this.state.editDescription}
+            />
+          </div>
+          <div className="edit-assRequirements">
+            <label>Requirements:&nbsp;</label>
+            <input
+              onChange={this.requirementsChange}
+              value={this.state.editRequirements}
+            />
+          </div>
+          <div className="edit-assDueDate">
+            <label>Due Date:&nbsp;</label>
+            <input
+              onChange={this.dueDateChange}
+              value={this.state.editDueDate}
+            />
+          </div>
+          <button onClick={this.submitClick}>Submit Assignment</button>
         </div>
       </div>
     );

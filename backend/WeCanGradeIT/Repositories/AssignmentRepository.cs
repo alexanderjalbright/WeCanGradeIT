@@ -26,5 +26,11 @@ namespace WeCanGradeIT.Repositories
             db.Add(newAssignment);
             db.SaveChanges();
         }
+
+        public void Edit(Assignment assignment)
+        {
+            db.Update(assignment);
+            db.SaveChanges();
+        }
     }
 }

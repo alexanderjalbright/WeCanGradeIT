@@ -84,7 +84,6 @@ export default class Instructor extends Component {
         exact
         render={() => (
           <div>
-            {/* {assignmentHome} */}
             <button
               className="add-assButton"
               onClick={() => {
