@@ -33,5 +33,13 @@ namespace WeCanGradeIT.Controllers
 
             return true;
         }
+
+        [HttpPost("{id}")]
+        public ActionResult<bool> Post(int id, [FromBody] Assignment assignment) 
+        {
+            repo.Edit(assignment); 
+
+            return true;
+        }
     }
 }

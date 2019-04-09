@@ -10,7 +10,12 @@ export default class Assignment extends Component {
       repos: [{}],
       repo: "",
       branches: [{}],
-      branch: ""
+      branch: "",
+      editName: "",
+      editType: "",
+      editDescription: "",
+      editRequirements: "",
+      editDueDate: ""
     };
   }
 
@@ -44,6 +49,10 @@ export default class Assignment extends Component {
     }
   };
 
+  onChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
   submitBranch = () => {
     const branchName = document.querySelector(".branch-select").value;
     const { user } = this.props;
@@ -68,6 +77,28 @@ export default class Assignment extends Component {
     }).then(res => {
       if (res.ok) {
         alert(`Your assignment has been submitted: ${this.state.url}`);
+      }
+    });
+  };
+
+  submitAssignment = () => {
+    const editAssignment = {
+      name: this.state.editName,
+      type: this.state.editType,
+      description: this.state.editDescription,
+      requirements: this.state.editRequirements,
+      dueDate: this.state.editDueDate,
+      assignmentId: this.props.assignment.assignmentId
+    };
+    fetch(`${apiUrl}/assignment/${this.props.assignment.assignmentId}`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(editAssignment)
+    }).then(res => {
+      if (res.ok) {
+        this.props.editAssignment(editAssignment);
       }
     });
   };
@@ -108,14 +139,6 @@ export default class Assignment extends Component {
     var month =
       dueDate.slice(5, 6) >= 1 ? dueDate.slice(5, 7) : dueDate.slice(6, 7);
 
-    const userUrl = this.props.user.grades.forEach(grade => {
-      if (grade.repoUrl !== null) {
-        return <h2>Submitted:{grade.repoUrl}</h2>;
-      } else {
-        console.log("nope");
-      }
-    });
-
     const repoSelection = this.state.repos.map(repo => (
       <option>{repo.name}</option>
     ));
@@ -123,6 +146,96 @@ export default class Assignment extends Component {
     const branchSelection = this.state.branches.map(branch => (
       <option>{branch.name}</option>
     ));
+
+    const studentOrInstructor = () =>
+      this.props.user.name === "Instructor" ? (
+        <div>
+          <button
+            className="edit-assButton"
+            onClick={() => {
+              const addAssForm = document.querySelector(".edit-assForm");
+              addAssForm.style.display = "block";
+              const addAssButton = document.querySelector(".edit-assButton");
+              addAssButton.style.display = "none";
+              this.setState({
+                editName: name,
+                editType: type,
+                editDescription: description,
+                editRequirements: requirements,
+                editDueDate: dueDate
+              });
+            }}
+          >
+            Edit Assignment
+          </button>
+          <div className="edit-assForm" style={{ display: "none" }}>
+            <div className="edit-assName">
+              <label>Name:&nbsp;</label>
+              <input
+                name="editName"
+                onChange={this.onChange}
+                value={this.state.editName}
+              />
+            </div>
+            <div className="edit-assType">
+              <label>Type:&nbsp;</label>
+              <select
+                name="editType"
+                onChange={this.onChange}
+                id="selType"
+                value={this.state.editType}
+              >
+                <option value="Individual">Individual</option>
+                <option value="Team">Team</option>
+              </select>
+            </div>
+            <div className="edit-assDescription">
+              <label>Description:&nbsp;</label>
+              <input
+                name="editDescription"
+                onChange={this.onChange}
+                value={this.state.editDescription}
+              />
+            </div>
+            <div className="edit-assRequirements">
+              <label>Requirements:&nbsp;</label>
+              <input
+                name="editRequirements"
+                onChange={this.onChange}
+                value={this.state.editRequirements}
+              />
+            </div>
+            <div className="edit-assDueDate">
+              <label>Due Date:&nbsp;</label>
+              <input
+                type="datetime-local"
+                name="editDueDate"
+                onChange={this.onChange}
+                value={this.state.editDueDate}
+              />
+            </div>
+            <button onClick={this.submitAssignment}>Submit Assignment</button>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div className="submit-url">
+            <label>URL:&nbsp;</label>
+            <input onChange={this.urlChange} value={this.state.url} />
+            <button onClick={this.submitUrl}>Submit URL</button>
+          </div>
+          <div>
+            <label>Repo:&nbsp;</label>
+            <select className="repo-select">{repoSelection}</select>
+            <button onClick={this.submitRepo}>Submit Repo</button>
+          </div>
+          <div>
+            <label>Branch:&nbsp;</label>
+            <select className="branch-select">{branchSelection}</select>
+            <button onClick={this.submitBranch}>Submit Branch</button>
+          </div>
+        </div>
+      );
 
     return (
       <div>
@@ -137,22 +250,7 @@ export default class Assignment extends Component {
           {militaryToStandardTime()}
           {dueDate.slice(13, 16)} {amPm()}
         </h3>
-        {userUrl}
-        <div className="submit-url">
-          <label>URL:&nbsp;</label>
-          <input onChange={this.urlChange} value={this.state.url} />
-          <button onClick={this.submitUrl}>Submit URL</button>
-        </div>
-        <div>
-          <label>Repo:&nbsp;</label>
-          <select className="repo-select">{repoSelection}</select>
-          <button onClick={this.submitRepo}>Submit Repo</button>
-        </div>
-        <div>
-          <label>Branch:&nbsp;</label>
-          <select className="branch-select">{branchSelection}</select>
-          <button onClick={this.submitBranch}>Submit Branch</button>
-        </div>
+        {studentOrInstructor()}
       </div>
     );
   }

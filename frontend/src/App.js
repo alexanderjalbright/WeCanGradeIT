@@ -71,6 +71,13 @@ class App extends Component {
     this.setState({ assignments: newAssignments });
   };
 
+  editAssignment = newAssignment => {
+    const index = newAssignment.assignmentId - 1;
+    const newAssignments = [...this.state.assignments];
+    newAssignments[index] = newAssignment;
+    this.setState({ assignments: newAssignments });
+  };
+
   render() {
     return (
       <Router>
@@ -84,6 +91,7 @@ class App extends Component {
           <Assignments
             assignments={this.state.assignments}
             user={this.state.user}
+            editAssignment={this.editAssignment}
           />
           <Grades user={this.state.user} />
 

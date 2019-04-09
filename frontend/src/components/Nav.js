@@ -23,7 +23,9 @@ export default class Nav extends Component {
               </span>
               <span className="it">IT</span>
             </h1> */}
-            <img src={logo} style={{ width: "200px", margin: "1em 0" }} />
+            <a href="/">
+              <img src={logo} style={{ width: "200px", margin: "1em 0" }} />
+            </a>
           </li>
           <li className="nav-assign">
             <Route
@@ -55,6 +57,12 @@ export default class Nav extends Component {
               component={() => (
                 <Link to={`/${user.userName}/students`}>STUDENTS</Link>
               )}
+            />
+          </li>
+          <li>
+            <Route
+              path={`/${user.userName}`}
+              component={() => <Link to={`/`}>LOGOUT</Link>}
             />
           </li>
         </ul>

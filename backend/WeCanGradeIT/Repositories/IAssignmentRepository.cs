@@ -11,5 +11,7 @@ namespace WeCanGradeIT.Repositories
         IEnumerable<Assignment> GetAll();
 
         void Create(Assignment newAssignment);
+
+        void Edit(Assignment assignment);
     }
 }

@@ -39,24 +39,8 @@ export default class Instructor extends Component {
     });
   };
 
-  nameChange = event => {
-    this.setState({ name: event.target.value });
-  };
-
-  typeChange = event => {
-    this.setState({ type: event.target.value });
-  };
-
-  descriptionChange = event => {
-    this.setState({ description: event.target.value });
-  };
-
-  requirementsChange = event => {
-    this.setState({ requirements: event.target.value });
-  };
-
-  dueDateChange = event => {
-    this.setState({ dueDate: event.target.value });
+  onChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   submitClick = () => {
@@ -84,7 +68,6 @@ export default class Instructor extends Component {
         exact
         render={() => (
           <div>
-            {/* {assignmentHome} */}
             <button
               className="add-assButton"
               onClick={() => {
@@ -99,11 +82,15 @@ export default class Instructor extends Component {
             <div className="add-assForm" style={{ display: "none" }}>
               <div className="add-assName">
                 <label>Name:&nbsp;</label>
-                <input onChange={this.nameChange} value={this.state.name} />
+                <input
+                  name="name"
+                  onChange={this.onChange}
+                  value={this.state.name}
+                />
               </div>
               <div className="add-assType">
                 <label>Type:&nbsp;</label>
-                <select onChange={this.typeChange} id="selType">
+                <select name="type" onChange={this.onChange} id="selType">
                   <option value="" />
                   <option value="Individual">Individual</option>
                   <option value="Team">Team</option>
@@ -111,22 +98,26 @@ export default class Instructor extends Component {
               </div>
               <div className="add-assDescription">
                 <label>Description:&nbsp;</label>
-                <input
-                  onChange={this.descriptionChange}
+                <textarea
+                  name="description"
+                  onChange={this.onChange}
                   value={this.state.description}
                 />
               </div>
               <div className="add-assRequirements">
                 <label>Requirements:&nbsp;</label>
                 <input
-                  onChange={this.requirementsChange}
+                  name="requirements"
+                  onChange={this.onChange}
                   value={this.state.requirements}
                 />
               </div>
               <div className="add-assDueDate">
                 <label>Due Date:&nbsp;</label>
                 <input
-                  onChange={this.dueDateChange}
+                  type="datetime-local"
+                  name="dueDate"
+                  onChange={this.onChange}
                   value={this.state.dueDate}
                 />
               </div>
