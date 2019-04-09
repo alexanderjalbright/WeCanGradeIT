@@ -42,6 +42,9 @@ export default class Instructor extends Component {
 
   render() {
     const { assignmentList } = this.props;
+    // const assignmentHome = roster.map(assignment => (
+    //   <h1>{student.name === "Instructor" ? "" : student.name}</h1>
+    // ));
     return (
       <Route
         path={`/instructor`} //??
