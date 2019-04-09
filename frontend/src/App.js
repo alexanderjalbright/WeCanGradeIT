@@ -7,6 +7,7 @@ import Nav from "./components/Nav";
 import Home from "./components/Home";
 import Grades from "./components/Grades";
 import { apiUrl } from "./lib/constants";
+import Instructor from "./components/Instructor";
 import "./App.css";
 
 class App extends Component {
@@ -65,6 +66,11 @@ class App extends Component {
     this.setState({ user: student });
   };
 
+  addAssignment = newAssignment => {
+    const newAssignments = [...this.state.assignments, newAssignment];
+    this.setState({ assignments: newAssignments });
+  };
+
   render() {
     return (
       <Router>
@@ -89,6 +95,8 @@ class App extends Component {
             setNewUserName={this.setNewUserName}
             submitNewStudent={this.submitNewStudent}
           />
+
+          <Instructor addAssignment={this.addAssignment} />
         </div>
       </Router>
     );
