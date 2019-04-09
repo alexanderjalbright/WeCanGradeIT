@@ -49,6 +49,10 @@ export default class Assignment extends Component {
     }
   };
 
+  onChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
   submitBranch = () => {
     const branchName = document.querySelector(".branch-select").value;
     const { user } = this.props;
@@ -145,11 +149,15 @@ export default class Assignment extends Component {
           <div className="edit-assForm" style={{ display: "none" }}>
             <div className="edit-assName">
               <label>Name:&nbsp;</label>
-              <input onChange={this.nameChange} value={this.state.editName} />
+              <input
+                name="name"
+                onChange={this.onChange}
+                value={this.state.editName}
+              />
             </div>
             <div className="edit-assType">
               <label>Type:&nbsp;</label>
-              <select onChange={this.typeChange} id="selType">
+              <select name="type" onChange={this.onChange} id="selType">
                 <option value="" />
                 <option value="Individual">Individual</option>
                 <option value="Team">Team</option>
@@ -158,21 +166,25 @@ export default class Assignment extends Component {
             <div className="edit-assDescription">
               <label>Description:&nbsp;</label>
               <input
-                onChange={this.descriptionChange}
+                name="description"
+                onChange={this.onChange}
                 value={this.state.editDescription}
               />
             </div>
             <div className="edit-assRequirements">
               <label>Requirements:&nbsp;</label>
               <input
-                onChange={this.requirementsChange}
+                name="requirements"
+                onChange={this.onChange}
                 value={this.state.editRequirements}
               />
             </div>
             <div className="edit-assDueDate">
               <label>Due Date:&nbsp;</label>
               <input
-                onChange={this.dueDateChange}
+                type="datetime-local"
+                name="dueDate"
+                onChange={this.onChange}
                 value={this.state.editDueDate}
               />
             </div>
