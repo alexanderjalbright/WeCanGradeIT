@@ -81,6 +81,28 @@ export default class Assignment extends Component {
     });
   };
 
+  submitAssignment = () => {
+    const editAssignment = {
+      name: this.state.editName,
+      type: this.state.editType,
+      description: this.state.editDescription,
+      requirements: this.state.editRequirements,
+      dueDate: this.state.editDueDate,
+      assignmentId: this.props.assignment.assignmentId
+    };
+    fetch(`${apiUrl}/assignment/${this.props.assignment.assignmentId}`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(editAssignment)
+    }).then(res => {
+      if (res.ok) {
+        this.props.editAssignment(editAssignment);
+      }
+    });
+  };
+
   render() {
     const {
       name,
@@ -150,15 +172,19 @@ export default class Assignment extends Component {
             <div className="edit-assName">
               <label>Name:&nbsp;</label>
               <input
-                name="name"
+                name="editName"
                 onChange={this.onChange}
                 value={this.state.editName}
               />
             </div>
             <div className="edit-assType">
               <label>Type:&nbsp;</label>
-              <select name="type" onChange={this.onChange} id="selType">
-                <option value="" />
+              <select
+                name="editType"
+                onChange={this.onChange}
+                id="selType"
+                value={this.state.editType}
+              >
                 <option value="Individual">Individual</option>
                 <option value="Team">Team</option>
               </select>
@@ -166,7 +192,7 @@ export default class Assignment extends Component {
             <div className="edit-assDescription">
               <label>Description:&nbsp;</label>
               <input
-                name="description"
+                name="editDescription"
                 onChange={this.onChange}
                 value={this.state.editDescription}
               />
@@ -174,7 +200,7 @@ export default class Assignment extends Component {
             <div className="edit-assRequirements">
               <label>Requirements:&nbsp;</label>
               <input
-                name="requirements"
+                name="editRequirements"
                 onChange={this.onChange}
                 value={this.state.editRequirements}
               />
@@ -183,12 +209,12 @@ export default class Assignment extends Component {
               <label>Due Date:&nbsp;</label>
               <input
                 type="datetime-local"
-                name="dueDate"
+                name="editDueDate"
                 onChange={this.onChange}
                 value={this.state.editDueDate}
               />
             </div>
-            <button onClick={this.submitClick}>Submit Assignment</button>
+            <button onClick={this.submitAssignment}>Submit Assignment</button>
           </div>
         </div>
       ) : (

@@ -4,7 +4,7 @@ import Assignment from "./Assignment";
 
 export default class Assignments extends Component {
   render() {
-    const { assignments, user } = this.props;
+    const { assignments, user, editAssignment } = this.props;
     const parseAssignments = assignments.map(assignment => (
       <Route
         key={assignment.assignmentId}
@@ -15,6 +15,7 @@ export default class Assignments extends Component {
             key={assignment.assignmentId}
             assignment={assignment}
             user={user}
+            editAssignment={editAssignment}
           />
         )}
       />
