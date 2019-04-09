@@ -66,6 +66,11 @@ class App extends Component {
     this.setState({ user: student });
   };
 
+  addAssignment = newAssignment => {
+    const newAssignments = [...this.state.assignments, newAssignment];
+    this.setState({ assignments: newAssignments });
+  };
+
   render() {
     return (
       <Router>
@@ -91,7 +96,7 @@ class App extends Component {
             submitNewStudent={this.submitNewStudent}
           />
 
-          <Instructor />
+          <Instructor addAssignment={this.addAssignment} />
         </div>
       </Router>
     );

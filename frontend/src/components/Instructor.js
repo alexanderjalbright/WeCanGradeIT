@@ -1,35 +1,28 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
+import { apiUrl } from "../lib/constants";
 
 export default class Instructor extends Component {
   constructor() {
     super();
     this.state = {
-      newAssignment: {
-        name: "",
-        description: "",
-        requirements: "",
-        dueDate: "",
-        type: ""
-      }
+      name: "",
+      description: "",
+      requirements: "",
+      dueDate: "",
+      type: ""
     };
   }
 
-  submitNewAssignment = (
-    newName,
-    newDescription,
-    newRequirements,
-    newDueDate,
-    newType
-  ) => {
+  submitNewAssignment = () => {
     const newAssignment = {
-      name: newName,
-      description: newDescription,
-      requirements: newRequirements,
-      dueDate: newDueDate,
-      type: newType
+      name: this.state.name,
+      description: this.state.description,
+      requirements: this.state.requirements,
+      dueDate: this.state.dueDate,
+      type: this.state.type
     };
-    fetch(`instructor/assignment`, {
+    fetch(`${apiUrl}/assignment`, {
       method: "POST",
       headers: {
         "Content-type": "application/json"
@@ -37,8 +30,7 @@ export default class Instructor extends Component {
       body: JSON.stringify(newAssignment)
     }).then(res => {
       if (res.ok) {
-        const newAssignment = [...this.state.assignments, newAssignment];
-        this.setState({ assignments: newAssignment });
+        this.props.addAssignment(newAssignment);
         const addAssForm = document.querySelector(".add-assForm");
         addAssForm.style.display = "none";
         const addAssButton = document.querySelector(".add-assButton");
@@ -47,12 +39,28 @@ export default class Instructor extends Component {
     });
   };
 
-  addAssignment = event => {
-    this.setState({ newAssignment: event.target.value });
+  nameChange = event => {
+    this.setState({ name: event.target.value });
+  };
+
+  typeChange = event => {
+    this.setState({ type: event.target.value });
+  };
+
+  descriptionChange = event => {
+    this.setState({ description: event.target.value });
+  };
+
+  requirementsChange = event => {
+    this.setState({ requirements: event.target.value });
+  };
+
+  dueDateChange = event => {
+    this.setState({ dueDate: event.target.value });
   };
 
   submitClick = () => {
-    this.state.submitNewAssignment(
+    this.submitNewAssignment(
       this.state.newName,
       this.state.newDescription,
       this.state.newRequirements,
@@ -91,10 +99,7 @@ export default class Instructor extends Component {
             <div className="add-assForm" style={{ display: "none" }}>
               <div className="add-assName">
                 <label>Name:&nbsp;</label>
-                <input
-                  onChange={this.addAssignment}
-                  value={this.state.newName}
-                />
+                <input onChange={this.nameChange} value={this.state.name} />
               </div>
               <div className="add-assType">
                 <label>Type:&nbsp;</label>
@@ -102,31 +107,28 @@ export default class Instructor extends Component {
                   <option value="" />
                   <option value="Individual">Individual</option>
                   <option value="Team">Team</option>
-                  <input
-                    onChange={this.addAssignment}
-                    value={this.state.newType}
-                  />
+                  <input onChange={this.typeChange} value={this.state.type} />
                 </select>
               </div>
               <div className="add-assDescription">
                 <label>Description:&nbsp;</label>
                 <input
-                  onChange={this.addAssignment}
-                  value={this.state.newDescription}
+                  onChange={this.descriptionChange}
+                  value={this.state.description}
                 />
               </div>
               <div className="add-assRequirements">
                 <label>Requirements:&nbsp;</label>
                 <input
-                  onChange={this.addAssignment}
-                  value={this.state.newRequirements}
+                  onChange={this.requirementsChange}
+                  value={this.state.requirements}
                 />
               </div>
               <div className="add-assDueDate">
                 <label>Due Date:&nbsp;</label>
                 <input
-                  onChange={this.addAssignment}
-                  value={this.state.newDueDate}
+                  onChange={this.dueDateChange}
+                  value={this.state.dueDate}
                 />
               </div>
               <button onClick={this.submitClick}>Submit Assignment</button>
