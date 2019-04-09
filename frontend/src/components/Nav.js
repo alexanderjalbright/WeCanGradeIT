@@ -59,6 +59,12 @@ export default class Nav extends Component {
               )}
             />
           </li>
+          <li>
+            <Route
+              path={`/${user.userName}`}
+              component={() => <Link to={`/`}>LOGOUT</Link>}
+            />
+          </li>
         </ul>
       </nav>
     );
