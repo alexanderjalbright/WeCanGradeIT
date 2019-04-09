@@ -103,11 +103,10 @@ export default class Instructor extends Component {
               </div>
               <div className="add-assType">
                 <label>Type:&nbsp;</label>
-                <select id="selType">
+                <select onChange={this.typeChange} id="selType">
                   <option value="" />
                   <option value="Individual">Individual</option>
                   <option value="Team">Team</option>
-                  <input onChange={this.typeChange} value={this.state.type} />
                 </select>
               </div>
               <div className="add-assDescription">
