@@ -10,7 +10,8 @@ export default class Instructor extends Component {
       description: "",
       requirements: "",
       dueDate: "",
-      type: ""
+      type: "",
+      dueTime: ""
     };
   }
 
@@ -19,9 +20,10 @@ export default class Instructor extends Component {
       name: this.state.name,
       description: this.state.description,
       requirements: this.state.requirements,
-      dueDate: this.state.dueDate,
+      dueDate: this.state.dueDate + "T" + this.state.dueTime,
       type: this.state.type
     };
+    console.log(newAssignment.dueDate);
     fetch(`${apiUrl}/assignment`, {
       method: "POST",
       headers: {
@@ -43,23 +45,6 @@ export default class Instructor extends Component {
 
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-  };
-
-  submitClick = () => {
-    this.submitNewAssignment(
-      this.state.newName,
-      this.state.newDescription,
-      this.state.newRequirements,
-      this.state.newDueDate,
-      this.state.newType
-    );
-    this.setState({
-      newName: "",
-      newDescription: "",
-      newRequirements: "",
-      newDueDate: "",
-      newType: ""
-    });
   };
 
   render() {
@@ -120,13 +105,21 @@ export default class Instructor extends Component {
               <div className="add-assignmentDueDate">
                 <label>Due Date:&nbsp;</label>
                 <input
-                  type="datetime-local"
+                  type="date"
                   name="dueDate"
                   onChange={this.onChange}
                   value={this.state.dueDate}
                 />
+                <input
+                  type="time"
+                  name="dueTime"
+                  onChange={this.onChange}
+                  value={this.state.dueTime}
+                />
               </div>
-              <button onClick={this.submitClick}>Submit Assignment</button>
+              <button onClick={this.submitNewAssignment}>
+                Submit Assignment
+              </button>
             </div>
           </div>
         )}
