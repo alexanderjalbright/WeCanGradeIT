@@ -26,10 +26,6 @@ export default class Assignment extends Component {
       .then(json => this.setState({ repos: json }));
   }
 
-  urlChange = event => {
-    this.setState({ url: event.target.value });
-  };
-
   getBranches = repo => {
     const { user } = this.props;
     fetch(`${gitHubApi}/repos/${user.userName}/${repo}/branches`)
@@ -37,32 +33,34 @@ export default class Assignment extends Component {
       .then(json => this.setState({ branches: json }));
   };
 
-  submitRepo = () => {
-    const repoName = document.querySelector(".repo-select").value;
-    if (repoName !== "") {
-      const repoUrl = `https://github.com/${
-        this.props.user.userName
-      }/${repoName}/`;
-      this.setState({ url: repoUrl, repo: repoName });
-      this.submitUrl();
-      this.getBranches(repoName);
-    }
-  };
-
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  repoChange = event => {
+    this.setState({ repo: event.target.value });
+    this.getBranches(event.target.value);
+  };
+
   submitBranch = () => {
-    const branchName = document.querySelector(".branch-select").value;
-    const { user } = this.props;
-    if (branchName !== "") {
-      const branchUrl = `https://github.com/${user.userName}/${
-        this.state.repo
-      }/tree/${branchName}`;
-      this.setState({ url: branchUrl, branch: branchName });
-      this.submitUrl();
+    const { user, assignment } = this.props;
+    const branchUrl = `https://github.com/${user.userName}/${this.state.repo}`;
+    if (this.state.branch !== "") {
+      branchUrl = `${branchUrl}/tree/${this.state.branch}`;
     }
+    this.setState({ url: branchUrl });
+    const url = `${apiUrl}/grade/${user.studentId}/${assignment.assignmentId}`;
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(branchUrl)
+    }).then(res => {
+      if (res.ok) {
+        alert(`Your assignment has been submitted: ${branchUrl}`);
+      }
+    });
   };
 
   submitUrl = () => {
@@ -221,18 +219,25 @@ export default class Assignment extends Component {
         <div>
           <div className="submit-url">
             <label>URL:&nbsp;</label>
-            <input onChange={this.urlChange} value={this.state.url} />
+            <input name="url" onChange={this.onChange} value={this.state.url} />
             <button onClick={this.submitUrl}>Submit URL</button>
           </div>
           <div>
             <label>Repo:&nbsp;</label>
-            <select className="repo-select">{repoSelection}</select>
-            <button onClick={this.submitRepo}>Submit Repo</button>
+            <select onChange={this.repoChange} className="repo-select">
+              {repoSelection}
+            </select>
           </div>
           <div>
             <label>Branch:&nbsp;</label>
-            <select className="branch-select">{branchSelection}</select>
-            <button onClick={this.submitBranch}>Submit Branch</button>
+            <select
+              name="branch"
+              onChange={this.onChange}
+              className="branch-select"
+            >
+              {branchSelection}
+            </select>
+            <button onClick={this.submitBranch}>Submit Repo/Branch</button>
           </div>
         </div>
       );
