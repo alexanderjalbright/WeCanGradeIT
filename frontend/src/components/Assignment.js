@@ -35,6 +35,8 @@ export default class Assignment extends Component {
 
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
+    console.log(event.target.name);
+    console.log(event.target.value);
   };
 
   repoChange = event => {
@@ -44,7 +46,7 @@ export default class Assignment extends Component {
 
   submitBranch = () => {
     const { user, assignment } = this.props;
-    const branchUrl = `https://github.com/${user.userName}/${this.state.repo}`;
+    let branchUrl = `https://github.com/${user.userName}/${this.state.repo}`;
     if (this.state.branch !== "") {
       branchUrl = `${branchUrl}/tree/${this.state.branch}`;
     }
