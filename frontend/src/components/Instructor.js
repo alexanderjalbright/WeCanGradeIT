@@ -31,10 +31,12 @@ export default class Instructor extends Component {
     }).then(res => {
       if (res.ok) {
         this.props.addAssignment(newAssignment);
-        const addAssForm = document.querySelector(".add-assForm");
-        addAssForm.style.display = "none";
-        const addAssButton = document.querySelector(".add-assButton");
-        addAssButton.style.display = "block";
+        const addAssignmentForm = document.querySelector(".add-assignmentForm");
+        addAssignmentForm.style.display = "none";
+        const addAssignmentButton = document.querySelector(
+          ".add-assignmentButton"
+        );
+        addAssignmentButton.style.display = "block";
       }
     });
   };
@@ -61,7 +63,6 @@ export default class Instructor extends Component {
   };
 
   render() {
-    // const { assignmentList } = this.props;
     return (
       <Route
         path={`/instructor`}
@@ -69,18 +70,22 @@ export default class Instructor extends Component {
         render={() => (
           <div>
             <button
-              className="add-assButton"
+              className="add-assignmentButton"
               onClick={() => {
-                const addAssForm = document.querySelector(".add-assForm");
-                addAssForm.style.display = "block";
-                const addAssButton = document.querySelector(".add-assButton");
-                addAssButton.style.display = "none";
+                const addAssignmentForm = document.querySelector(
+                  ".add-assignmentForm"
+                );
+                addAssignmentForm.style.display = "block";
+                const addAssignmentButton = document.querySelector(
+                  ".add-assignmentButton"
+                );
+                addAssignmentButton.style.display = "none";
               }}
             >
               Add Assignment
             </button>
-            <div className="add-assForm" style={{ display: "none" }}>
-              <div className="add-assName">
+            <div className="add-assignmentForm" style={{ display: "none" }}>
+              <div className="add-assignmentName">
                 <label>Name:&nbsp;</label>
                 <input
                   name="name"
@@ -88,7 +93,7 @@ export default class Instructor extends Component {
                   value={this.state.name}
                 />
               </div>
-              <div className="add-assType">
+              <div className="add-assignmentType">
                 <label>Type:&nbsp;</label>
                 <select name="type" onChange={this.onChange} id="selType">
                   <option value="" />
@@ -96,7 +101,7 @@ export default class Instructor extends Component {
                   <option value="Team">Team</option>
                 </select>
               </div>
-              <div className="add-assDescription">
+              <div className="add-assignmentDescription">
                 <label>Description:&nbsp;</label>
                 <textarea
                   name="description"
@@ -104,7 +109,7 @@ export default class Instructor extends Component {
                   value={this.state.description}
                 />
               </div>
-              <div className="add-assRequirements">
+              <div className="add-assignmentRequirements">
                 <label>Requirements:&nbsp;</label>
                 <input
                   name="requirements"
@@ -112,7 +117,7 @@ export default class Instructor extends Component {
                   value={this.state.requirements}
                 />
               </div>
-              <div className="add-assDueDate">
+              <div className="add-assignmentDueDate">
                 <label>Due Date:&nbsp;</label>
                 <input
                   type="datetime-local"
