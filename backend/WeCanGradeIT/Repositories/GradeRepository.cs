@@ -39,24 +39,40 @@ namespace WeCanGradeIT.Repositories
             return exists;
         }
 
-        public void CreateOrEdit(int sId, int aId, string repoUrl)
+        public void CreateOrEdit(int sId, int aId, Grade theGrade)
         {
             if (CheckIfExists(sId, aId))
             {
-                var theGrade = db.Grades.Single(grade => grade.StudentId == sId && grade.AssignmentId == aId);
-                theGrade.RepoUrl = repoUrl;
-                Edit(theGrade);
+                var existingGrade = MatchSet(sId, aId, theGrade);
+                Edit(existingGrade);
             }
             else
             {
-                var newGrade = new Grade()
-                {
-                    StudentId = sId,
-                    AssignmentId = aId,
-                    RepoUrl = repoUrl
-                };
-                Create(newGrade);
+                Create(theGrade);
             }
+        }
+
+        public Grade MatchSet(int sId, int aId, Grade theGrade)
+        {
+            var existingGrade = db.Grades.Single(grade => grade.StudentId == sId && grade.AssignmentId == aId);
+
+            if (theGrade.RepoUrl != "")
+            {
+                existingGrade.RepoUrl = theGrade.RepoUrl;
+            }
+
+            if (theGrade.Comment != "")
+            {
+                existingGrade.Comment = theGrade.Comment;
+            }
+
+            if (theGrade.Value != 0)
+            {
+                existingGrade.Value = theGrade.Value;
+            }
+
+
+            return existingGrade;
         }
     }
 }

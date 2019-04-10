@@ -47,6 +47,7 @@ export default class Assignment extends Component {
   submitBranch = () => {
     const { user, assignment } = this.props;
     let branchUrl = `https://github.com/${user.userName}/${this.state.repo}`;
+    const grade = { repoUrl: branchUrl };
     if (this.state.branch !== "") {
       branchUrl = `${branchUrl}/tree/${this.state.branch}`;
     }
@@ -57,7 +58,7 @@ export default class Assignment extends Component {
       headers: {
         "Content-type": "application/json"
       },
-      body: JSON.stringify(branchUrl)
+      body: JSON.stringify(grade)
     }).then(res => {
       if (res.ok) {
         alert(`Your assignment has been submitted: ${branchUrl}`);
@@ -67,13 +68,14 @@ export default class Assignment extends Component {
 
   submitUrl = () => {
     const { user, assignment } = this.props;
+    const grade = { repoUrl: this.state.url };
     const url = `${apiUrl}/grade/${user.studentId}/${assignment.assignmentId}`;
     fetch(url, {
       method: "POST",
       headers: {
         "Content-type": "application/json"
       },
-      body: JSON.stringify(this.state.url)
+      body: JSON.stringify(grade)
     }).then(res => {
       if (res.ok) {
         alert(`Your assignment has been submitted: ${this.state.url}`);
