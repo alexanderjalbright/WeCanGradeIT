@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
+import { apiUrl } from "../lib/constants";
 
 class Grades extends Component {
   constructor() {
     super();
     this.state = {
-      editGrade: "",
+      editValue: "",
       editComment: ""
     };
   }
@@ -15,8 +16,66 @@ class Grades extends Component {
         <h2>Assignment: {grade.assignment.name}</h2>
         <h3>Grade: {grade.value}</h3>
         <p>Comment: {grade.comment}</p>
+        <button onClick={() => this.editGrade(grade)}>Edit</button>
+        <div
+          className={`grade-edit${grade.gradeId}`}
+          style={{ display: "none" }}
+        >
+          <label>Grade:</label>
+          <input
+            name="editValue"
+            value={this.state.editValue}
+            onChange={this.onChange}
+          />
+          <label>Comment:</label>
+          <input
+            name="editComment"
+            value={this.state.editComment}
+            onChange={this.onChange}
+          />
+          <button onClick={() => this.submitGrade(grade)}>
+            Submit Changes
+          </button>
+          <button onClick={() => this.cancelEdit(grade.gradeId)}>Cancel</button>
+        </div>
       </div>
     ));
+
+  submitGrade = grade => {
+    const editedGrade = {
+      assignmentId: grade.assignmentId,
+      studentId: grade.studentId,
+      value: this.state.editValue,
+      comment: this.state.editComment
+    };
+    const url = `${apiUrl}/grade/${grade.studentId}/${grade.assignmentId}`;
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(editedGrade)
+    }).then(res => {
+      if (res.ok) {
+        alert(`This needs to be finished!`);
+      }
+    });
+  };
+
+  onChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  cancelEdit = id => {
+    const inputGroup = document.querySelector(`.grade-edit${id}`);
+    inputGroup.style.display = "none";
+  };
+
+  editGrade = grade => {
+    this.setState({ editValue: grade.value, editComment: grade.comment });
+    const inputGroup = document.querySelector(`.grade-edit${grade.gradeId}`);
+    inputGroup.style.display = "block";
+  };
 
   render() {
     const { user, students } = this.props;

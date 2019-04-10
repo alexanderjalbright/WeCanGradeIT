@@ -20,17 +20,6 @@ export default class Assignments extends Component {
             assignment={assignment}
             user={user}
             editAssignment={editAssignment}
-            // url={this.state.url}
-            // repos={this.state.repos}
-            // repo={this.state.repo}
-            // branches={this.state.branches}
-            // branch={this.state.branch}
-            // editName={this.state.editName}
-            // editType={this.state.editType}
-            // editDescription={this.state.editDescription}
-            // editRequirements={this.state.editRequirements}
-            // editDueDate={this.state.editDueDate}
-            // onChange={this.onChange}
           />
         )}
       />
