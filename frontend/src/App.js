@@ -93,7 +93,11 @@ class App extends Component {
             user={this.state.user}
             editAssignment={this.editAssignment}
           />
-          <Grades user={this.state.user} />
+          <Grades
+            user={this.state.user}
+            assignments={this.state.assignments}
+            students={this.state.students}
+          />
 
           <Students
             roster={this.state.students}
