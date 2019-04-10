@@ -15,7 +15,8 @@ export default class Assignment extends Component {
       editType: "",
       editDescription: "",
       editRequirements: "",
-      editDueDate: ""
+      editDueDate: "",
+      editDueTime: ""
     };
   }
 
@@ -89,7 +90,7 @@ export default class Assignment extends Component {
       type: this.state.editType,
       description: this.state.editDescription,
       requirements: this.state.editRequirements,
-      dueDate: this.state.editDueDate,
+      dueDate: this.state.editDueDate + "T" + this.state.editDueTime,
       assignmentId: this.props.assignment.assignmentId
     };
     fetch(`${apiUrl}/assignment/${this.props.assignment.assignmentId}`, {
@@ -164,7 +165,8 @@ export default class Assignment extends Component {
                 editType: type,
                 editDescription: description,
                 editRequirements: requirements,
-                editDueDate: dueDate
+                editDueDate: dueDate.slice(0, 10),
+                editDueTime: dueDate.slice(11, 16)
               });
             }}
           >
@@ -210,10 +212,16 @@ export default class Assignment extends Component {
             <div className="edit-assDueDate">
               <label>Due Date:&nbsp;</label>
               <input
-                type="datetime-local"
+                type="date"
                 name="editDueDate"
                 onChange={this.onChange}
                 value={this.state.editDueDate}
+              />
+              <input
+                type="time"
+                name="editDueTime"
+                onChange={this.onChange}
+                value={this.state.editDueTime}
               />
             </div>
             <button onClick={this.submitAssignment}>Submit Assignment</button>
