@@ -48,6 +48,8 @@ namespace WeCanGradeIT.Repositories
             }
             else
             {
+                theGrade.AssignmentId = aId;
+                theGrade.StudentId = sId;
                 Create(theGrade);
             }
         }

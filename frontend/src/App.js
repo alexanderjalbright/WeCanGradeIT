@@ -34,8 +34,7 @@ class App extends Component {
     fetch(`${apiUrl}/student`)
       .then(res => res.json())
       .then(json => {
-        json.unshift(this.state.students[0]);
-        this.setState({ students: json });
+        this.resetState(json);
       });
   }
 
@@ -78,6 +77,11 @@ class App extends Component {
     this.setState({ assignments: newAssignments });
   };
 
+  resetState = json => {
+    json.unshift(this.state.students[0]);
+    this.setState({ students: json });
+  };
+
   render() {
     return (
       <Router>
@@ -87,17 +91,14 @@ class App extends Component {
             students={this.state.students}
             user={this.state.user}
             setUser={this.setUser}
+            resetState={this.resetState}
           />
           <Assignments
             assignments={this.state.assignments}
             user={this.state.user}
             editAssignment={this.editAssignment}
           />
-          <Grades
-            user={this.state.user}
-            assignments={this.state.assignments}
-            students={this.state.students}
-          />
+          <Grades user={this.state.user} students={this.state.students} />
 
           <Students
             roster={this.state.students}

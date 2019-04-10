@@ -1,8 +1,19 @@
 import { Link, Route } from "react-router-dom";
 
+import { apiUrl } from "../lib/constants";
 import React, { Component } from "react";
 
 export default class Home extends Component {
+  componentDidMount() {
+    fetch(`${apiUrl}/assignment`)
+      .then(res => res.json())
+      .then(json => this.setState({ assignments: json }));
+    fetch(`${apiUrl}/student`)
+      .then(res => res.json())
+      .then(json => {
+        this.props.resetState(json);
+      });
+  }
   setUserClick = student => {
     this.props.setUser(student);
   };

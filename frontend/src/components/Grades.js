@@ -1,29 +1,25 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import Assignments from "./Assignments";
-import Students from "./Students";
 
 class Grades extends Component {
-  studentsFunc = id =>
-    this.props.students.map(student => (
-      <div key={student.studentId}>
-        <h2>Student: {student.name}</h2>
-        <h3>
-          Grade:{" "}
-          {student.grades.some(grade => grade.assignmentId === id)
-            ? student.grades.find(grade => grade.assignmentId === id).value
-            : ""}
-        </h3>
-        <h3>
-          Comment:{" "}
-          {student.grades.some(grade => grade.assignmentId === id)
-            ? student.grades.find(grade => grade.assignmentId === id).comment
-            : ""}
-        </h3>
+  constructor() {
+    super();
+    this.state = {
+      editGrade: "",
+      editComment: ""
+    };
+  }
+  gradesMapper = grades =>
+    grades.map(grade => (
+      <div key={grade.gradeId}>
+        <h2>Assignment: {grade.assignment.name}</h2>
+        <h3>Grade: {grade.value}</h3>
+        <p>Comment: {grade.comment}</p>
       </div>
     ));
+
   render() {
-    const { user, assignments, students } = this.props;
+    const { user, students } = this.props;
     const gradesTable =
       user.name !== "Instructor" && user.name !== ""
         ? user.grades.map(grade => (
@@ -38,12 +34,16 @@ class Grades extends Component {
               </div>
             </div>
           ))
-        : assignments.map(assignment => (
-            <div key={assignment.assignmentId}>
-              <h1>{assignment.name}</h1>
-              {this.studentsFunc(assignment.assignmentId)}
-            </div>
-          ));
+        : students.map(student =>
+            student.name === "Instructor" ? (
+              ""
+            ) : (
+              <div key={student.studentId}>
+                <h1>{student.name}</h1>
+                {this.gradesMapper(student.grades)}
+              </div>
+            )
+          );
     return (
       <Route
         path={`/${user.userName}/grades`}
