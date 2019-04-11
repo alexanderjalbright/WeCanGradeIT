@@ -41,7 +41,7 @@ export default class Home extends Component {
 
             <h2>
               {`${user.firstName} ${user.lastName}`}
-              {`${user.firstName} ${user.lastName}` === ""
+              {`${user.firstName} ${user.lastName}` === " "
                 ? ``
                 : ` has been selected!`}
             </h2>
