@@ -25,7 +25,9 @@ class Grades extends Component {
             {grade.repoUrl}
           </a>
         </p>
-        <button onClick={() => this.editGrade(grade)}>Edit</button>
+        {this.state.editingGrade !== grade.gradeId && (
+          <button onClick={() => this.editGrade(grade)}>Edit</button>
+        )}
         {this.state.editingGrade === grade.gradeId && (
           <div className={`grade-edit grade-edit${grade.gradeId}`}>
             <label>Grade:</label>
@@ -43,9 +45,7 @@ class Grades extends Component {
             <button onClick={() => this.submitGrade(grade)}>
               Submit Changes
             </button>
-            <button onClick={() => this.cancelEdit(grade.gradeId)}>
-              Cancel
-            </button>
+            <button onClick={this.cancelEdit}>Cancel</button>
           </div>
         )}
       </div>
@@ -53,7 +53,7 @@ class Grades extends Component {
 
   submitGrade = grade => {
     const editedGrade = {
-      assignmentId: grade.assignmentId,
+      assignmentId: grade.assignmentId * 1,
       studentId: grade.studentId,
       value: this.state.editValue,
       comment: this.state.editComment
@@ -67,6 +67,7 @@ class Grades extends Component {
       body: JSON.stringify(editedGrade)
     }).then(res => {
       if (res.ok) {
+        console.log(editedGrade);
         this.props.gradeSubmitted(editedGrade);
       }
     });
@@ -76,7 +77,7 @@ class Grades extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  cancelEdit = id => {
+  cancelEdit = () => {
     this.setState({ editingGrade: 0, addingGrade: 0 });
   };
 
@@ -89,7 +90,12 @@ class Grades extends Component {
     });
   };
 
-  showAddStudent;
+  assignmentMapper = () =>
+    this.props.assignments.map(assignment => (
+      <option key={assignment.assignmentId} value={assignment.assignmentId}>
+        {assignment.name}
+      </option>
+    ));
 
   render() {
     const { user, students } = this.props;
@@ -114,23 +120,25 @@ class Grades extends Component {
               <div key={student.studentId}>
                 <h1>{student.name}</h1>
                 {this.gradesMapper(student.grades)}
-                <button
-                  className={`add-grade add-grade${student.studentId}`}
-                  onClick={() =>
-                    this.setState({
-                      addingGrade: student.studentId,
-                      editingGrade: 0
-                    })
-                  }
-                >
-                  Add Grade
-                </button>
+                {this.state.addingGrade !== student.studentId && (
+                  <button
+                    className={`add-grade add-grade${student.studentId}`}
+                    onClick={() =>
+                      this.setState({
+                        addingGrade: student.studentId,
+                        editingGrade: 0
+                      })
+                    }
+                  >
+                    Add Grade
+                  </button>
+                )}
+
                 {this.state.addingGrade === student.studentId && (
                   <div>
+                    <label>Assignment: </label>
                     <select name="addAssignmentId" onChange={this.onChange}>
-                      <option>placeholder 1</option>
-                      <option>placeholder 2</option>
-                      <option>placeholder 3</option>
+                      {this.assignmentMapper()}
                     </select>
                     <label>Value:</label>
                     <input
@@ -145,9 +153,20 @@ class Grades extends Component {
                       onChange={this.onChange}
                     />
                     <button
-                      onClick={() => console.log("submitting an added grade")}
+                      onClick={() => {
+                        this.submitGrade({
+                          assignmentId: this.state.addAssignmentId,
+                          studentId: student.studentId
+                        });
+                        this.setState({
+                          editValue: 0,
+                          editComment: "",
+                          addingGrade: 0,
+                          editingGrade: 0
+                        });
+                      }}
                     >
-                      Submit
+                      Submit Grade
                     </button>
                     <button onClick={this.cancelEdit}>Cancel</button>
                   </div>

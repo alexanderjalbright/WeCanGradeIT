@@ -41,7 +41,8 @@ class App extends Component {
   submitNewStudent = (newName, newUserName) => {
     const newStudent = {
       name: newName,
-      userName: newUserName
+      userName: newUserName,
+      grades: []
     };
     fetch(`${apiUrl}/student`, {
       method: "POST",
@@ -97,8 +98,25 @@ class App extends Component {
         gradeIndex = index;
       }
     });
-    studentGrades[gradeIndex].value = grade.value;
-    studentGrades[gradeIndex].comment = grade.comment;
+    if (gradeIndex === -1) {
+      const assignment = this.state.assignments.find(
+        whichOne => whichOne.assignmentId === grade.assignmentId
+      );
+      const newGrade = {
+        value: grade.value,
+        comment: grade.comment,
+        assignmentId: grade.assignmentId,
+        studentId: grade.studentId,
+        repoUrl: "",
+        assignment: { name: assignment.name }
+      };
+      studentGrades.push(newGrade);
+      console.log(grade.assignmentId);
+    } else {
+      studentGrades[gradeIndex].value = grade.value;
+      studentGrades[gradeIndex].comment = grade.comment;
+    }
+
     this.setState({ students: newStudents });
   };
 
@@ -122,6 +140,7 @@ class App extends Component {
             user={this.state.user}
             students={this.state.students}
             gradeSubmitted={this.gradeSubmitted}
+            assignments={this.state.assignments}
           />
 
           <Students
