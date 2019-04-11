@@ -10,8 +10,9 @@ namespace WeCanGradeIT.Repositories
     {
         IEnumerable<Grade> GetAll();
         bool CheckIfExists(int sId, int aId);
-        void CreateOrEdit(int sId, int aId, string repoUrl);
+        void CreateOrEdit(int sId, int aId, Grade theGrade);
         void Create(Grade grade);
-        void Edit(Grade grade);      
+        void Edit(Grade grade);
+        Grade MatchSet(int sId, int aId, Grade theGrade);
     }
 }

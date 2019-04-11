@@ -13,6 +13,5 @@ namespace WeCanGradeIT.Models
         public string Description { get; set; }
         public string Requirements { get; set; } //Stored as MD format
         public DateTime DueDate { get; set; }
-        public virtual List<Student> Students { get; set; }
     }
 }

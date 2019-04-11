@@ -23,7 +23,6 @@ export default class Instructor extends Component {
       dueDate: this.state.dueDate + "T" + this.state.dueTime,
       type: this.state.type
     };
-    console.log(newAssignment.dueDate);
     fetch(`${apiUrl}/assignment`, {
       method: "POST",
       headers: {

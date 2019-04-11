@@ -21,10 +21,10 @@ namespace WeCanGradeIT.Controllers
         }
 
         [HttpPost("{studentId}/{assignmentId}")]
-        public ActionResult<bool> Post(int studentId, int assignmentId, [FromBody] string repoUrl)
+        public ActionResult<bool> Post(int studentId, int assignmentId, [FromBody] Grade theGrade)
         {
-            repo.CreateOrEdit(studentId, assignmentId, repoUrl);   
+            repo.CreateOrEdit(studentId, assignmentId, theGrade);   
             return true;
-        }   
+        }
     }
 }
