@@ -237,6 +237,9 @@ export default class Assignment extends Component {
           <div>
             <label>Repo:&nbsp;</label>
             <select onChange={this.repoChange} className="repo-select">
+              <option value="" selected disabled hidden>
+                Choose here
+              </option>
               {repoSelection}
             </select>
           </div>
@@ -247,6 +250,9 @@ export default class Assignment extends Component {
               onChange={this.onChange}
               className="branch-select"
             >
+              <option value="" selected disabled hidden>
+                Choose here
+              </option>
               {branchSelection}
             </select>
             <button onClick={this.submitBranch}>Submit Repo/Branch</button>

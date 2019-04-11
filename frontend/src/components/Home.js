@@ -43,7 +43,9 @@ export default class Home extends Component {
           <div className="login">
             <h2>Select User</h2>
             <select className="user-select">
-              <option />
+              <option value="" selected disabled hidden>
+                Choose here
+              </option>
               {selectUserLinks}
             </select>
             <button className="user-select-btn" onClick={this.selectClick}>

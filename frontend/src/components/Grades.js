@@ -138,6 +138,9 @@ class Grades extends Component {
                   <div>
                     <label>Assignment: </label>
                     <select name="addAssignmentId" onChange={this.onChange}>
+                      <option value="" selected disabled hidden>
+                        Choose here
+                      </option>
                       {this.assignmentMapper()}
                     </select>
                     <label>Value:</label>

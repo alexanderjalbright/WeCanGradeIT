@@ -52,6 +52,7 @@ class App extends Component {
       body: JSON.stringify(newStudent)
     }).then(res => {
       if (res.ok) {
+        newStudent.studentId = this.state.students.length;
         const newStudents = [...this.state.students, newStudent];
         this.setState({ students: newStudents });
         const addForm = document.querySelector(".add-form");
