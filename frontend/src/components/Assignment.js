@@ -36,8 +36,6 @@ export default class Assignment extends Component {
 
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-    console.log(event.target.name);
-    console.log(event.target.value);
   };
 
   repoChange = event => {
@@ -48,10 +46,10 @@ export default class Assignment extends Component {
   submitBranch = () => {
     const { user, assignment } = this.props;
     let branchUrl = `https://github.com/${user.userName}/${this.state.repo}`;
-    const grade = { repoUrl: branchUrl };
     if (this.state.branch !== "") {
       branchUrl = `${branchUrl}/tree/${this.state.branch}`;
     }
+    const grade = { repoUrl: branchUrl };
     this.setState({ url: branchUrl });
     const url = `${apiUrl}/grade/${user.studentId}/${assignment.assignmentId}`;
     fetch(url, {
@@ -151,7 +149,7 @@ export default class Assignment extends Component {
     ));
 
     const studentOrInstructor = () =>
-      this.props.user.name === "Instructor" ? (
+      this.props.user.firstName === "Instructor" ? (
         <div>
           <button
             className="edit-assButton"

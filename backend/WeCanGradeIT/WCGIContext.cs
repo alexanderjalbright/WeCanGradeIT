@@ -52,13 +52,15 @@ namespace WeCanGradeIT
                 new Student()
                 {
                     StudentId = 1,
-                    Name = "Alex Albright",
+                    FirstName = "Alex",
+                    LastName = "Albright",
                     UserName = "alexanderjalbright"
                 },
                 new Student()
                 {
                     StudentId = 2,
-                    Name = "Mary McGeary",
+                    FirstName = "Mary",
+                    LastName = "McGeary",
                     UserName = "MaryMcGeary"
                 }
             );

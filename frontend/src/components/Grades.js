@@ -100,10 +100,11 @@ class Grades extends Component {
   render() {
     const { user, students } = this.props;
     const gradesTable =
-      user.name !== "Instructor" && user.name !== ""
-        ? user.grades.map(grade => (
+      user.firstName !== "Instructor" && user.firstName !== "" ? (
+        <div>
+          <h1>Grades - {`${user.firstName} ${user.lastName}`}</h1>
+          {user.grades.map(grade => (
             <div>
-              <h1>{user.name}'s Grades</h1>
               <div>
                 {" "}
                 <h2>
@@ -112,71 +113,76 @@ class Grades extends Component {
                 <p>{grade.comment}</p>
               </div>
             </div>
-          ))
-        : students.map(student =>
-            student.name === "Instructor" ? (
-              ""
-            ) : (
-              <div key={student.studentId}>
-                <h1>{student.name}</h1>
-                {this.gradesMapper(student.grades)}
-                {this.state.addingGrade !== student.studentId && (
-                  <button
-                    className={`add-grade add-grade${student.studentId}`}
-                    onClick={() =>
-                      this.setState({
-                        addingGrade: student.studentId,
-                        editingGrade: 0
-                      })
-                    }
-                  >
-                    Add Grade
-                  </button>
-                )}
+          ))}
+        </div>
+      ) : (
+        students.map(student =>
+          student.firstName === "Instructor" ? (
+            ""
+          ) : (
+            <div key={student.studentId}>
+              <h1>Grades - {`${student.firstName} ${student.lastName}`}</h1>
+              {this.gradesMapper(student.grades)}
+              {this.state.addingGrade !== student.studentId && (
+                <button
+                  className={`add-grade add-grade${student.studentId}`}
+                  onClick={() =>
+                    this.setState({
+                      addingGrade: student.studentId,
+                      editingGrade: 0,
+                      editValue: 0,
+                      editComment: ""
+                    })
+                  }
+                >
+                  Add Grade
+                </button>
+              )}
 
-                {this.state.addingGrade === student.studentId && (
-                  <div>
-                    <label>Assignment: </label>
-                    <select name="addAssignmentId" onChange={this.onChange}>
-                      <option value="" selected disabled hidden>
-                        Choose here
-                      </option>
-                      {this.assignmentMapper()}
-                    </select>
-                    <label>Value:</label>
-                    <input
-                      name="editValue"
-                      value={this.state.editValue}
-                      onChange={this.onChange}
-                    />
-                    <label>Comment:</label>
-                    <input
-                      name="editComment"
-                      value={this.state.editComment}
-                      onChange={this.onChange}
-                    />
-                    <button
-                      onClick={() => {
-                        this.submitGrade({
-                          assignmentId: this.state.addAssignmentId,
-                          studentId: student.studentId
-                        });
-                        this.setState({
-                          editValue: 0,
-                          editComment: "",
-                          addingGrade: 0,
-                          editingGrade: 0
-                        });
-                      }}
-                    >
-                      Submit Grade
-                    </button>
-                    <button onClick={this.cancelEdit}>Cancel</button>
-                  </div>
-                )}
-              </div>
-            )
-          );
+              {this.state.addingGrade === student.studentId && (
+                <div>
+                  <label>Assignment: </label>
+                  <select name="addAssignmentId" onChange={this.onChange}>
+                    <option value="" selected disabled hidden>
+                      Choose here
+                    </option>
+                    {this.assignmentMapper()}
+                  </select>
+                  <label>Value:</label>
+                  <input
+                    name="editValue"
+                    value={this.state.editValue}
+                    onChange={this.onChange}
+                  />
+                  <label>Comment:</label>
+                  <input
+                    name="editComment"
+                    value={this.state.editComment}
+                    onChange={this.onChange}
+                  />
+                  <button
+                    onClick={() => {
+                      this.submitGrade({
+                        assignmentId: this.state.addAssignmentId,
+                        studentId: student.studentId
+                      });
+                      this.setState({
+                        editValue: 0,
+                        editComment: "",
+                        addingGrade: 0,
+                        editingGrade: 0
+                      });
+                    }}
+                  >
+                    Submit Grade
+                  </button>
+                  <button onClick={this.cancelEdit}>Cancel</button>
+                </div>
+              )}
+            </div>
+          )
+        )
+      );
     return (
       <Route
         path={`/${user.userName}/grades`}
