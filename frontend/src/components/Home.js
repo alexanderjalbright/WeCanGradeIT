@@ -20,7 +20,7 @@ export default class Home extends Component {
     const { students, user } = this.props;
     const selectUserLinks = students.map(student => (
       <option key={student.studentId} value={student.studentId}>
-        {student.name}
+        {`${student.firstName} ${student.lastName}`}
       </option>
     ));
 
@@ -40,12 +40,16 @@ export default class Home extends Component {
             </button>
 
             <h2>
-              {user.name}
-              {user.name === "" ? `` : ` has been selected!`}
+              {`${user.firstName} ${user.lastName}`}
+              {`${user.firstName} ${user.lastName}` === ""
+                ? ``
+                : ` has been selected!`}
             </h2>
             <Link
               to={
-                user.name === "Instructor" ? `/instructor` : `/${user.userName}`
+                user.firstName === "Instructor"
+                  ? `/instructor`
+                  : `/${user.userName}`
               }
             >
               <button

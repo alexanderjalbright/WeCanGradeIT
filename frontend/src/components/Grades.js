@@ -5,7 +5,7 @@ class Grades extends Component {
   render() {
     const { user } = this.props;
     const gradesTable =
-      user.name !== "Instructor" && user.name !== ""
+      user.name !== "Instructor" && user.firstName !== ""
         ? user.grades.map(grade => (
             <div>
               {" "}
@@ -22,7 +22,7 @@ class Grades extends Component {
         exact
         render={() => (
           <div>
-            <h1>{user.name}'s Grades</h1>
+            <h1>{`${user.firstName} ${user.lastName}`}'s Grades</h1>
             {gradesTable}
           </div>
         )}

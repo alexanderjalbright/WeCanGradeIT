@@ -17,13 +17,14 @@ class App extends Component {
       assignments: [],
       students: [
         {
-          name: "Instructor",
+          firstName: "Instructor",
+          lastName: "",
           userName: "Instructor",
           studentId: 0,
           grades: [{ assignment: "" }]
         }
       ],
-      user: { name: "" }
+      user: { firstName: "", lastName: "" }
     };
   }
 
@@ -39,9 +40,10 @@ class App extends Component {
       });
   }
 
-  submitNewStudent = (newName, newUserName) => {
+  submitNewStudent = (newFirstName, newLastName, newUserName) => {
     const newStudent = {
-      name: newName,
+      firstName: newFirstName,
+      lastName: newLastName,
       userName: newUserName
     };
     fetch(`${apiUrl}/student`, {
@@ -97,8 +99,10 @@ class App extends Component {
 
           <Students
             roster={this.state.students}
-            newName={this.state.newName}
-            setNewName={this.setNewName}
+            newFirstName={this.state.newFirstName}
+            setNewFirstName={this.setNewFirstName}
+            newLastName={this.state.newLastName}
+            setNewLastName={this.setNewLastName}
             newUserName={this.state.newUserName}
             setNewUserName={this.setNewUserName}
             submitNewStudent={this.submitNewStudent}
