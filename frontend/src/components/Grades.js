@@ -7,7 +7,8 @@ class Grades extends Component {
     super();
     this.state = {
       editValue: "",
-      editComment: ""
+      editComment: "",
+      editingGrade: 0
     };
   }
   gradesMapper = grades =>
@@ -23,27 +24,28 @@ class Grades extends Component {
           </a>
         </p>
         <button onClick={() => this.editGrade(grade)}>Edit</button>
-        <div
-          className={`grade-edit grade-edit${grade.gradeId}`}
-          style={{ display: "none" }}
-        >
-          <label>Grade:</label>
-          <input
-            name="editValue"
-            value={this.state.editValue}
-            onChange={this.onChange}
-          />
-          <label>Comment:</label>
-          <input
-            name="editComment"
-            value={this.state.editComment}
-            onChange={this.onChange}
-          />
-          <button onClick={() => this.submitGrade(grade)}>
-            Submit Changes
-          </button>
-          <button onClick={() => this.cancelEdit(grade.gradeId)}>Cancel</button>
-        </div>
+        {this.state.editingGrade === grade.gradeId && (
+          <div className={`grade-edit grade-edit${grade.gradeId}`}>
+            <label>Grade:</label>
+            <input
+              name="editValue"
+              value={this.state.editValue}
+              onChange={this.onChange}
+            />
+            <label>Comment:</label>
+            <input
+              name="editComment"
+              value={this.state.editComment}
+              onChange={this.onChange}
+            />
+            <button onClick={() => this.submitGrade(grade)}>
+              Submit Changes
+            </button>
+            <button onClick={() => this.cancelEdit(grade.gradeId)}>
+              Cancel
+            </button>
+          </div>
+        )}
       </div>
     ));
 
@@ -73,14 +75,15 @@ class Grades extends Component {
   };
 
   cancelEdit = id => {
-    const inputGroup = document.querySelector(`.grade-edit${id}`);
-    inputGroup.style.display = "none";
+    this.setState({ editingGrade: 0 });
   };
 
   editGrade = grade => {
-    this.setState({ editValue: grade.value, editComment: grade.comment });
-    const inputGroup = document.querySelector(`.grade-edit${grade.gradeId}`);
-    inputGroup.style.display = "block";
+    this.setState({
+      editValue: grade.value,
+      editComment: grade.comment,
+      editingGrade: grade.gradeId
+    });
   };
 
   render() {
