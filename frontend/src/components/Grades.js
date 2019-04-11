@@ -16,6 +16,12 @@ class Grades extends Component {
         <h2>Assignment: {grade.assignment.name}</h2>
         <h3>Grade: {grade.value}</h3>
         <p>Comment: {grade.comment}</p>
+        <p>
+          Repo:{" "}
+          <a href={grade.repoUrl} target="_blank">
+            {grade.repoUrl}
+          </a>
+        </p>
         <button onClick={() => this.editGrade(grade)}>Edit</button>
         <div
           className={`grade-edit grade-edit${grade.gradeId}`}
