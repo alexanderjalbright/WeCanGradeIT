@@ -9,6 +9,7 @@ export default class Instructor extends Component {
       name: "",
       description: "",
       requirements: "",
+      requirementsList: [],
       dueDate: "",
       type: "",
       dueTime: ""
@@ -41,6 +42,12 @@ export default class Instructor extends Component {
         addAssignmentButton.style.display = "block";
       }
     });
+  };
+
+  arrayToMDString = arr => {
+    let str = "";
+    arr.forEach(each => (str += "* " + each + "  "));
+    return str;
   };
 
   onChange = event => {
@@ -97,9 +104,15 @@ export default class Instructor extends Component {
               <div className="add-assignmentRequirements">
                 <label>Requirements:&nbsp;</label>
                 <input
-                  name="requirements"
+                  name="requirementsList"
                   onChange={this.onChange}
-                  value={this.state.requirements}
+                  value={this.state.requirementsList[0]}
+                />
+                <label>Requirements:&nbsp;</label>
+                <input
+                  name="requirementsList"
+                  onChange={this.onChange}
+                  value={this.state.requirementsList[1]}
                 />
               </div>
               <div className="add-assignmentDueDate">
