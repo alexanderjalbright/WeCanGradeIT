@@ -8,7 +8,9 @@ class Grades extends Component {
     this.state = {
       editValue: "",
       editComment: "",
-      editingGrade: 0
+      editingGrade: 0,
+      addingGrade: 0,
+      addAssignmentId: 0
     };
   }
   gradesMapper = grades =>
@@ -75,16 +77,19 @@ class Grades extends Component {
   };
 
   cancelEdit = id => {
-    this.setState({ editingGrade: 0 });
+    this.setState({ editingGrade: 0, addingGrade: 0 });
   };
 
   editGrade = grade => {
     this.setState({
       editValue: grade.value,
       editComment: grade.comment,
-      editingGrade: grade.gradeId
+      editingGrade: grade.gradeId,
+      addingGrade: 0
     });
   };
+
+  showAddStudent;
 
   render() {
     const { user, students } = this.props;
@@ -109,6 +114,44 @@ class Grades extends Component {
               <div key={student.studentId}>
                 <h1>{student.name}</h1>
                 {this.gradesMapper(student.grades)}
+                <button
+                  className={`add-grade add-grade${student.studentId}`}
+                  onClick={() =>
+                    this.setState({
+                      addingGrade: student.studentId,
+                      editingGrade: 0
+                    })
+                  }
+                >
+                  Add Grade
+                </button>
+                {this.state.addingGrade === student.studentId && (
+                  <div>
+                    <select name="addAssignmentId" onChange={this.onChange}>
+                      <option>placeholder 1</option>
+                      <option>placeholder 2</option>
+                      <option>placeholder 3</option>
+                    </select>
+                    <label>Value:</label>
+                    <input
+                      name="editValue"
+                      value={this.state.editValue}
+                      onChange={this.onChange}
+                    />
+                    <label>Comment:</label>
+                    <input
+                      name="editComment"
+                      value={this.state.editComment}
+                      onChange={this.onChange}
+                    />
+                    <button
+                      onClick={() => console.log("submitting an added grade")}
+                    >
+                      Submit
+                    </button>
+                    <button onClick={this.cancelEdit}>Cancel</button>
+                  </div>
+                )}
               </div>
             )
           );
