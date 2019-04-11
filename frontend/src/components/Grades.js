@@ -18,7 +18,7 @@ class Grades extends Component {
         <p>Comment: {grade.comment}</p>
         <button onClick={() => this.editGrade(grade)}>Edit</button>
         <div
-          className={`grade-edit${grade.gradeId}`}
+          className={`grade-edit grade-edit${grade.gradeId}`}
           style={{ display: "none" }}
         >
           <label>Grade:</label>
@@ -57,7 +57,7 @@ class Grades extends Component {
       body: JSON.stringify(editedGrade)
     }).then(res => {
       if (res.ok) {
-        alert(`This needs to be finished!`);
+        this.props.gradeSubmitted(editedGrade);
       }
     });
   };

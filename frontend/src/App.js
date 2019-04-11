@@ -82,6 +82,26 @@ class App extends Component {
     this.setState({ students: json });
   };
 
+  gradeSubmitted = grade => {
+    const newStudents = [...this.state.students];
+    let studentIndex = -1;
+    newStudents.forEach((student, index) => {
+      if (student.studentId === grade.studentId) {
+        studentIndex = index;
+      }
+    });
+    const studentGrades = newStudents[studentIndex].grades;
+    let gradeIndex = -1;
+    studentGrades.forEach((theirGrade, index) => {
+      if (theirGrade.assignmentId === grade.assignmentId) {
+        gradeIndex = index;
+      }
+    });
+    studentGrades[gradeIndex].value = grade.value;
+    studentGrades[gradeIndex].comment = grade.comment;
+    this.setState({ students: newStudents });
+  };
+
   render() {
     return (
       <Router>
@@ -98,7 +118,11 @@ class App extends Component {
             user={this.state.user}
             editAssignment={this.editAssignment}
           />
-          <Grades user={this.state.user} students={this.state.students} />
+          <Grades
+            user={this.state.user}
+            students={this.state.students}
+            gradeSubmitted={this.gradeSubmitted}
+          />
 
           <Students
             roster={this.state.students}
