@@ -99,7 +99,7 @@ export default class Assignment extends Component {
       body: JSON.stringify(editAssignment)
     }).then(res => {
       if (res.ok) {
-        this.props.editAssignment(editAssignment);
+        this.props.editAssignment();
       }
     });
   };
@@ -152,12 +152,16 @@ export default class Assignment extends Component {
       this.props.user.firstName === "Instructor" ? (
         <div>
           <button
-            className="edit-assButton"
+            className="edit-assignment-button"
             onClick={() => {
-              const addAssForm = document.querySelector(".edit-assForm");
-              addAssForm.style.display = "block";
-              const addAssButton = document.querySelector(".edit-assButton");
-              addAssButton.style.display = "none";
+              const addAssignmentForm = document.querySelector(
+                ".edit-assignment-form"
+              );
+              addAssignmentForm.style.display = "block";
+              const addAssignmentButton = document.querySelector(
+                ".edit-assignment-button"
+              );
+              addAssignmentButton.style.display = "none";
               this.setState({
                 editName: name,
                 editType: type,
@@ -170,8 +174,8 @@ export default class Assignment extends Component {
           >
             Edit Assignment
           </button>
-          <div className="edit-assForm" style={{ display: "none" }}>
-            <div className="edit-assName">
+          <div className="edit-assignment-form" style={{ display: "none" }}>
+            <div className="edit-assignment-name">
               <label>Name:&nbsp;</label>
               <input
                 name="editName"
@@ -179,7 +183,7 @@ export default class Assignment extends Component {
                 value={this.state.editName}
               />
             </div>
-            <div className="edit-assType">
+            <div className="edit-assignment-type">
               <label>Type:&nbsp;</label>
               <select
                 name="editType"
@@ -191,7 +195,7 @@ export default class Assignment extends Component {
                 <option value="Team">Team</option>
               </select>
             </div>
-            <div className="edit-assDescription">
+            <div className="edit-assignment-description">
               <label>Description:&nbsp;</label>
               <input
                 name="editDescription"
@@ -199,7 +203,7 @@ export default class Assignment extends Component {
                 value={this.state.editDescription}
               />
             </div>
-            <div className="edit-assRequirements">
+            <div className="edit-assignment-requirements">
               <label>Requirements:&nbsp;</label>
               <input
                 name="editRequirements"
@@ -207,7 +211,7 @@ export default class Assignment extends Component {
                 value={this.state.editRequirements}
               />
             </div>
-            <div className="edit-assDueDate">
+            <div className="edit-assignment-due-date">
               <label>Due Date:&nbsp;</label>
               <input
                 type="date"
