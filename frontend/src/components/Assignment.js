@@ -36,8 +36,6 @@ export default class Assignment extends Component {
 
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-    console.log(event.target.name);
-    console.log(event.target.value);
   };
 
   repoChange = event => {
@@ -51,6 +49,7 @@ export default class Assignment extends Component {
     if (this.state.branch !== "") {
       branchUrl = `${branchUrl}/tree/${this.state.branch}`;
     }
+    const grade = { repoUrl: branchUrl };
     this.setState({ url: branchUrl });
     const url = `${apiUrl}/grade/${user.studentId}/${assignment.assignmentId}`;
     fetch(url, {
@@ -58,7 +57,7 @@ export default class Assignment extends Component {
       headers: {
         "Content-type": "application/json"
       },
-      body: JSON.stringify(branchUrl)
+      body: JSON.stringify(grade)
     }).then(res => {
       if (res.ok) {
         alert(`Your assignment has been submitted: ${branchUrl}`);
@@ -68,13 +67,14 @@ export default class Assignment extends Component {
 
   submitUrl = () => {
     const { user, assignment } = this.props;
+    const grade = { repoUrl: this.state.url };
     const url = `${apiUrl}/grade/${user.studentId}/${assignment.assignmentId}`;
     fetch(url, {
       method: "POST",
       headers: {
         "Content-type": "application/json"
       },
-      body: JSON.stringify(this.state.url)
+      body: JSON.stringify(grade)
     }).then(res => {
       if (res.ok) {
         alert(`Your assignment has been submitted: ${this.state.url}`);
@@ -149,7 +149,7 @@ export default class Assignment extends Component {
     ));
 
     const studentOrInstructor = () =>
-      this.props.user.name === "Instructor" ? (
+      this.props.user.firstName === "Instructor" ? (
         <div>
           <button
             className="edit-assButton"
@@ -235,6 +235,9 @@ export default class Assignment extends Component {
           <div>
             <label>Repo:&nbsp;</label>
             <select onChange={this.repoChange} className="repo-select">
+              <option value="" selected disabled hidden>
+                Choose here
+              </option>
               {repoSelection}
             </select>
           </div>
@@ -245,6 +248,9 @@ export default class Assignment extends Component {
               onChange={this.onChange}
               className="branch-select"
             >
+              <option value="" selected disabled hidden>
+                Choose here
+              </option>
               {branchSelection}
             </select>
             <button onClick={this.submitBranch}>Submit Repo/Branch</button>

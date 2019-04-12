@@ -2,7 +2,7 @@
 
 namespace WeCanGradeIT.Migrations
 {
-    public partial class firstLastNameSplit : Migration
+    public partial class FirstLastName : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

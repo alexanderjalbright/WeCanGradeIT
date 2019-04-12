@@ -7,7 +7,10 @@ export default class Nav extends Component {
   render() {
     const { user, assignments } = this.props;
     const assignLinks = assignments.map(assignment => (
-      <Link to={`/${user.userName}/assignments/${assignment.assignmentId}`}>
+      <Link
+        key={assignment.assignmentId}
+        to={`/${user.userName}/assignments/${assignment.assignmentId}`}
+      >
         <li>{assignment.name}</li>
       </Link>
     ));

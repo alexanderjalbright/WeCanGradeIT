@@ -10,8 +10,8 @@ using WeCanGradeIT;
 namespace WeCanGradeIT.Migrations
 {
     [DbContext(typeof(WCGIContext))]
-    [Migration("20190411150237_firstLastNameSplit")]
-    partial class firstLastNameSplit
+    [Migration("20190410195538_fixedVirtualPropsAgain")]
+    partial class fixedVirtualPropsAgain
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,23 +85,17 @@ namespace WeCanGradeIT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AssignmentId");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
+                    b.Property<string>("Name");
 
                     b.Property<string>("UserName");
 
                     b.HasKey("StudentId");
 
-                    b.HasIndex("AssignmentId");
-
                     b.ToTable("Students");
 
                     b.HasData(
-                        new { StudentId = 1, FirstName = "Alex", LastName = "Albright", UserName = "alexanderjalbright" },
-                        new { StudentId = 2, FirstName = "Mary", LastName = "McGeary", UserName = "MaryMcGeary" }
+                        new { StudentId = 1, Name = "Alex Albright", UserName = "alexanderjalbright" },
+                        new { StudentId = 2, Name = "Mary McGeary", UserName = "MaryMcGeary" }
                     );
                 });
 
@@ -116,13 +110,6 @@ namespace WeCanGradeIT.Migrations
                         .WithMany("Grades")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("WeCanGradeIT.Models.Student", b =>
-                {
-                    b.HasOne("WeCanGradeIT.Models.Assignment")
-                        .WithMany("Students")
-                        .HasForeignKey("AssignmentId");
                 });
 #pragma warning restore 612, 618
         }

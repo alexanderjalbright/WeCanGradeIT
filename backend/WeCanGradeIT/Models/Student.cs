@@ -9,7 +9,7 @@ namespace WeCanGradeIT.Models
     {
         public int StudentId { get; set; }
         public string FirstName { get; set; }
-        public string LastName { get; set; } 
+        public string LastName { get; set; }
         public string UserName { get; set; }
         public virtual List<Grade> Grades { get; set; }
     }

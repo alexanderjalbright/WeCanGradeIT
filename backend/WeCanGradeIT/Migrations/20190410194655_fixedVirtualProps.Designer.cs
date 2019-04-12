@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WeCanGradeIT;
 
 namespace WeCanGradeIT.Migrations
 {
     [DbContext(typeof(WCGIContext))]
-    partial class WCGIContextModelSnapshot : ModelSnapshot
+    [Migration("20190410194655_fixedVirtualProps")]
+    partial class fixedVirtualProps
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,9 +85,7 @@ namespace WeCanGradeIT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
+                    b.Property<string>("Name");
 
                     b.Property<string>("UserName");
 
@@ -94,19 +94,19 @@ namespace WeCanGradeIT.Migrations
                     b.ToTable("Students");
 
                     b.HasData(
-                        new { StudentId = 1, FirstName = "Alex", LastName = "Albright", UserName = "alexanderjalbright" },
-                        new { StudentId = 2, FirstName = "Mary", LastName = "McGeary", UserName = "MaryMcGeary" }
+                        new { StudentId = 1, Name = "Alex Albright", UserName = "alexanderjalbright" },
+                        new { StudentId = 2, Name = "Mary McGeary", UserName = "MaryMcGeary" }
                     );
                 });
 
             modelBuilder.Entity("WeCanGradeIT.Models.Grade", b =>
                 {
                     b.HasOne("WeCanGradeIT.Models.Assignment", "Assignment")
-                        .WithMany()
+                        .WithMany("Grades")
                         .HasForeignKey("AssignmentId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("WeCanGradeIT.Models.Student")
+                    b.HasOne("WeCanGradeIT.Models.Student", "Student")
                         .WithMany("Grades")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade);
