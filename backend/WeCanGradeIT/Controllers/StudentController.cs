@@ -48,6 +48,13 @@ namespace WeCanGradeIT.Controllers
             return true;
         }
 
+        [HttpPost("{id}")]
+        public ActionResult<bool> Post(int id, [FromBody] Student student)
+        {
+            repo.Edit(student);
+            return true;
+        }
+
         public decimal OverallGrade(int id)
         {
             var student = repo.GetById(id);
