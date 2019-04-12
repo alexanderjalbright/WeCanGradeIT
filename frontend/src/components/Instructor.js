@@ -28,7 +28,7 @@ export default class Instructor extends Component {
       headers: {
         "Content-type": "application/json"
       },
-      body: JSON.stringify(newAssignment) 
+      body: JSON.stringify(newAssignment)
     }).then(res => {
       if (res.ok) {
         this.props.addAssignment();
