@@ -32,10 +32,12 @@ export default class Instructor extends Component {
     }).then(res => {
       if (res.ok) {
         this.props.addAssignment();
-        const addAssignmentForm = document.querySelector(".add-assignmentForm");
+        const addAssignmentForm = document.querySelector(
+          ".add-assignment-form"
+        );
         addAssignmentForm.style.display = "none";
         const addAssignmentButton = document.querySelector(
-          ".add-assignmentButton"
+          ".add-assignment-button"
         );
         addAssignmentButton.style.display = "block";
       }
@@ -54,22 +56,22 @@ export default class Instructor extends Component {
         render={() => (
           <div>
             <button
-              className="add-assignmentButton"
+              className="add-assignment-button"
               onClick={() => {
                 const addAssignmentForm = document.querySelector(
-                  ".add-assignmentForm"
+                  ".add-assignment-form"
                 );
                 addAssignmentForm.style.display = "block";
                 const addAssignmentButton = document.querySelector(
-                  ".add-assignmentButton"
+                  ".add-assignment-button"
                 );
                 addAssignmentButton.style.display = "none";
               }}
             >
               Add Assignment
             </button>
-            <div className="add-assignmentForm" style={{ display: "none" }}>
-              <div className="add-assignmentName">
+            <div className="add-assignment-form" style={{ display: "none" }}>
+              <div className="add-assignment-name">
                 <label>Name:&nbsp;</label>
                 <input
                   name="name"
@@ -77,7 +79,7 @@ export default class Instructor extends Component {
                   value={this.state.name}
                 />
               </div>
-              <div className="add-assignmentType">
+              <div className="add-assignment-type">
                 <label>Type:&nbsp;</label>
                 <select name="type" onChange={this.onChange} id="selType">
                   <option value="" />
@@ -85,7 +87,7 @@ export default class Instructor extends Component {
                   <option value="Team">Team</option>
                 </select>
               </div>
-              <div className="add-assignmentDescription">
+              <div className="add-assignment-description">
                 <label>Description:&nbsp;</label>
                 <textarea
                   name="description"
@@ -93,7 +95,7 @@ export default class Instructor extends Component {
                   value={this.state.description}
                 />
               </div>
-              <div className="add-assignmentRequirements">
+              <div className="add-assignment-requirements">
                 <label>Requirements:&nbsp;</label>
                 <input
                   name="requirements"
@@ -101,7 +103,7 @@ export default class Instructor extends Component {
                   value={this.state.requirements}
                 />
               </div>
-              <div className="add-assignmentDueDate">
+              <div className="add-assignment-due-date">
                 <label>Due Date:&nbsp;</label>
                 <input
                   type="date"
