@@ -25,7 +25,7 @@ namespace WeCanGradeIT.Controllers
             var students = repo.GetAll();
             foreach(var student in students)
             {
-                int average = OverallGrade(student.StudentId);
+                decimal average = OverallGrade(student.StudentId);
                 student.AvgGrade = average;
                 repo.Edit(student);
             }
@@ -48,27 +48,27 @@ namespace WeCanGradeIT.Controllers
             return true;
         }
 
-        public int OverallGrade(int id)
+        public decimal OverallGrade(int id)
         {
             var student = repo.GetById(id);
-            int total = 0;
-            int numberOfGrades = 0;
+            decimal total = 0;
+            decimal numberOfGrades = 0;
             foreach(var grade in student.Grades)
             {
-                if(grade.Value > 0 && grade.Value <= 100)
+                if(grade.Value > 0)
                 {
                     total += grade.Value;
                     numberOfGrades++;
                 }
             }
 
-            int average = 0;
+            decimal average = 0;
             if(numberOfGrades > 0)
             {
-                average = total / numberOfGrades;
+                average = (total / numberOfGrades);
             }
 
-            return average;
+            return Math.Round(average,1);
         }
     }
 }
