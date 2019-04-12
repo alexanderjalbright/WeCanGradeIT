@@ -99,7 +99,7 @@ export default class Assignment extends Component {
       body: JSON.stringify(editAssignment)
     }).then(res => {
       if (res.ok) {
-        this.props.editAssignment(editAssignment);
+        this.props.editAssignment();
       }
     });
   };

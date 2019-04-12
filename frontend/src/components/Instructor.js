@@ -31,7 +31,7 @@ export default class Instructor extends Component {
       body: JSON.stringify(newAssignment)
     }).then(res => {
       if (res.ok) {
-        this.props.addAssignment(newAssignment);
+        this.props.addAssignment();
         const addAssignmentForm = document.querySelector(".add-assignmentForm");
         addAssignmentForm.style.display = "none";
         const addAssignmentButton = document.querySelector(

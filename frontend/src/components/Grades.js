@@ -67,8 +67,7 @@ class Grades extends Component {
       body: JSON.stringify(editedGrade)
     }).then(res => {
       if (res.ok) {
-        console.log(editedGrade);
-        this.props.gradeSubmitted(editedGrade);
+        this.props.gradeSubmitted();
       }
     });
   };

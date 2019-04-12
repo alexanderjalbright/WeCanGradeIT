@@ -33,7 +33,6 @@ namespace WeCanGradeIT.Controllers
             return student;
         }
 
-        // POST api/values
         [HttpPost]
         public ActionResult<bool> Post([FromBody] Student student)
         {
