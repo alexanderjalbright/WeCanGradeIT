@@ -22,8 +22,15 @@ namespace WeCanGradeIT.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Student>> Get()
         {
-            var students = repo.GetAll().ToArray();
-            return students;
+            var students = repo.GetAll();
+            foreach(var student in students)
+            {
+                int average = OverallGrade(student.StudentId);
+                student.AvgGrade = average;
+                repo.Edit(student);
+            }
+
+            return students.ToArray();
         }
 
         [HttpGet("{id}")]
@@ -45,13 +52,23 @@ namespace WeCanGradeIT.Controllers
         {
             var student = repo.GetById(id);
             int total = 0;
-            int numberOfGrades = 1;
+            int numberOfGrades = 0;
             foreach(var grade in student.Grades)
             {
-
+                if(grade.Value > 0 && grade.Value <= 100)
+                {
+                    total += grade.Value;
+                    numberOfGrades++;
+                }
             }
 
-            return 1;
+            int average = 0;
+            if(numberOfGrades > 0)
+            {
+                average = total / numberOfGrades;
+            }
+
+            return average;
         }
     }
 }
