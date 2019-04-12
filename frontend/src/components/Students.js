@@ -7,7 +7,11 @@ export default class Students extends Component {
     this.state = {
       newLastName: "",
       newFirstName: "",
-      newUserName: ""
+      newUserName: "",
+      editingStudent: 0,
+      editFirstName: "",
+      editLastName: "",
+      editUserName: ""
     };
   }
 
@@ -35,11 +39,30 @@ export default class Students extends Component {
   render() {
     const { roster } = this.props;
     const studentHome = roster.map(student => (
-      <h1>
-        {student.firstName === "Instructor"
-          ? ""
-          : `${student.firstName} ${student.lastName}`}
-      </h1>
+      <div>
+        {student.firstName === "Instructor" || (
+          <div>
+            <h1>
+              {student.firstName} {student.lastName}
+            </h1>
+            <h2>{student.userName}</h2>
+            {this.state.editingStudent !== student.studentId && (
+              <button
+                onClick={() =>
+                  this.setState({
+                    editingStudent: student.studentId,
+                    editFirstName: student.firstName,
+                    editLastName: student.lastName,
+                    editUserName: student.userName
+                  })
+                }
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        )}
+      </div>
     ));
     return (
       <Route
