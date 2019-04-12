@@ -40,5 +40,18 @@ namespace WeCanGradeIT.Controllers
             repo.Create(student);
             return true;
         }
+
+        public int OverallGrade(int id)
+        {
+            var student = repo.GetById(id);
+            int total = 0;
+            int numberOfGrades = 1;
+            foreach(var grade in student.Grades)
+            {
+
+            }
+
+            return 1;
+        }
     }
 }
