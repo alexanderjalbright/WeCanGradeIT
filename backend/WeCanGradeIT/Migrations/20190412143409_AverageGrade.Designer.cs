@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WeCanGradeIT;
 
 namespace WeCanGradeIT.Migrations
 {
     [DbContext(typeof(WCGIContext))]
-    partial class WCGIContextModelSnapshot : ModelSnapshot
+    [Migration("20190412143409_AverageGrade")]
+    partial class AverageGrade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,7 +85,7 @@ namespace WeCanGradeIT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("AvgGrade");
+                    b.Property<int>("AvgGrade");
 
                     b.Property<string>("FirstName");
 
@@ -96,8 +98,8 @@ namespace WeCanGradeIT.Migrations
                     b.ToTable("Students");
 
                     b.HasData(
-                        new { StudentId = 1, AvgGrade = 0m, FirstName = "Alex", LastName = "Albright", UserName = "alexanderjalbright" },
-                        new { StudentId = 2, AvgGrade = 0m, FirstName = "Mary", LastName = "McGeary", UserName = "MaryMcGeary" }
+                        new { StudentId = 1, AvgGrade = 0, FirstName = "Alex", LastName = "Albright", UserName = "alexanderjalbright" },
+                        new { StudentId = 2, AvgGrade = 0, FirstName = "Mary", LastName = "McGeary", UserName = "MaryMcGeary" }
                     );
                 });
 

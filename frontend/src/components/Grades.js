@@ -102,6 +102,7 @@ class Grades extends Component {
       user.firstName !== "Instructor" && user.firstName !== "" ? (
         <div>
           <h1>Grades - {`${user.firstName} ${user.lastName}`}</h1>
+          <h2>Overall: {user.avgGrade}</h2>
           {user.grades.map(grade => (
             <div>
               <div>
@@ -121,6 +122,7 @@ class Grades extends Component {
           ) : (
             <div key={student.studentId}>
               <h1>Grades - {`${student.firstName} ${student.lastName}`}</h1>
+              <h2>Overall: {student.avgGrade}</h2>
               {this.gradesMapper(student.grades)}
               {this.state.addingGrade !== student.studentId && (
                 <button

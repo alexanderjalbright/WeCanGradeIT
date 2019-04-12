@@ -33,5 +33,11 @@ namespace WeCanGradeIT.Repositories
             db.Add(student);
             db.SaveChanges();
         }
+
+        public void Edit(Student student)
+        {
+            db.Update(student);
+            db.SaveChanges();
+        }
     }
 }
