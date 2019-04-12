@@ -7,7 +7,11 @@ export default class Students extends Component {
     this.state = {
       newLastName: "",
       newFirstName: "",
-      newUserName: ""
+      newUserName: "",
+      editingStudent: 0,
+      editFirstName: "",
+      editLastName: "",
+      editUserName: ""
     };
   }
 
@@ -32,14 +36,90 @@ export default class Students extends Component {
     this.setState({ newFirstName: "", newLastName: "", newUserName: "" });
   };
 
+  onChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  submitChanges = id => {
+    const student = {
+      firstName: this.state.editFirstName,
+      lastName: this.state.editLastName,
+      userName: this.state.editUserName,
+      studentId: id
+    };
+    this.props.submitEditStudent(student);
+    this.setState({
+      editingStudent: 0,
+      editFirstName: "",
+      editLastName: "",
+      editUserName: ""
+    });
+  };
+
   render() {
     const { roster } = this.props;
     const studentHome = roster.map(student => (
-      <h1>
-        {student.firstName === "Instructor"
-          ? ""
-          : `${student.firstName} ${student.lastName}`}
-      </h1>
+      <div>
+        {student.firstName === "Instructor" || (
+          <div>
+            <h1>
+              {student.firstName} {student.lastName}
+            </h1>
+            <h2>{student.userName}</h2>
+            {this.state.editingStudent !== student.studentId && (
+              <button
+                onClick={() =>
+                  this.setState({
+                    editingStudent: student.studentId,
+                    editFirstName: student.firstName,
+                    editLastName: student.lastName,
+                    editUserName: student.userName
+                  })
+                }
+              >
+                Edit
+              </button>
+            )}
+            {this.state.editingStudent === student.studentId && (
+              <div>
+                <label>First Name:</label>
+                <input
+                  value={this.state.editFirstName}
+                  onChange={this.onChange}
+                  name="editFirstName"
+                />
+                <label>Last Name:</label>
+                <input
+                  value={this.state.editLastName}
+                  onChange={this.onChange}
+                  name="editLastName"
+                />
+                <label>Username:</label>
+                <input
+                  value={this.state.editUserName}
+                  onChange={this.onChange}
+                  name="editUserName"
+                />
+                <button onClick={() => this.submitChanges(student.studentId)}>
+                  Submit Changes
+                </button>
+                <button
+                  onClick={() =>
+                    this.setState({
+                      editingStudent: 0,
+                      editFirstName: "",
+                      editLastName: "",
+                      editUserName: ""
+                    })
+                  }
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     ));
     return (
       <Route
