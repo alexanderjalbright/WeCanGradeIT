@@ -96,6 +96,23 @@ class App extends Component {
       });
   };
 
+  submitEditStudent = student => {
+    fetch(`${apiUrl}/student/${student.studentId}`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(student)
+    }).then(res => {
+      if (res.ok) {
+        fetch(`${apiUrl}/student`)
+          .then(res => res.json())
+          .then(json => {
+            this.setState({ students: json });
+          });
+      }
+    });
+  };
   render() {
     return (
       <Router>
@@ -128,6 +145,7 @@ class App extends Component {
             newUserName={this.state.newUserName}
             setNewUserName={this.setNewUserName}
             submitNewStudent={this.submitNewStudent}
+            submitEditStudent={this.submitEditStudent}
           />
 
           <Instructor addAssignment={this.addAssignment} />
