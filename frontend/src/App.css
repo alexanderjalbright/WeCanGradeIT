@@ -149,10 +149,10 @@ label {
   font-family: "Roboto", sans-serif;
 }
 
-button {
-  background-color: rgb(82, 139, 69);
+/*button {
+  background-color: rgb(66, 156, 211);
   border: none;
-  color: white;
+  color: black;
   padding: 16px 32px;
   text-align: center;
   text-decoration: none;
@@ -160,9 +160,53 @@ button {
   font-size: 16px;
   margin: 4px 2px;
   -webkit-transition-duration: 0.4s;
-  /* Safari */
   transition-duration: 0.4s;
   cursor: pointer;
+  width: 250px;
+}*/
+
+p {
+  font-weight: bold;
 }
 
-p {}
+button {
+  background: rgb(66, 156, 211);
+  color: #fff;
+  border: none;
+  position: relative;
+  height: 60px;
+  font-size: 1.6em;
+  padding: 0 2em;
+  cursor: pointer;
+  transition: 800ms ease all;
+  outline: none;
+  margin: 4px 2px;
+}
+
+button:hover {
+  background: #fff;
+  color: rgb(66, 156, 211);
+}
+
+button:before, button:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width: 0;
+  background: rgb(66, 156, 211);
+  transition: 400ms ease all;
+}
+
+button:after {
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
+}
+
+button:hover:before, button:hover:after {
+  width: 100%;
+  transition: 800ms ease all;
+}
