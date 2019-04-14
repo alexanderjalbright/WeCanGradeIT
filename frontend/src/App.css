@@ -25,12 +25,14 @@ nav {
   font-size: 1.2em;
   line-height: 1.5em;
 }
+
 nav ul {
   margin: 0;
   display: flex;
   align-items: center;
   list-style: none;
 }
+
 nav ul li {
   margin-right: 0.5vw;
 }
@@ -105,3 +107,62 @@ nav a {
   padding: 5px 10px;
   margin: 5px;
 }
+
+input {
+  width: 100%;
+  height: 50px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 1.2em;
+  resize: none;
+}
+
+textarea {
+  width: 100%;
+  height: 50px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 1.2em;
+  resize: none;
+}
+
+select {
+  width: 100%;
+  height: 50px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 1.2em;
+  resize: none;
+}
+
+label {
+  font-size: 1.2em;
+  font-family: "Roboto", sans-serif;
+}
+
+button {
+  background-color: rgb(82, 139, 69);
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s;
+  /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+p {}
