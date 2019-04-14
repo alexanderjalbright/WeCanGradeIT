@@ -130,6 +130,7 @@ textarea {
   background-color: #f8f8f8;
   font-size: 1.2em;
   resize: none;
+  font-family: "Roboto", sans-serif;
 }
 
 select {
@@ -171,7 +172,7 @@ p {
 
 button {
   background: rgb(66, 156, 211);
-  color: #fff;
+  color: black;
   border: none;
   position: relative;
   height: 60px;
