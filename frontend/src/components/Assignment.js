@@ -49,7 +49,11 @@ export default class Assignment extends Component {
     if (this.state.branch !== "") {
       branchUrl = `${branchUrl}/tree/${this.state.branch}`;
     }
-    const grade = { repoUrl: branchUrl };
+    const grade = {
+      repoUrl: branchUrl,
+      repoName: this.state.repo,
+      branchName: this.state.branch
+    };
     this.setState({ url: branchUrl });
     const url = `${apiUrl}/grade/${user.studentId}/${assignment.assignmentId}`;
     fetch(url, {
