@@ -5,6 +5,7 @@
   --it: rgb(242, 103, 34);
   --dark-color: rgb(68, 68, 68);
   --light-color: #fff;
+  --button-color: #83d8ff;
 }
 
 html {
@@ -98,11 +99,11 @@ nav a {
   padding: 5px 10px;
   margin: 5px;
   border: none;
-  background-color: #83d8ff;
+  background-color: var(--button-color);
 }
 
 .user-select-btn {
-  background-color: #83d8ff;
+  background-color: var(--button-color);
   border: 2px solid var(--dark-color);
   padding: 5px 10px;
   margin: 5px;
@@ -171,7 +172,7 @@ p {
 }
 
 button {
-  background: rgb(66, 156, 211);
+  background: var(--button-color);
   color: black;
   border: none;
   position: relative;
@@ -189,8 +190,9 @@ button:hover {
   color: rgb(66, 156, 211);
 }
 
-button:before, button:after {
-  content: '';
+button:before,
+button:after {
+  content: "";
   position: absolute;
   top: 0;
   right: 0;
@@ -207,7 +209,8 @@ button:after {
   bottom: 0;
 }
 
-button:hover:before, button:hover:after {
+button:hover:before,
+button:hover:after {
   width: 100%;
   transition: 800ms ease all;
 }
