@@ -16,7 +16,8 @@ export default class Assignment extends Component {
       editDescription: "",
       editRequirements: "",
       editDueDate: "",
-      editDueTime: ""
+      editDueTime: "",
+      editRequirementsList: []
     };
   }
 
@@ -83,11 +84,12 @@ export default class Assignment extends Component {
   };
 
   submitAssignment = () => {
+    const str = this.arrayToMDString(this.state.requirementsList);
     const editAssignment = {
       name: this.state.editName,
       type: this.state.editType,
       description: this.state.editDescription,
-      requirements: this.state.editRequirements,
+      requirements: str,
       dueDate: this.state.editDueDate + "T" + this.state.editDueTime,
       assignmentId: this.props.assignment.assignmentId
     };
@@ -104,6 +106,23 @@ export default class Assignment extends Component {
     });
   };
 
+  arrayToMDString = arr => {
+    let str = "";
+    arr.forEach(each => (str += "* " + each + "  "));
+    return str;
+  };
+
+  addRequirement = newReq => {
+    this.state.requirementsList.push(this.state.requirements);
+    this.setState({ requirements: "" });
+  };
+
+  removeReq = removeThis => {
+    let arr = this.state.requirementsList;
+    arr.splice(removeThis, 1);
+    this.setState({ requirementsList: arr });
+  };
+
   render() {
     const {
       name,
@@ -118,6 +137,13 @@ export default class Assignment extends Component {
     const renderArrayToHTMLList = requirementsArray.map(req => (
       <li key={req}>{req}</li>
     ));
+
+    const renderArrayToHTMLListWithX = editReqList =>
+      editReqList.map((req, index) => (
+        <li key={req}>
+          {req} <button onClick={() => this.removeReq(index)}>&times;</button>
+        </li>
+      ));
 
     const amPm = () => {
       if (dueDate.slice(11, 13) > 12) {
@@ -168,7 +194,8 @@ export default class Assignment extends Component {
                 editDescription: description,
                 editRequirements: requirements,
                 editDueDate: dueDate.slice(0, 10),
-                editDueTime: dueDate.slice(11, 16)
+                editDueTime: dueDate.slice(11, 16),
+                editRequirementsList: parseMarkdown(requirements)
               });
             }}
           >

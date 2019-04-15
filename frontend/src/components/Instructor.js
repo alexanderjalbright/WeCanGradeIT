@@ -12,14 +12,13 @@ export default class Instructor extends Component {
       dueDate: "",
       type: "",
       dueTime: "",
-      requirementsList: [],
-      numReqs: 0
+      requirementsList: []
     };
   }
 
   arrayToMDString = arr => {
     let str = "";
-    arr.forEach(each => (str += "* " + each + ""));
+    arr.forEach(each => (str += "* " + each + "  "));
     return str;
   };
 
@@ -71,16 +70,16 @@ export default class Instructor extends Component {
     this.setState({ requirements: "" });
   };
 
-  handleText = i => e => {
-    let reqsArr = [...this.state.requirementsList];
-    reqsArr[i] = e.target.value;
-    this.setState({
-      reqsArr
-    });
-  };
+  // handleText = i => e => {
+  //   let reqsArr = [...this.state.requirementsList];
+  //   reqsArr[i] = e.target.value;
+  //   this.setState({
+  //     reqsArr
+  //   });
+  // };
 
   render() {
-    const renderArrayToHTMLList = this.state.requirementsList.map(
+    const renderArrayToHTMLListWithX = this.state.requirementsList.map(
       (req, index) => (
         <li key={req}>
           {req} <button onClick={() => this.removeReq(index)}>&times;</button>
@@ -137,7 +136,7 @@ export default class Instructor extends Component {
               <div className="add-assignment-requirements">
                 <label>Requirements:&nbsp;</label>
                 {this.state.requirementsList.length > 0 && (
-                  <ul>{renderArrayToHTMLList}</ul>
+                  <ul>{renderArrayToHTMLListWithX}</ul>
                 )}
                 <input
                   name="requirements"
