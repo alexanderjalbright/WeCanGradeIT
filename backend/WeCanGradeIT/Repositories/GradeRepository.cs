@@ -61,6 +61,8 @@ namespace WeCanGradeIT.Repositories
             if (theGrade.RepoUrl != "")
             {
                 existingGrade.RepoUrl = theGrade.RepoUrl;
+                existingGrade.RepoName = theGrade.RepoName;
+                existingGrade.BranchName = theGrade.BranchName;
             }
 
             if (theGrade.Comment != "")
@@ -72,7 +74,6 @@ namespace WeCanGradeIT.Repositories
             {
                 existingGrade.Value = theGrade.Value;
             }
-
 
             return existingGrade;
         }
