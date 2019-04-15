@@ -84,7 +84,7 @@ export default class Assignment extends Component {
   };
 
   submitAssignment = () => {
-    const str = this.arrayToMDString(this.state.requirementsList);
+    const str = this.arrayToMDString(this.state.editRequirementsList);
     const editAssignment = {
       name: this.state.editName,
       type: this.state.editType,
@@ -118,9 +118,9 @@ export default class Assignment extends Component {
   };
 
   removeReq = removeThis => {
-    let arr = this.state.requirementsList;
+    let arr = this.state.editRequirementsList;
     arr.splice(removeThis, 1);
-    this.setState({ requirementsList: arr });
+    this.setState({ editRequirementsList: arr });
   };
 
   render() {
@@ -187,7 +187,9 @@ export default class Assignment extends Component {
               const addAssignmentButton = document.querySelector(
                 ".edit-assignment-button"
               );
+
               addAssignmentButton.style.display = "none";
+              const arr = parseMarkdown(requirements);
               this.setState({
                 editName: name,
                 editType: type,
@@ -195,8 +197,10 @@ export default class Assignment extends Component {
                 editRequirements: requirements,
                 editDueDate: dueDate.slice(0, 10),
                 editDueTime: dueDate.slice(11, 16),
-                editRequirementsList: parseMarkdown(requirements)
+                editRequirementsList: arr
               });
+              console.log("XXX:");
+              console.log(arr);
             }}
           >
             Edit Assignment
@@ -232,6 +236,11 @@ export default class Assignment extends Component {
             </div>
             <div className="edit-assignment-requirements">
               <label>Requirements:&nbsp;</label>
+              {this.state.editRequirementsList.length > 0 && (
+                <ul>
+                  {renderArrayToHTMLListWithX(this.state.editRequirementsList)}
+                </ul>
+              )}
               <input
                 name="editRequirements"
                 onChange={this.onChange}
