@@ -24,10 +24,11 @@ export default class Instructor extends Component {
   };
 
   submitNewAssignment = () => {
+    const str = this.arrayToMDString(this.state.requirementsList);
     const newAssignment = {
       name: this.state.name,
       description: this.state.description,
-      requirements: this.state.requirements,
+      requirements: str,
       dueDate: this.state.dueDate + "T" + this.state.dueTime,
       type: this.state.type
     };
