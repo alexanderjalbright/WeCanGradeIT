@@ -22,7 +22,8 @@ class Grades extends Component {
         <p>
           Repo:{" "}
           <a href={grade.repoUrl} target="_blank">
-            {`${grade.repoName} (${grade.branchName})`}
+            {grade.repoName}
+            {grade.branchName === "" || ` (${grade.branchName})`}
           </a>
         </p>
         {this.state.editingGrade !== grade.gradeId && (
