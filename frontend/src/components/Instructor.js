@@ -11,9 +11,16 @@ export default class Instructor extends Component {
       requirements: "",
       dueDate: "",
       type: "",
-      dueTime: ""
+      dueTime: "",
+      requirementsList: []
     };
   }
+
+  arrayToMDString = arr => {
+    let str = "";
+    arr.forEach(each => (str += "* " + each + ""));
+    return str;
+  };
 
   submitNewAssignment = () => {
     const newAssignment = {
@@ -45,8 +52,38 @@ export default class Instructor extends Component {
   };
 
   onChange = event => {
+    if (event.target.name === "requirements") {
+      console.log("Hello! yo yo");
+    }
     this.setState({ [event.target.name]: event.target.value });
   };
+
+  handleText = i => e => {
+    let reqsArr = [...this.state.requirementsList];
+    reqsArr[i] = e.target.value;
+    this.setState({
+      reqsArr
+    });
+  };
+
+  // handleDelete = i => e => {
+  //   e.preventDefault();
+  //   let reqsArr = [
+  //     ...this.state.requirementsList.slice(0, i),
+  //     ...this.state.requirementsList.slice(i + 1)
+  //   ];
+  //   this.setState({
+  //     reqsArr
+  //   });
+  // };
+
+  // addQuestion = e => {
+  //   e.preventDefault();
+  //   let questions = this.state.requirementsList.concat([""]);
+  //   this.setState({
+  //     questions
+  //   });
+  // };
 
   render() {
     return (
