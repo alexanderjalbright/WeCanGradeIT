@@ -151,22 +151,6 @@ label {
   font-family: "Roboto", sans-serif;
 }
 
-/*button {
-  background-color: rgb(66, 156, 211);
-  border: none;
-  color: black;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  -webkit-transition-duration: 0.4s;
-  transition-duration: 0.4s;
-  cursor: pointer;
-  width: 250px;
-}*/
-
 p {
   font-weight: bold;
 }
