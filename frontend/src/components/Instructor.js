@@ -11,15 +11,29 @@ export default class Instructor extends Component {
       requirements: "",
       dueDate: "",
       type: "",
-      dueTime: ""
+      dueTime: "",
+      requirementsList: []
     };
   }
 
+  arrayToMDString = arr => {
+    let str = "";
+    arr.forEach(each => (str += "* " + each + "  "));
+    return str;
+  };
+
+  removeReq = removeThis => {
+    let arr = this.state.requirementsList;
+    arr.splice(removeThis, 1);
+    this.setState({ requirementsList: arr });
+  };
+
   submitNewAssignment = () => {
+    const str = this.arrayToMDString(this.state.requirementsList);
     const newAssignment = {
       name: this.state.name,
       description: this.state.description,
-      requirements: this.state.requirements,
+      requirements: str,
       dueDate: this.state.dueDate + "T" + this.state.dueTime,
       type: this.state.type
     };
@@ -51,10 +65,26 @@ export default class Instructor extends Component {
   };
 
   onChange = event => {
+    if (event.target.name === "requirements") {
+      console.log("Hello! yo yo");
+    }
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  addRequirement = () => {
+    this.state.requirementsList.push(this.state.requirements);
+    this.setState({ requirements: "" });
+  };
+
   render() {
+    const renderArrayToHTMLListWithX = this.state.requirementsList.map(
+      (req, index) => (
+        <li key={req}>
+          {req} <button onClick={() => this.removeReq(index)}>&times;</button>
+        </li>
+      )
+    );
+
     return (
       <Route
         path={`/instructor`}
@@ -103,11 +133,15 @@ export default class Instructor extends Component {
               </div>
               <div className="add-assignment-requirements">
                 <label>Requirements:&nbsp;</label>
+                {this.state.requirementsList.length > 0 && (
+                  <ul>{renderArrayToHTMLListWithX}</ul>
+                )}
                 <input
                   name="requirements"
                   onChange={this.onChange}
                   value={this.state.requirements}
                 />
+                <button onClick={this.addRequirement}>Add Requirement</button>
               </div>
               <div className="add-assignment-due-date">
                 <label>Due Date:&nbsp;</label>
