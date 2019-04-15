@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import parseMarkdown from "../lib/parseMarkdown";
 import { apiUrl, gitHubApi } from "../lib/constants";
+import assignment from "../components/Assignment.css";
 
 export default class Assignment extends Component {
   constructor() {
@@ -234,14 +235,19 @@ export default class Assignment extends Component {
           </div>
         </div>
       ) : (
-        <div>
+        <div className="student">
           <div className="submit-url">
-            <label>URL:&nbsp;</label>
-            <input name="url" onChange={this.onChange} value={this.state.url} />
+            <label>URL&nbsp;</label>
+            <input
+              name="url"
+              onChange={this.onChange}
+              value={this.state.url}
+              placeholder="https://alexalbright.dev"
+            />
             <button onClick={this.submitUrl}>Submit URL</button>
           </div>
-          <div>
-            <label>Repo:&nbsp;</label>
+          <div className="repo-selection">
+            <label>Repo&nbsp;</label>
             <select onChange={this.repoChange} className="repo-select">
               <option value="" selected disabled hidden>
                 Choose here
@@ -250,7 +256,7 @@ export default class Assignment extends Component {
             </select>
           </div>
           <div>
-            <label>Branch:&nbsp;</label>
+            <label>Branch&nbsp;</label>
             <select
               name="branch"
               onChange={this.onChange}
@@ -267,18 +273,20 @@ export default class Assignment extends Component {
       );
 
     return (
-      <div>
-        <h1 style={{ display: "inline" }}>{name}</h1>
-        <small> ({type})</small>
-        <p>{description}</p>
-        <h3>Requirements</h3>
-        <ul>{renderArrayToHTMLList}</ul>
-        <h3>
-          Due: {month}/{day}/{dueDate.slice(0, 4)}
-          <br />
-          {militaryToStandardTime()}
-          {dueDate.slice(13, 16)} {amPm()}
-        </h3>
+      <div className="assignment-page">
+        <div className="assignment">
+          <h1 style={{ display: "inline" }}>{name}</h1>
+          <small> ({type})</small>
+          <p>{description}</p>
+          <h3>Requirements</h3>
+          <ul>{renderArrayToHTMLList}</ul>
+          <h3>
+            Due: {month}/{day}/{dueDate.slice(0, 4)}
+            <br />
+            {militaryToStandardTime()}
+            {dueDate.slice(13, 16)} {amPm()}
+          </h3>
+        </div>
         {studentOrInstructor()}
       </div>
     );

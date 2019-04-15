@@ -81,6 +81,7 @@ nav a {
   display: var(--assign-dropdown);
   background-color: var(--dark-color);
   padding: 5px 10px;
+  z-index: 5;
 }
 
 .assign-dropdown li:hover {

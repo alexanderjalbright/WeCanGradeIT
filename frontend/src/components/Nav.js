@@ -32,8 +32,8 @@ export default class Nav extends Component {
           </li>
           <li>
             <Route
-              path={`/instructor/`}
-              component={() => <Link to={`/instructor`}>HOME</Link>}
+              path={`/${user.userName}/`}
+              component={() => <Link to={`/${user.userName}`}>HOME</Link>}
             />
           </li>
           <li className="nav-assign">
