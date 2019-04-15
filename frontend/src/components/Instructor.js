@@ -65,7 +65,7 @@ export default class Instructor extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  addRequirement = newReq => {
+  addRequirement = () => {
     this.state.requirementsList.push(this.state.requirements);
     this.setState({ requirements: "" });
   };

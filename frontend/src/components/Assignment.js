@@ -112,7 +112,7 @@ export default class Assignment extends Component {
     return str;
   };
 
-  addRequirement = newReq => {
+  addRequirement = () => {
     this.state.editRequirementsList.push(this.state.editRequirements);
     this.setState({ editRequirements: "" });
   };
