@@ -113,10 +113,16 @@ class App extends Component {
       }
     });
   };
+
+  resetUser = () => this.setState({ user: { firstName: "", lastName: "" } });
   render() {
     return (
       <Router>
-        <Nav user={this.state.user} assignments={this.state.assignments} />
+        <Nav
+          user={this.state.user}
+          assignments={this.state.assignments}
+          resetUser={this.resetUser}
+        />
         <div className="App">
           <Home
             students={this.state.students}

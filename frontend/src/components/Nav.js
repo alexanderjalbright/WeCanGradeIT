@@ -30,6 +30,12 @@ export default class Nav extends Component {
               <img src={logo} style={{ width: "200px", margin: "1em 0" }} />
             </a>
           </li>
+          <li>
+            <Route
+              path={`/${user.userName}/`}
+              component={() => <Link to={`/${user.userName}`}>HOME</Link>}
+            />
+          </li>
           <li className="nav-assign">
             <Route
               path={`/${user.userName}`}
@@ -62,7 +68,7 @@ export default class Nav extends Component {
               )}
             />
           </li>
-          <li>
+          <li onClick={this.props.resetUser}>
             <Route
               path={`/${user.userName}`}
               component={() => <Link to={`/`}>LOGOUT</Link>}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import parseMarkdown from "../lib/parseMarkdown";
 import { apiUrl, gitHubApi } from "../lib/constants";
+import assignment from "../components/Assignment.css";
 
 export default class Assignment extends Component {
   constructor() {
@@ -144,8 +145,11 @@ export default class Assignment extends Component {
 
     const renderArrayToHTMLListWithX = editReqList =>
       editReqList.map((req, index) => (
-        <li key={req}>
-          {req} <button onClick={() => this.removeReq(index)}>&times;</button>
+        <li className="requirements" key={req}>
+          {req}{" "}
+          <button className="close-btn" onClick={() => this.removeReq(index)}>
+            &times;
+          </button>
         </li>
       ));
 
@@ -182,7 +186,7 @@ export default class Assignment extends Component {
       this.props.user.firstName === "Instructor" ? (
         <div>
           <button
-            className="edit-assignment-button"
+            className="edit-assignment-button fancy-btn"
             onClick={() => {
               const addAssignmentForm = document.querySelector(
                 ".edit-assignment-form"
@@ -207,9 +211,12 @@ export default class Assignment extends Component {
           >
             Edit Assignment
           </button>
-          <div className="edit-assignment-form" style={{ display: "none" }}>
+          <div
+            className="edit-assignment-form assignment-form"
+            style={{ display: "none" }}
+          >
             <div className="edit-assignment-name">
-              <label>Name:&nbsp;</label>
+              <label>Name&nbsp;</label>
               <input
                 name="editName"
                 onChange={this.onChange}
@@ -217,7 +224,7 @@ export default class Assignment extends Component {
               />
             </div>
             <div className="edit-assignment-type">
-              <label>Type:&nbsp;</label>
+              <label>Type&nbsp;</label>
               <select
                 name="editType"
                 onChange={this.onChange}
@@ -229,29 +236,36 @@ export default class Assignment extends Component {
               </select>
             </div>
             <div className="edit-assignment-description">
-              <label>Description:&nbsp;</label>
-              <input
+              <label>Description&nbsp;</label>
+              <textarea
+                style={{ height: "200px" }}
                 name="editDescription"
                 onChange={this.onChange}
                 value={this.state.editDescription}
               />
             </div>
             <div className="edit-assignment-requirements">
-              <label>Requirements:&nbsp;</label>
+              <label>Requirements&nbsp;</label>
               {this.state.editRequirementsList.length > 0 && (
-                <ul>
+                <ul style={{ textAlign: "left" }}>
                   {renderArrayToHTMLListWithX(this.state.editRequirementsList)}
                 </ul>
               )}
               <input
+                placeholder="&#9679; new requirement"
                 name="editRequirements"
                 onChange={this.onChange}
                 value={this.state.editRequirements}
               />
-              <button onClick={this.addRequirement}>Add Requirement</button>
+              <button
+                className="fancy-btn small-btn"
+                onClick={this.addRequirement}
+              >
+                Add Requirement
+              </button>
             </div>
             <div className="edit-assignment-due-date">
-              <label>Due Date:&nbsp;</label>
+              <label>Due Date&nbsp;</label>
               <input
                 type="date"
                 name="editDueDate"
@@ -265,18 +279,45 @@ export default class Assignment extends Component {
                 value={this.state.editDueTime}
               />
             </div>
-            <button onClick={this.submitAssignment}>Submit Assignment</button>
+            <button
+              className="fancy-btn small-btn"
+              onClick={this.submitAssignment}
+            >
+              Submit Assignment
+            </button>
+            <button
+              className="fancy-btn small-btn"
+              onClick={() => {
+                const addAssignmentForm = document.querySelector(
+                  ".edit-assignment-form"
+                );
+                addAssignmentForm.style.display = "none";
+                const addAssignmentButton = document.querySelector(
+                  ".edit-assignment-button"
+                );
+                addAssignmentButton.style.display = "block";
+              }}
+            >
+              Cancel
+            </button>
           </div>
         </div>
       ) : (
-        <div>
+        <div className="assignment-form student-form">
           <div className="submit-url">
-            <label>URL:&nbsp;</label>
-            <input name="url" onChange={this.onChange} value={this.state.url} />
-            <button onClick={this.submitUrl}>Submit URL</button>
+            <label>URL&nbsp;</label>
+            <input
+              name="url"
+              onChange={this.onChange}
+              value={this.state.url}
+              placeholder="https://alexalbright.dev"
+            />
+            <button className="fancy-btn small-btn" onClick={this.submitUrl}>
+              Submit URL
+            </button>
           </div>
-          <div>
-            <label>Repo:&nbsp;</label>
+          <div className="repo-selection">
+            <label>Repo&nbsp;</label>
             <select onChange={this.repoChange} className="repo-select">
               <option value="" selected disabled hidden>
                 Choose here
@@ -285,7 +326,7 @@ export default class Assignment extends Component {
             </select>
           </div>
           <div>
-            <label>Branch:&nbsp;</label>
+            <label>Branch&nbsp;</label>
             <select
               name="branch"
               onChange={this.onChange}
@@ -296,24 +337,27 @@ export default class Assignment extends Component {
               </option>
               {branchSelection}
             </select>
-            <button onClick={this.submitBranch}>Submit Repo/Branch</button>
+            <button className="fancy-btn small-btn" onClick={this.submitBranch}>
+              Submit Repo/Branch
+            </button>
           </div>
         </div>
       );
 
     return (
-      <div>
-        <h1 style={{ display: "inline" }}>{name}</h1>
-        <small> ({type})</small>
-        <p>{description}</p>
-        <h3>Requirements</h3>
-        <ul>{renderArrayToHTMLList}</ul>
-        <h3>
-          Due: {month}/{day}/{dueDate.slice(0, 4)}
-          <br />
-          {militaryToStandardTime()}
-          {dueDate.slice(13, 16)} {amPm()}
-        </h3>
+      <div className="assignment-page">
+        <div className="assignment">
+          <h1 style={{ display: "inline" }}>{name}</h1>
+          <small> ({type})</small>
+          <p>{description}</p>
+          <h3>Requirements</h3>
+          <ul>{renderArrayToHTMLList}</ul>
+          <h3>
+            Due: {month}/{day}/{dueDate.slice(0, 4)} &nbsp;
+            {militaryToStandardTime()}
+            {dueDate.slice(13, 16)} {amPm()}
+          </h3>
+        </div>
         {studentOrInstructor()}
       </div>
     );

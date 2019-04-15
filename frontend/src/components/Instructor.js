@@ -92,7 +92,7 @@ export default class Instructor extends Component {
         render={() => (
           <div>
             <button
-              className="add-assignment-button"
+              className="add-assignment-button fancy-btn"
               onClick={() => {
                 const addAssignmentForm = document.querySelector(
                   ".add-assignment-form"
@@ -141,7 +141,12 @@ export default class Instructor extends Component {
                   onChange={this.onChange}
                   value={this.state.requirements}
                 />
-                <button onClick={this.addRequirement}>Add Requirement</button>
+                <button
+                  className="fancy-btn small-btn"
+                  onClick={this.addRequirement}
+                >
+                  Add Requirement
+                </button>
               </div>
               <div className="add-assignment-due-date">
                 <label>Due Date:&nbsp;</label>
@@ -158,7 +163,10 @@ export default class Instructor extends Component {
                   value={this.state.dueTime}
                 />
               </div>
-              <button onClick={this.submitNewAssignment}>
+              <button
+                className="fancy-btn small-btn"
+                onClick={this.submitNewAssignment}
+              >
                 Submit Assignment
               </button>
             </div>

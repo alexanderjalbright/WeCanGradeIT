@@ -68,6 +68,7 @@ export default class Students extends Component {
             <h2>{student.userName}</h2>
             {this.state.editingStudent !== student.studentId && (
               <button
+                className="fancy-btn small-btn"
                 onClick={() =>
                   this.setState({
                     editingStudent: student.studentId,
@@ -100,10 +101,14 @@ export default class Students extends Component {
                   onChange={this.onChange}
                   name="editUserName"
                 />
-                <button onClick={() => this.submitChanges(student.studentId)}>
+                <button
+                  className="fancy-btn small-btn"
+                  onClick={() => this.submitChanges(student.studentId)}
+                >
                   Submit Changes
                 </button>
                 <button
+                  className="fancy-btn small-btn"
                   onClick={() =>
                     this.setState({
                       editingStudent: 0,
@@ -129,7 +134,7 @@ export default class Students extends Component {
           <div>
             {studentHome}
             <button
-              className="add-button"
+              className="add-button fancy-btn"
               onClick={() => {
                 const addForm = document.querySelector(".add-form");
                 addForm.style.display = "block";

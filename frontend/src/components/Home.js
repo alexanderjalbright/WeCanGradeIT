@@ -42,15 +42,12 @@ export default class Home extends Component {
         render={() => (
           <div className="login">
             <h2>Select User</h2>
-            <select className="user-select">
+            <select className="user-select" onChange={this.selectClick}>
               <option value="" selected disabled hidden>
                 Choose here
               </option>
               {selectUserLinks}
             </select>
-            <button className="user-select-btn" onClick={this.selectClick}>
-              Select
-            </button>
 
             <h2>
               {`${user.firstName} ${user.lastName}`}
@@ -66,7 +63,7 @@ export default class Home extends Component {
               }
             >
               <button
-                className="user-select-btn enter-site"
+                className="user-select-btn enter-site fancy-btn"
                 style={{ width: "200px" }}
               >
                 Enter
