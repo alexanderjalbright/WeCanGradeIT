@@ -12,7 +12,8 @@ export default class Instructor extends Component {
       dueDate: "",
       type: "",
       dueTime: "",
-      requirementsList: []
+      requirementsList: [],
+      numReqs: 0
     };
   }
 
@@ -58,6 +59,12 @@ export default class Instructor extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  addRequirement = newReq => {
+    console.log("newReq: " + this.state.requirements);
+    this.state.requirementsList.push(this.state.requirements);
+    console.log(this.state.requirementsList);
+  };
+
   handleText = i => e => {
     let reqsArr = [...this.state.requirementsList];
     reqsArr[i] = e.target.value;
@@ -86,6 +93,10 @@ export default class Instructor extends Component {
   // };
 
   render() {
+    const renderArrayToHTMLList = this.state.requirementsList.map(req => (
+      <li key={req}>{req}</li>
+    ));
+
     return (
       <Route
         path={`/instructor`}
@@ -134,11 +145,15 @@ export default class Instructor extends Component {
               </div>
               <div className="add-assignment-requirements">
                 <label>Requirements:&nbsp;</label>
+                {this.state.requirementsList.length > 0 && (
+                  <ul>{renderArrayToHTMLList}</ul>
+                )}
                 <input
                   name="requirements"
                   onChange={this.onChange}
                   value={this.state.requirements}
                 />
+                <button onClick={this.addRequirement}>Add Requirement</button>
               </div>
               <div className="add-assignment-due-date">
                 <label>Due Date:&nbsp;</label>
