@@ -61,9 +61,8 @@ export default class Instructor extends Component {
   };
 
   addRequirement = newReq => {
-    console.log("newReq: " + this.state.requirements);
     this.state.requirementsList.push(this.state.requirements);
-    console.log(this.state.requirementsList);
+    this.setState({ requirements: "" });
   };
 
   handleText = i => e => {
@@ -73,25 +72,6 @@ export default class Instructor extends Component {
       reqsArr
     });
   };
-
-  // handleDelete = i => e => {
-  //   e.preventDefault();
-  //   let reqsArr = [
-  //     ...this.state.requirementsList.slice(0, i),
-  //     ...this.state.requirementsList.slice(i + 1)
-  //   ];
-  //   this.setState({
-  //     reqsArr
-  //   });
-  // };
-
-  // addQuestion = e => {
-  //   e.preventDefault();
-  //   let questions = this.state.requirementsList.concat([""]);
-  //   this.setState({
-  //     questions
-  //   });
-  // };
 
   render() {
     const renderArrayToHTMLList = this.state.requirementsList.map(req => (
