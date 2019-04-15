@@ -11,5 +11,6 @@ namespace WeCanGradeIT.Repositories
         Student GetById(int id);
         IEnumerable<Student> GetAll();
         void Create(Student student);
+        void Edit(Student student);
     }
 }

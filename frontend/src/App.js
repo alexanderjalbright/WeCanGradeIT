@@ -54,9 +54,11 @@ class App extends Component {
       body: JSON.stringify(newStudent)
     }).then(res => {
       if (res.ok) {
-        newStudent.studentId = this.state.students.length;
-        const newStudents = [...this.state.students, newStudent];
-        this.setState({ students: newStudents });
+        fetch(`${apiUrl}/student`)
+          .then(res => res.json())
+          .then(json => {
+            this.setState({ students: json });
+          });
         const addForm = document.querySelector(".add-form");
         addForm.style.display = "none";
         const addButton = document.querySelector(".add-button");
@@ -69,16 +71,16 @@ class App extends Component {
     this.setState({ user: student });
   };
 
-  addAssignment = newAssignment => {
-    const newAssignments = [...this.state.assignments, newAssignment];
-    this.setState({ assignments: newAssignments });
+  addAssignment = () => {
+    fetch(`${apiUrl}/assignment`)
+      .then(res => res.json())
+      .then(json => this.setState({ assignments: json }));
   };
 
-  editAssignment = newAssignment => {
-    const index = newAssignment.assignmentId - 1;
-    const newAssignments = [...this.state.assignments];
-    newAssignments[index] = newAssignment;
-    this.setState({ assignments: newAssignments });
+  editAssignment = () => {
+    fetch(`${apiUrl}/assignment`)
+      .then(res => res.json())
+      .then(json => this.setState({ assignments: json }));
   };
 
   resetState = json => {
@@ -86,43 +88,31 @@ class App extends Component {
     this.setState({ students: json });
   };
 
-  gradeSubmitted = grade => {
-    const newStudents = [...this.state.students];
-    let studentIndex = -1;
-    newStudents.forEach((student, index) => {
-      if (student.studentId === grade.studentId) {
-        studentIndex = index;
-      }
-    });
-    const studentGrades = newStudents[studentIndex].grades;
-    let gradeIndex = -1;
-    studentGrades.forEach((theirGrade, index) => {
-      if (theirGrade.assignmentId === grade.assignmentId) {
-        gradeIndex = index;
-      }
-    });
-    if (gradeIndex === -1) {
-      const assignment = this.state.assignments.find(
-        whichOne => whichOne.assignmentId === grade.assignmentId
-      );
-      const newGrade = {
-        value: grade.value,
-        comment: grade.comment,
-        assignmentId: grade.assignmentId,
-        studentId: grade.studentId,
-        repoUrl: "",
-        assignment: { name: assignment.name }
-      };
-      studentGrades.push(newGrade);
-      console.log(grade.assignmentId);
-    } else {
-      studentGrades[gradeIndex].value = grade.value;
-      studentGrades[gradeIndex].comment = grade.comment;
-    }
-
-    this.setState({ students: newStudents });
+  gradeSubmitted = () => {
+    fetch(`${apiUrl}/student`)
+      .then(res => res.json())
+      .then(json => {
+        this.setState({ students: json });
+      });
   };
 
+  submitEditStudent = student => {
+    fetch(`${apiUrl}/student/${student.studentId}`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(student)
+    }).then(res => {
+      if (res.ok) {
+        fetch(`${apiUrl}/student`)
+          .then(res => res.json())
+          .then(json => {
+            this.setState({ students: json });
+          });
+      }
+    });
+  };
   render() {
     return (
       <Router>
@@ -155,6 +145,7 @@ class App extends Component {
             newUserName={this.state.newUserName}
             setNewUserName={this.setNewUserName}
             submitNewStudent={this.submitNewStudent}
+            submitEditStudent={this.submitEditStudent}
           />
 
           <Instructor addAssignment={this.addAssignment} />
