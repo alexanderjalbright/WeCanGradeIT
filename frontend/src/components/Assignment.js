@@ -179,7 +179,10 @@ export default class Assignment extends Component {
           >
             Edit Assignment
           </button>
-          <div className="edit-assignment-form" style={{ display: "none" }}>
+          <div
+            className="edit-assignment-form assignment-form"
+            style={{ display: "none" }}
+          >
             <div className="edit-assignment-name">
               <label>Name:&nbsp;</label>
               <input
@@ -235,7 +238,7 @@ export default class Assignment extends Component {
           </div>
         </div>
       ) : (
-        <div className="student">
+        <div className="assignment-form">
           <div className="submit-url">
             <label>URL&nbsp;</label>
             <input
@@ -281,8 +284,7 @@ export default class Assignment extends Component {
           <h3>Requirements</h3>
           <ul>{renderArrayToHTMLList}</ul>
           <h3>
-            Due: {month}/{day}/{dueDate.slice(0, 4)}
-            <br />
+            Due: {month}/{day}/{dueDate.slice(0, 4)} &nbsp;
             {militaryToStandardTime()}
             {dueDate.slice(13, 16)} {amPm()}
           </h3>

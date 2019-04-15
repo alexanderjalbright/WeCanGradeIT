@@ -1,13 +1,7 @@
 .assignment-page {
   display: grid;
   grid-template-areas: "assign student";
-}
-
-.student label {
-  padding: 0 auto;
-  background-color: #86d8ff;
-  display: block;
-  margin-top: 1em;
+  grid-template-columns: 1fr 1fr;
 }
 
 .assignment {
@@ -15,10 +9,22 @@
   grid-area: assign;
 }
 
-.student {
+.edit-assignment-button {
+  float: right;
+  margin: 1em 2em;
+}
+
+.assignment-form {
   text-align: center;
   grid-area: student;
   padding: 1em 2em;
+}
+
+.assignment-form label {
+  padding: 0 auto;
+  background-color: #86d8ff;
+  display: block;
+  margin-top: 1em;
 }
 
 .repo-selection {
