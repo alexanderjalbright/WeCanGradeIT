@@ -1,0 +1,20 @@
+.add-assignment-form {
+  width: 50%;
+  text-align: center;
+  padding: 1em 2em;
+}
+
+.add-assignment-form label {
+  padding: 0 auto;
+  background-color: #86d8ff;
+  display: block;
+  margin-top: 1em;
+}
+
+.add-assignment-form label:nth-child(0) {
+  margin-top: 0;
+}
+
+.description {
+  height: 200px;
+}

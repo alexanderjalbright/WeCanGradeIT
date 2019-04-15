@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { apiUrl } from "../lib/constants";
+import instructor from "../components/Instructor.css";
 
 export default class Instructor extends Component {
   constructor() {
@@ -108,7 +109,7 @@ export default class Instructor extends Component {
             </button>
             <div className="add-assignment-form" style={{ display: "none" }}>
               <div className="add-assignment-name">
-                <label>Name:&nbsp;</label>
+                <label>Name&nbsp;</label>
                 <input
                   name="name"
                   onChange={this.onChange}
@@ -116,7 +117,7 @@ export default class Instructor extends Component {
                 />
               </div>
               <div className="add-assignment-type">
-                <label>Type:&nbsp;</label>
+                <label>Type&nbsp;</label>
                 <select name="type" onChange={this.onChange} id="selType">
                   <option value="" />
                   <option value="Individual">Individual</option>
@@ -124,19 +125,21 @@ export default class Instructor extends Component {
                 </select>
               </div>
               <div className="add-assignment-description">
-                <label>Description:&nbsp;</label>
+                <label>Description&nbsp;</label>
                 <textarea
+                  className="description"
                   name="description"
                   onChange={this.onChange}
                   value={this.state.description}
                 />
               </div>
               <div className="add-assignment-requirements">
-                <label>Requirements:&nbsp;</label>
+                <label>Requirements&nbsp;</label>
                 {this.state.requirementsList.length > 0 && (
                   <ul>{renderArrayToHTMLListWithX}</ul>
                 )}
                 <input
+                  placeholder="&#9679; new requirement"
                   name="requirements"
                   onChange={this.onChange}
                   value={this.state.requirements}
@@ -149,7 +152,7 @@ export default class Instructor extends Component {
                 </button>
               </div>
               <div className="add-assignment-due-date">
-                <label>Due Date:&nbsp;</label>
+                <label>Due Date&nbsp;</label>
                 <input
                   type="date"
                   name="dueDate"
