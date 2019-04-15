@@ -95,3 +95,25 @@
   font-size: 18px;
   color: var(--dark-green);
 }
+
+.grade-edit {
+  text-align: right;
+  padding: 1em;
+}
+
+.grade-input {
+  width: 50%;
+  margin-right: 5%;
+}
+
+.grade-input-value {
+  width: 5%;
+}
+
+.edit-grade-btn {
+  margin: auto 10px auto 0;
+}
+
+.submit-edit-btn {
+  width: 150px;
+}

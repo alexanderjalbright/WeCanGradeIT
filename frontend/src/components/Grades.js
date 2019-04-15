@@ -53,23 +53,28 @@ class Grades extends Component {
           <div className={`grade-edit grade-edit${grade.gradeId}`}>
             <label>Grade:</label>
             <input
+              className="grade-input grade-input-value"
               name="editValue"
               value={this.state.editValue}
               onChange={this.onChange}
             />
             <label>Comment:</label>
-            <input
+            <textarea
+              className="grade-input"
               name="editComment"
               value={this.state.editComment}
               onChange={this.onChange}
             />
             <button
-              className="grade-btn"
+              className="grade-btn edit-grade-btn submit-edit-btn"
               onClick={() => this.submitGrade(grade)}
             >
               Submit Changes
             </button>
-            <button className="grade-btn" onClick={this.cancelEdit}>
+            <button
+              className="grade-btn edit-grade-btn"
+              onClick={this.cancelEdit}
+            >
               Cancel
             </button>
           </div>
