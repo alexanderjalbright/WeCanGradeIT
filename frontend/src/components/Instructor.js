@@ -9,7 +9,6 @@ export default class Instructor extends Component {
       name: "",
       description: "",
       requirements: "",
-      requirementsList: [],
       dueDate: "",
       type: "",
       dueTime: ""
@@ -105,15 +104,9 @@ export default class Instructor extends Component {
               <div className="add-assignment-requirements">
                 <label>Requirements:&nbsp;</label>
                 <input
-                  name="requirementsList"
+                  name="requirements"
                   onChange={this.onChange}
-                  value={this.state.requirementsList[0]}
-                />
-                <label>Requirements:&nbsp;</label>
-                <input
-                  name="requirementsList"
-                  onChange={this.onChange}
-                  value={this.state.requirementsList[1]}
+                  value={this.state.requirements}
                 />
               </div>
               <div className="add-assignment-due-date">
