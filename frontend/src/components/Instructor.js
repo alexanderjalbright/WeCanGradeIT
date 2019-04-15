@@ -70,14 +70,6 @@ export default class Instructor extends Component {
     this.setState({ requirements: "" });
   };
 
-  // handleText = i => e => {
-  //   let reqsArr = [...this.state.requirementsList];
-  //   reqsArr[i] = e.target.value;
-  //   this.setState({
-  //     reqsArr
-  //   });
-  // };
-
   render() {
     const renderArrayToHTMLListWithX = this.state.requirementsList.map(
       (req, index) => (

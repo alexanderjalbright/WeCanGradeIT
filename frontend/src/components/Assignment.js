@@ -113,8 +113,8 @@ export default class Assignment extends Component {
   };
 
   addRequirement = newReq => {
-    this.state.requirementsList.push(this.state.requirements);
-    this.setState({ requirements: "" });
+    this.state.editRequirementsList.push(this.state.editRequirements);
+    this.setState({ editRequirements: "" });
   };
 
   removeReq = removeThis => {
@@ -194,13 +194,11 @@ export default class Assignment extends Component {
                 editName: name,
                 editType: type,
                 editDescription: description,
-                editRequirements: requirements,
+                editRequirements: "",
                 editDueDate: dueDate.slice(0, 10),
                 editDueTime: dueDate.slice(11, 16),
                 editRequirementsList: arr
               });
-              console.log("XXX:");
-              console.log(arr);
             }}
           >
             Edit Assignment
@@ -246,6 +244,7 @@ export default class Assignment extends Component {
                 onChange={this.onChange}
                 value={this.state.editRequirements}
               />
+              <button onClick={this.addRequirement}>Add Requirement</button>
             </div>
             <div className="edit-assignment-due-date">
               <label>Due Date:&nbsp;</label>
