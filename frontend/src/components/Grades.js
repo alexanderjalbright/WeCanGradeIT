@@ -15,25 +15,38 @@ class Grades extends Component {
     };
   }
   gradesMapper = grades =>
-    grades.map(grade => (
-      <div key={grade.gradeId}>
+    grades.map((grade, index) => (
+      <div className="assignment-parent" key={grade.gradeId}>
+        {index === 0 && (
+          <div className="assignment-table assignment-header">
+            <h2>Assignment</h2>
+            <h2>Repo</h2>
+            <h2>Grade</h2>
+          </div>
+        )}
         <div className="assignment-table">
           <h3 className="assignment">{grade.assignment.name}</h3>
-          <p className="grade">{grade.value}</p>
-          <p className="repo">
+          <h3 className="grade">{grade.value}%</h3>
+          <h3 className="repo">
             <a href={grade.repoUrl} target="_blank">
               {grade.repoName}
               {grade.branchName === "" ||
                 grade.branchName === null ||
                 ` (${grade.branchName})`}
             </a>
-          </p>
+          </h3>
           {this.state.editingGrade !== grade.gradeId && (
-            <button className="btn" onClick={() => this.editGrade(grade)}>
+            <button
+              className="grade-btn btn"
+              onClick={() => this.editGrade(grade)}
+            >
               Edit
             </button>
           )}
-          <p className="comment">Comment: {grade.comment}</p>
+          <p className="comment">
+            <span className="comment-title">Comment:</span> <br />
+            {grade.comment}
+          </p>
         </div>
 
         {this.state.editingGrade === grade.gradeId && (
@@ -50,10 +63,15 @@ class Grades extends Component {
               value={this.state.editComment}
               onChange={this.onChange}
             />
-            <button onClick={() => this.submitGrade(grade)}>
+            <button
+              className="grade-btn"
+              onClick={() => this.submitGrade(grade)}
+            >
               Submit Changes
             </button>
-            <button onClick={this.cancelEdit}>Cancel</button>
+            <button className="grade-btn" onClick={this.cancelEdit}>
+              Cancel
+            </button>
           </div>
         )}
       </div>
@@ -131,13 +149,12 @@ class Grades extends Component {
             <div key={student.studentId}>
               <div className="student-table">
                 <h1>{`${student.firstName} ${student.lastName}`}</h1>
-                <h1>{student.avgGrade}</h1>
-              </div>
-              <div>
-                {this.gradesMapper(student.grades)}
+                <h1>{student.avgGrade}%</h1>
                 {this.state.addingGrade !== student.studentId && (
                   <button
-                    className={`add-grade add-grade${student.studentId}`}
+                    className={`grade-btn add-grade add-grade${
+                      student.studentId
+                    }`}
                     onClick={() =>
                       this.setState({
                         addingGrade: student.studentId,
@@ -150,7 +167,9 @@ class Grades extends Component {
                     Add Grade
                   </button>
                 )}
-
+              </div>
+              <div>
+                {this.gradesMapper(student.grades)}
                 {this.state.addingGrade === student.studentId && (
                   <div>
                     <label>Assignment: </label>
@@ -173,6 +192,7 @@ class Grades extends Component {
                       onChange={this.onChange}
                     />
                     <button
+                      className="grade-btn"
                       onClick={() => {
                         this.submitGrade({
                           assignmentId: this.state.addAssignmentId,
@@ -188,7 +208,9 @@ class Grades extends Component {
                     >
                       Submit Grade
                     </button>
-                    <button onClick={this.cancelEdit}>Cancel</button>
+                    <button className="grade-btn" onClick={this.cancelEdit}>
+                      Cancel
+                    </button>
                   </div>
                 )}
               </div>

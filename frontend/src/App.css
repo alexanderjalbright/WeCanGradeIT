@@ -48,22 +48,6 @@ nav a {
   margin: 0 1em;
 }
 
-.we {
-  color: var(--we);
-}
-
-.can {
-  color: var(--can);
-}
-
-.grade {
-  color: var(--grade);
-}
-
-.it {
-  color: var(--it);
-}
-
 .enter-site {
   display: none;
 }
