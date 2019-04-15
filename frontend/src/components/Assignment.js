@@ -17,7 +17,8 @@ export default class Assignment extends Component {
       editDescription: "",
       editRequirements: "",
       editDueDate: "",
-      editDueTime: ""
+      editDueTime: "",
+      editRequirementsList: []
     };
   }
 
@@ -88,11 +89,12 @@ export default class Assignment extends Component {
   };
 
   submitAssignment = () => {
+    const str = this.arrayToMDString(this.state.editRequirementsList);
     const editAssignment = {
       name: this.state.editName,
       type: this.state.editType,
       description: this.state.editDescription,
-      requirements: this.state.editRequirements,
+      requirements: str,
       dueDate: this.state.editDueDate + "T" + this.state.editDueTime,
       assignmentId: this.props.assignment.assignmentId
     };
@@ -109,6 +111,23 @@ export default class Assignment extends Component {
     });
   };
 
+  arrayToMDString = arr => {
+    let str = "";
+    arr.forEach(each => (str += "* " + each + "  "));
+    return str;
+  };
+
+  addRequirement = () => {
+    this.state.editRequirementsList.push(this.state.editRequirements);
+    this.setState({ editRequirements: "" });
+  };
+
+  removeReq = removeThis => {
+    let arr = this.state.editRequirementsList;
+    arr.splice(removeThis, 1);
+    this.setState({ editRequirementsList: arr });
+  };
+
   render() {
     const {
       name,
@@ -123,6 +142,13 @@ export default class Assignment extends Component {
     const renderArrayToHTMLList = requirementsArray.map(req => (
       <li key={req}>{req}</li>
     ));
+
+    const renderArrayToHTMLListWithX = editReqList =>
+      editReqList.map((req, index) => (
+        <li key={req}>
+          {req} <button onClick={() => this.removeReq(index)}>&times;</button>
+        </li>
+      ));
 
     const amPm = () => {
       if (dueDate.slice(11, 13) > 12) {
@@ -166,14 +192,17 @@ export default class Assignment extends Component {
               const addAssignmentButton = document.querySelector(
                 ".edit-assignment-button"
               );
+
               addAssignmentButton.style.display = "none";
+              const arr = parseMarkdown(requirements);
               this.setState({
                 editName: name,
                 editType: type,
                 editDescription: description,
-                editRequirements: requirements,
+                editRequirements: "",
                 editDueDate: dueDate.slice(0, 10),
-                editDueTime: dueDate.slice(11, 16)
+                editDueTime: dueDate.slice(11, 16),
+                editRequirementsList: arr
               });
             }}
           >
@@ -213,11 +242,17 @@ export default class Assignment extends Component {
             </div>
             <div className="edit-assignment-requirements">
               <label>Requirements:&nbsp;</label>
+              {this.state.editRequirementsList.length > 0 && (
+                <ul>
+                  {renderArrayToHTMLListWithX(this.state.editRequirementsList)}
+                </ul>
+              )}
               <input
                 name="editRequirements"
                 onChange={this.onChange}
                 value={this.state.editRequirements}
               />
+              <button onClick={this.addRequirement}>Add Requirement</button>
             </div>
             <div className="edit-assignment-due-date">
               <label>Due Date:&nbsp;</label>
