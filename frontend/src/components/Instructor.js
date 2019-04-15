@@ -23,6 +23,12 @@ export default class Instructor extends Component {
     return str;
   };
 
+  removeReq = removeThis => {
+    let arr = this.state.requirementsList;
+    arr.splice(removeThis, 1);
+    this.setState({ requirementsList: arr });
+  };
+
   submitNewAssignment = () => {
     const str = this.arrayToMDString(this.state.requirementsList);
     const newAssignment = {
@@ -74,9 +80,13 @@ export default class Instructor extends Component {
   };
 
   render() {
-    const renderArrayToHTMLList = this.state.requirementsList.map(req => (
-      <li key={req}>{req}</li>
-    ));
+    const renderArrayToHTMLList = this.state.requirementsList.map(
+      (req, index) => (
+        <li key={req}>
+          {req} <button onClick={() => this.removeReq(index)}>&times;</button>
+        </li>
+      )
+    );
 
     return (
       <Route
