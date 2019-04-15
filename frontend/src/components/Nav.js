@@ -68,7 +68,7 @@ export default class Nav extends Component {
               )}
             />
           </li>
-          <li>
+          <li onClick={this.props.resetUser}>
             <Route
               path={`/${user.userName}`}
               component={() => <Link to={`/`}>LOGOUT</Link>}
