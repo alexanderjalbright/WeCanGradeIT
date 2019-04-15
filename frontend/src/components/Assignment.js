@@ -234,11 +234,28 @@ export default class Assignment extends Component {
                 value={this.state.editDueTime}
               />
             </div>
-            <button onClick={this.submitAssignment}>Submit Assignment</button>
+            <button className="small-btn" onClick={this.submitAssignment}>
+              Submit Assignment
+            </button>
+            <button
+              className="small-btn"
+              onClick={() => {
+                const addAssignmentForm = document.querySelector(
+                  ".edit-assignment-form"
+                );
+                addAssignmentForm.style.display = "none";
+                const addAssignmentButton = document.querySelector(
+                  ".edit-assignment-button"
+                );
+                addAssignmentButton.style.display = "block";
+              }}
+            >
+              Cancel
+            </button>
           </div>
         </div>
       ) : (
-        <div className="assignment-form">
+        <div className="assignment-form student-form">
           <div className="submit-url">
             <label>URL&nbsp;</label>
             <input
@@ -247,7 +264,9 @@ export default class Assignment extends Component {
               value={this.state.url}
               placeholder="https://alexalbright.dev"
             />
-            <button onClick={this.submitUrl}>Submit URL</button>
+            <button className="small-btn" onClick={this.submitUrl}>
+              Submit URL
+            </button>
           </div>
           <div className="repo-selection">
             <label>Repo&nbsp;</label>
@@ -270,7 +289,9 @@ export default class Assignment extends Component {
               </option>
               {branchSelection}
             </select>
-            <button onClick={this.submitBranch}>Submit Repo/Branch</button>
+            <button className="small-btn" onClick={this.submitBranch}>
+              Submit Repo/Branch
+            </button>
           </div>
         </div>
       );

@@ -27,6 +27,13 @@
   margin-top: 1em;
 }
 
+.small-btn {
+  width: 150px;
+  height: auto;
+  font-size: 14px;
+  padding: 5px 10px;
+}
+
 .repo-selection {
   margin-top: 4em;
 }
