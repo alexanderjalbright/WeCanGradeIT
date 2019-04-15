@@ -1,0 +1,59 @@
+:root {
+  --dark-green: #04794d;
+  --light-green: #deecdf;
+}
+
+.assignment-table h3 {
+  font-size: 24px;
+}
+
+.table-header,
+.student-table {
+  display: grid;
+  grid-template-columns: repeat(2, 400px);
+  border-top: 2px solid var(--dark-green);
+  border-bottom: 2px solid var(--dark-green);
+}
+
+.table-header {
+  color: var(--dark-green);
+  background-color: var(--light-green);
+}
+
+.assignment-table {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "assign repo grade btn"
+    "comment comment comment comment";
+  align-items: center;
+  border-top: 2px solid var(--dark-green);
+  border-bottom: 2px solid var(--dark-green);
+  padding-left: 100px;
+}
+
+.assignment {
+  grid-area: assign;
+  padding: 0;
+}
+
+.repo {
+  grid-area: repo;
+}
+
+.grade {
+  grid-area: grade;
+}
+
+.btn {
+  grid-area: btn;
+}
+
+.comment {
+  grid-area: comment;
+}
+
+.assignment-table:nth-child(odd) {
+  background-color: var(--light-green);
+}
