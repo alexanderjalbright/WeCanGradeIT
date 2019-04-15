@@ -30,6 +30,12 @@ export default class Nav extends Component {
               <img src={logo} style={{ width: "200px", margin: "1em 0" }} />
             </a>
           </li>
+          <li>
+            <Route
+              path={`/instructor/`}
+              component={() => <Link to={`/instructor`}>HOME</Link>}
+            />
+          </li>
           <li className="nav-assign">
             <Route
               path={`/${user.userName}`}
