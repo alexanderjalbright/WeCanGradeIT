@@ -19,7 +19,11 @@ export default class Nav extends Component {
         <ul>
           <li style={{ flexGrow: "1" }}>
             <a href="/">
-              <img src={logo} style={{ width: "200px", margin: "1em 0" }} />
+              <img
+                src={logo}
+                alt="WeCanGradeIT Logo"
+                style={{ width: "200px", margin: "1em 0" }}
+              />
             </a>
           </li>
           <li className="nav-assign">
