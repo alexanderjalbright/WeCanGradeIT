@@ -88,7 +88,7 @@ export default class Instructor extends Component {
 
     return (
       <Route
-        path={`/instructor`}
+        path={`/instructor/assignments`}
         exact
         render={() => (
           <div>

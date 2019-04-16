@@ -18,30 +18,16 @@ export default class Nav extends Component {
       <nav>
         <ul>
           <li style={{ flexGrow: "1" }}>
-            {/* <h1>
-              <span className="we">We</span>
-              <span className="can">Can</span>
-              <span className="grade">
-                {`{`}Grade{`}`}
-              </span>
-              <span className="it">IT</span>
-            </h1> */}
             <a href="/">
               <img src={logo} style={{ width: "200px", margin: "1em 0" }} />
             </a>
-          </li>
-          <li>
-            <Route
-              path={`/${user.userName}/`}
-              component={() => <Link to={`/${user.userName}`}>HOME</Link>}
-            />
           </li>
           <li className="nav-assign">
             <Route
               path={`/${user.userName}`}
               component={() => (
                 <div>
-                  <a href="#">ASSIGNMENTS</a>
+                  <Link to={`/${user.userName}/assignments`}>ASSIGNMENTS</Link>
                   <ul
                     className="assign-dropdown"
                     style={{ position: "absolute", top: "10" }}
