@@ -157,7 +157,10 @@ class App extends Component {
 
           <Instructor addAssignment={this.addAssignment} />
           {this.state.user.userName === "Instructor" || (
-            <Student user={this.state.user} />
+            <Student
+              user={this.state.user}
+              assignments={this.state.assignments}
+            />
           )}
         </div>
       </Router>
