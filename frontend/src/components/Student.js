@@ -20,15 +20,25 @@ export default class Student extends Component {
 
   componentDidMount() {
     const { user } = this.props;
-    fetch("https://api.github.com/users/alexanderjalbright")
+    fetch(`${gitHubApi}/users/${user.userName}`)
       .then(res => res.json())
       .then(json => this.setState({ info: json }))
-      .then(console.log("howdy: " + this.state.info.avatar_url));
+      .then(console.log(user.userName));
+  }
+
+  getImage() {
+    const { user } = this.props;
+    fetch(`${gitHubApi}/users/${user.userName}`)
+      .then(res => res.json())
+      .then(json => this.setState({ info: json }))
+      .then(console.log(user.userName));
   }
 
   render() {
     const { user } = this.props;
-    // this.getImage();
+    if (user.userName !== this.state.info.login) {
+      this.getImage();
+    }
     return (
       <Route
         path={`/${user.userName}`}
