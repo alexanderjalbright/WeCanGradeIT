@@ -1,0 +1,89 @@
+:root {
+    --dark-green: #04794d;
+    --light-green: #deecdf;
+}
+
+.student-name-h1 {
+    color: var(--dark-green);
+    padding-left: 5px;
+}
+
+.student-name-h2 {
+    color: var(--dark-green);
+    font-style: italic;
+    padding-left: 5px;
+    text-align: right;
+}
+
+.student-div {
+    background-color: var(--light-green);
+}
+
+.edit-student-btn {
+    width: 100px;
+    height: 30px;
+    align-self: center;
+    background-color: var(--dark-green);
+    color: white;
+    border: none;
+    margin-bottom: 20px;
+}
+
+.add-student-btn {
+    width: 100px;
+    height: 30px;
+    align-self: center;
+    background-color: #000000;
+    color: white;
+    border: none;
+}
+
+.submit-student-btn {
+    width: 200px;
+    height: 30px;
+    align-self: center;
+    background-color: var(--dark-green);
+    color: white;
+    border: none;
+}
+
+.cancel-btn {
+    width: 100px;
+    height: 30px;
+    align-self: center;
+    background-color: var(--dark-green);
+    color: white;
+    border: none;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.first-name-input {
+    display: flex;
+    width: 50%;
+}
+
+.last-name-input {
+    display: flex;
+    width: 50%;
+}
+
+.username-input {
+    display: flex;
+    width: 50%;
+}
+
+.first-name-label {
+    background-color: var(--dark-green);
+    color: white;
+}
+
+.last-name-label {
+    background-color: var(--dark-green);
+    color: white;
+}
+
+.username-label {
+    background-color: var(--dark-green);
+    color: white;
+}

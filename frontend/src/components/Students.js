@@ -61,14 +61,14 @@ export default class Students extends Component {
     const studentHome = roster.map(student => (
       <div>
         {student.firstName === "Instructor" || (
-          <div>
-            <h1>
+          <div className="student-div-2">
+            <h1 className="student-name-h1">
               {student.firstName} {student.lastName}
             </h1>
-            <h2>{student.userName}</h2>
+            <h2 className="student-name-h2">{student.userName}</h2>
             {this.state.editingStudent !== student.studentId && (
               <button
-                className="fancy-btn small-btn"
+                className="edit-student-btn"
                 onClick={() =>
                   this.setState({
                     editingStudent: student.studentId,
@@ -83,32 +83,35 @@ export default class Students extends Component {
             )}
             {this.state.editingStudent === student.studentId && (
               <div>
-                <label>First Name:</label>
+                <label className="first-name-label">First Name:</label>
                 <input
+                  className="first-name-input"
                   value={this.state.editFirstName}
                   onChange={this.onChange}
                   name="editFirstName"
                 />
-                <label>Last Name:</label>
+                <label className="last-name-label">Last Name:</label>
                 <input
+                  className="last-name-input"
                   value={this.state.editLastName}
                   onChange={this.onChange}
                   name="editLastName"
                 />
-                <label>Username:</label>
+                <label className="username-label">Username:</label>
                 <input
+                  className="username-input"
                   value={this.state.editUserName}
                   onChange={this.onChange}
                   name="editUserName"
                 />
                 <button
-                  className="fancy-btn small-btn"
+                  className="submit-student-btn"
                   onClick={() => this.submitChanges(student.studentId)}
                 >
                   Submit Changes
                 </button>
                 <button
-                  className="fancy-btn small-btn"
+                  className="cancel-btn"
                   onClick={() =>
                     this.setState({
                       editingStudent: 0,
@@ -131,10 +134,10 @@ export default class Students extends Component {
         path={`/instructor/students`}
         exact
         render={() => (
-          <div>
+          <div className="student-div">
             {studentHome}
             <button
-              className="add-button fancy-btn"
+              className="add-student-btn"
               onClick={() => {
                 const addForm = document.querySelector(".add-form");
                 addForm.style.display = "block";
