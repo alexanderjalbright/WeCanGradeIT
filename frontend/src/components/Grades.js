@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { apiUrl } from "../lib/constants";
+import grades from "../components/Grades.css";
 
 class Grades extends Component {
   constructor() {
@@ -14,41 +15,68 @@ class Grades extends Component {
     };
   }
   gradesMapper = grades =>
-    grades.map(grade => (
-      <div key={grade.gradeId}>
-        <h2>Assignment: {grade.assignment.name}</h2>
-        <h3>Grade: {grade.value}</h3>
-        <p>Comment: {grade.comment}</p>
-        <p>
-          Repo:{" "}
-          <a href={grade.repoUrl} target="_blank">
-            {grade.repoName}
-            {grade.branchName === "" ||
-              grade.branchName === null ||
-              ` (${grade.branchName})`}
-          </a>
-        </p>
-        {this.state.editingGrade !== grade.gradeId && (
-          <button onClick={() => this.editGrade(grade)}>Edit</button>
+    grades.map((grade, index) => (
+      <div className="assignment-parent" key={grade.gradeId}>
+        {index === 0 && (
+          <div className="assignment-table assignment-header">
+            <h2>Assignment</h2>
+            <h2>Repo</h2>
+            <h2>Grade</h2>
+          </div>
         )}
+        <div className="assignment-table">
+          <h3 className="assignment">{grade.assignment.name}</h3>
+          <h3 className="grade">{grade.value}%</h3>
+          <h3 className="repo">
+            <a href={grade.repoUrl} target="_blank">
+              {grade.repoName}
+              {grade.branchName === "" ||
+                grade.branchName === null ||
+                ` (${grade.branchName})`}
+            </a>
+          </h3>
+          {this.state.editingGrade !== grade.gradeId && (
+            <button
+              className="grade-btn btn"
+              onClick={() => this.editGrade(grade)}
+            >
+              Edit
+            </button>
+          )}
+          <p className="comment">
+            <span className="comment-title">Comment:</span> <br />
+            {grade.comment}
+          </p>
+        </div>
+
         {this.state.editingGrade === grade.gradeId && (
           <div className={`grade-edit grade-edit${grade.gradeId}`}>
             <label>Grade:</label>
             <input
+              className="grade-input grade-input-value"
               name="editValue"
               value={this.state.editValue}
               onChange={this.onChange}
             />
             <label>Comment:</label>
-            <input
+            <textarea
+              className="grade-input"
               name="editComment"
               value={this.state.editComment}
               onChange={this.onChange}
             />
-            <button onClick={() => this.submitGrade(grade)}>
+            <button
+              className="grade-btn edit-grade-btn submit-edit-btn"
+              onClick={() => this.submitGrade(grade)}
+            >
               Submit Changes
             </button>
-            <button onClick={this.cancelEdit}>Cancel</button>
+            <button
+              className="grade-btn edit-grade-btn"
+              onClick={this.cancelEdit}
+            >
+              Cancel
+            </button>
           </div>
         )}
       </div>
@@ -124,65 +152,73 @@ class Grades extends Component {
             ""
           ) : (
             <div key={student.studentId}>
-              <h1>Grades - {`${student.firstName} ${student.lastName}`}</h1>
-              <h2>Overall: {student.avgGrade}</h2>
-              {this.gradesMapper(student.grades)}
-              {this.state.addingGrade !== student.studentId && (
-                <button
-                  className={`add-grade add-grade${student.studentId}`}
-                  onClick={() =>
-                    this.setState({
-                      addingGrade: student.studentId,
-                      editingGrade: 0,
-                      editValue: 0,
-                      editComment: ""
-                    })
-                  }
-                >
-                  Add Grade
-                </button>
-              )}
-
-              {this.state.addingGrade === student.studentId && (
-                <div>
-                  <label>Assignment: </label>
-                  <select name="addAssignmentId" onChange={this.onChange}>
-                    <option value="" selected disabled hidden>
-                      Choose here
-                    </option>
-                    {this.assignmentMapper()}
-                  </select>
-                  <label>Value:</label>
-                  <input
-                    name="editValue"
-                    value={this.state.editValue}
-                    onChange={this.onChange}
-                  />
-                  <label>Comment:</label>
-                  <input
-                    name="editComment"
-                    value={this.state.editComment}
-                    onChange={this.onChange}
-                  />
+              <div className="student-table">
+                <h1>{`${student.firstName} ${student.lastName}`}</h1>
+                <h1>{student.avgGrade}%</h1>
+                {this.state.addingGrade !== student.studentId && (
                   <button
-                    onClick={() => {
-                      this.submitGrade({
-                        assignmentId: this.state.addAssignmentId,
-                        studentId: student.studentId
-                      });
+                    className={`grade-btn add-grade add-grade${
+                      student.studentId
+                    }`}
+                    onClick={() =>
                       this.setState({
+                        addingGrade: student.studentId,
+                        editingGrade: 0,
                         editValue: 0,
-                        editComment: "",
-                        addingGrade: 0,
-                        editingGrade: 0
-                      });
-                    }}
+                        editComment: ""
+                      })
+                    }
                   >
-                    Submit Grade
+                    Add Grade
                   </button>
-                  <button onClick={this.cancelEdit}>Cancel</button>
-                </div>
-              )}
+                )}
+              </div>
+              <div>
+                {this.gradesMapper(student.grades)}
+                {this.state.addingGrade === student.studentId && (
+                  <div>
+                    <label>Assignment: </label>
+                    <select name="addAssignmentId" onChange={this.onChange}>
+                      <option value="" selected disabled hidden>
+                        Choose here
+                      </option>
+                      {this.assignmentMapper()}
+                    </select>
+                    <label>Value:</label>
+                    <input
+                      name="editValue"
+                      value={this.state.editValue}
+                      onChange={this.onChange}
+                    />
+                    <label>Comment:</label>
+                    <input
+                      name="editComment"
+                      value={this.state.editComment}
+                      onChange={this.onChange}
+                    />
+                    <button
+                      className="grade-btn"
+                      onClick={() => {
+                        this.submitGrade({
+                          assignmentId: this.state.addAssignmentId,
+                          studentId: student.studentId
+                        });
+                        this.setState({
+                          editValue: 0,
+                          editComment: "",
+                          addingGrade: 0,
+                          editingGrade: 0
+                        });
+                      }}
+                    >
+                      Submit Grade
+                    </button>
+                    <button className="grade-btn" onClick={this.cancelEdit}>
+                      Cancel
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           )
         )
@@ -191,7 +227,17 @@ class Grades extends Component {
       <Route
         path={`/${user.userName}/grades`}
         exact
-        render={() => <div>{gradesTable}</div>}
+        render={() => (
+          <div>
+            {user.userName === "Instructor" && (
+              <div className="table-header">
+                <h1>Student</h1>
+                <h1>Overall Grade</h1>
+              </div>
+            )}
+            {gradesTable}
+          </div>
+        )}
       />
     );
   }

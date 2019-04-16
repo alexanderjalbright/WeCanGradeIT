@@ -58,7 +58,7 @@ class App extends Component {
         fetch(`${apiUrl}/student`)
           .then(res => res.json())
           .then(json => {
-            this.setState({ students: json });
+            this.resetState(json);
           });
         const addForm = document.querySelector(".add-form");
         addForm.style.display = "none";
@@ -109,7 +109,7 @@ class App extends Component {
         fetch(`${apiUrl}/student`)
           .then(res => res.json())
           .then(json => {
-            this.setState({ students: json });
+            this.resetState(json);
           });
       }
     });

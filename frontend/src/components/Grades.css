@@ -1,0 +1,119 @@
+:root {
+  --dark-green: #04794d;
+  --light-green: #deecdf;
+}
+
+.assignment-table h3 {
+  font-size: 24px;
+}
+
+.table-header,
+.student-table {
+  display: grid;
+  grid-template-columns: repeat(2, 400px);
+  border-top: 2px solid var(--dark-green);
+  border-bottom: 2px solid var(--dark-green);
+  padding: 20px;
+}
+
+.table-header {
+  color: var(--dark-green);
+  background-color: var(--light-green);
+}
+
+.student-table {
+  grid-template-columns: repeat(3, 400px);
+}
+
+.grade-btn {
+  width: 100px;
+  height: 30px;
+  align-self: center;
+  background-color: var(--dark-green);
+  color: white;
+  border: none;
+}
+
+/* .assignment-header {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 2fr;
+  padding-left: 100px;
+  align-items: center;
+} */
+
+.assignment-table {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "assign repo grade btn"
+    "comment comment comment comment";
+  align-items: center;
+  border-top: 2px solid var(--dark-green);
+  border-bottom: 2px solid var(--dark-green);
+  padding-left: 100px;
+  background-color: var(--light-green);
+}
+
+.assignment-table h3 {
+  margin: 15px 0;
+}
+
+.assignment-table a {
+  color: rgb(66, 156, 211);
+  padding: auto 0;
+  font-size: 18px;
+}
+
+.assignment-header {
+  color: var(--dark-green);
+}
+
+.assignment {
+  grid-area: assign;
+  padding: 0;
+}
+
+.repo {
+  grid-area: repo;
+}
+
+.grade {
+  grid-area: grade;
+}
+
+.btn {
+  grid-area: btn;
+}
+
+.comment {
+  grid-area: comment;
+  margin-top: 0;
+}
+
+.comment-title {
+  font-size: 18px;
+  color: var(--dark-green);
+}
+
+.grade-edit {
+  text-align: right;
+  padding: 1em;
+}
+
+.grade-input {
+  width: 50%;
+  margin-right: 5%;
+}
+
+.grade-input-value {
+  width: 5%;
+}
+
+.edit-grade-btn {
+  margin: auto 10px auto 0;
+}
+
+.submit-edit-btn {
+  width: 150px;
+}
