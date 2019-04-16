@@ -84,7 +84,7 @@ export default class Students extends Component {
               )}
             </div>
             {this.state.editingStudent === student.studentId && (
-              <div className="edit-student">
+              <div className="students-form">
                 <label>First Name</label>
                 <input
                   value={this.state.editFirstName}
@@ -103,7 +103,7 @@ export default class Students extends Component {
                   onChange={this.onChange}
                   name="editUserName"
                 />
-                <div className="edit-student-btns">
+                <div className="students-form-btns">
                   <button
                     className="submit-student-btn student-btn"
                     onClick={() => this.submitChanges(student.studentId)}
@@ -148,7 +148,7 @@ export default class Students extends Component {
             >
               Add Student
             </button>
-            <div className="add-form edit-student" style={{ display: "none" }}>
+            <div className="add-form students-form" style={{ display: "none" }}>
               <label>First Name</label>
               <input
                 onChange={this.firstNameChange}
@@ -164,7 +164,7 @@ export default class Students extends Component {
                 onChange={this.userNameChange}
                 value={this.state.newUserName}
               />
-              <div className="edit-student-btns">
+              <div className="students-form-btns">
                 <button
                   className="student-btn submit-student-btn"
                   onClick={this.submitClick}
