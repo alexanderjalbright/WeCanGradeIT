@@ -5,21 +5,24 @@
 
 .student-name-h1 {
     color: var(--dark-green);
-    padding-left: 5px;
+    margin-left: 40px;
+    display: inline;
 }
 
 .student-name-h2 {
     color: var(--dark-green);
     font-style: italic;
-    padding-left: 5px;
-    text-align: right;
+    text-align: center;
+    margin-right: 10px;
+    display: inline;
 }
 
 .student-div {
     background-color: var(--light-green);
+    height: 100vh;
 }
 
-.edit-student-btn {
+.student-btn {
     width: 100px;
     height: 30px;
     align-self: center;
@@ -29,22 +32,8 @@
     margin-bottom: 20px;
 }
 
-.add-student-btn {
-    width: 100px;
-    height: 30px;
-    align-self: center;
-    background-color: #000000;
-    color: white;
-    border: none;
-}
-
 .submit-student-btn {
-    width: 200px;
-    height: 30px;
-    align-self: center;
-    background-color: var(--dark-green);
-    color: white;
-    border: none;
+    width: 120px;
 }
 
 .cancel-btn {
@@ -54,36 +43,29 @@
     background-color: var(--dark-green);
     color: white;
     border: none;
+}
+
+.edit-student {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.edit-student label {
+    display: block;
+    background-color: var(--dark-green);
+    color: white;
+    text-align: center;
     margin-top: 10px;
-    margin-left: 10px;
 }
 
-.first-name-input {
+.edit-student-btns {
     display: flex;
-    width: 50%;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-right: 10px;
 }
 
-.last-name-input {
-    display: flex;
-    width: 50%;
-}
-
-.username-input {
-    display: flex;
-    width: 50%;
-}
-
-.first-name-label {
-    background-color: var(--dark-green);
-    color: white;
-}
-
-.last-name-label {
-    background-color: var(--dark-green);
-    color: white;
-}
-
-.username-label {
-    background-color: var(--dark-green);
-    color: white;
+.each-student {
+    display: grid;
+    grid-template-columns: auto 1fr auto 40px;
 }
