@@ -20,6 +20,7 @@ export default class Assignments extends Component {
             assignment={assignment}
             user={user}
             editAssignment={editAssignment}
+            resetState={this.props.resetState}
           />
         )}
       />

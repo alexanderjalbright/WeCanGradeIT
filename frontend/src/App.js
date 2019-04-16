@@ -85,14 +85,22 @@ class App extends Component {
 
   resetState = json => {
     json.unshift(this.state.students[0]);
-    this.setState({ students: json });
+    let userRefreshed = this.state.user;
+
+    if (json.some(which => which.userName === this.state.user.userName)) {
+      userRefreshed = json.find(
+        which => which.userName === this.state.user.userName
+      );
+    }
+
+    this.setState({ students: json, user: userRefreshed });
   };
 
   gradeSubmitted = () => {
     fetch(`${apiUrl}/student`)
       .then(res => res.json())
       .then(json => {
-        this.setState({ students: json });
+        this.resetState(json);
       });
   };
 
@@ -134,6 +142,7 @@ class App extends Component {
             assignments={this.state.assignments}
             user={this.state.user}
             editAssignment={this.editAssignment}
+            resetState={this.resetState}
           />
           <Grades
             user={this.state.user}
