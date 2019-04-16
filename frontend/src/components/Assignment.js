@@ -66,6 +66,11 @@ export default class Assignment extends Component {
       body: JSON.stringify(grade)
     }).then(res => {
       if (res.ok) {
+        fetch(`${apiUrl}/student`)
+          .then(res => res.json())
+          .then(json => {
+            this.props.resetState(json);
+          });
         alert(`Your assignment has been submitted: ${branchUrl}`);
       }
     });
@@ -83,6 +88,11 @@ export default class Assignment extends Component {
       body: JSON.stringify(grade)
     }).then(res => {
       if (res.ok) {
+        fetch(`${apiUrl}/student`)
+          .then(res => res.json())
+          .then(json => {
+            this.resetState(json);
+          });
         alert(`Your assignment has been submitted: ${this.state.url}`);
       }
     });
@@ -356,6 +366,16 @@ export default class Assignment extends Component {
             Due: {month}/{day}/{dueDate.slice(0, 4)} &nbsp;
             {militaryToStandardTime()}
             {dueDate.slice(13, 16)} {amPm()}
+          </h3>
+          <h3>
+            Last Submitted:&nbsp;
+            {this.props.user.grades.some(
+              grade => grade.assignmentId === this.props.assignment.assignmentId
+            ) &&
+              this.props.user.grades.find(
+                grade =>
+                  grade.assignmentId === this.props.assignment.assignmentId
+              ).repoUrl}
           </h3>
         </div>
         {studentOrInstructor()}
