@@ -30,9 +30,6 @@ export default class Student extends Component {
     let dueAfterToday = [];
     let count = 0;
     assignments.forEach(assignment => {
-      // if (count <= 0) {
-      //   current = assignment;
-      // }
       if (assignment.dueDate.slice(2, 5) >= today.slice(2, 5)) {
         if (assignment.dueDate.slice(5, 7) >= today.slice(5, 7)) {
           if (assignment.dueDate.slice(8, 10) > today.slice(8, 10)) {
@@ -86,6 +83,7 @@ export default class Student extends Component {
             <img
               src={this.state.info.avatar_url}
               style={{ width: "200px", margin: "1em 0" }}
+              alt="Student Avatar"
             />
           </div>
         )}

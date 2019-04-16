@@ -27,7 +27,11 @@ export default class Nav extends Component {
               <span className="it">IT</span>
             </h1> */}
             <a href="/">
-              <img src={logo} style={{ width: "200px", margin: "1em 0" }} />
+              <img
+                src={logo}
+                alt="WeCanGradeIT Logo"
+                style={{ width: "200px", margin: "1em 0" }}
+              />
             </a>
           </li>
           <li>
