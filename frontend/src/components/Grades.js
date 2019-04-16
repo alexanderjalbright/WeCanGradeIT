@@ -131,8 +131,8 @@ class Grades extends Component {
     const { user, students } = this.props;
     const gradesTable =
       user.firstName !== "Instructor" && user.firstName !== "" ? (
-        <div>
-          <h1>Grades - {`${user.firstName} ${user.lastName}`}</h1>
+        <div className="user-grades-page">
+          <h1>{`${user.firstName} ${user.lastName}`}</h1>
           <h2>Overall: {user.avgGrade}</h2>
           {user.grades.map(grade => (
             <div>
