@@ -19,22 +19,53 @@ export default class Student extends Component {
   }
 
   getNextDueAssignment() {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, "0");
+    let mm = String(today.getMonth() + 1).padStart(2, "0");
+    let yyyy = today.getFullYear();
+    today = yyyy + "-" + mm + "-" + dd;
+
     const { assignments } = this.props;
     let current = {};
+    let dueAfterToday = [];
     let count = 0;
     assignments.forEach(assignment => {
-      if (count <= 0) {
-        current = assignment;
-      }
-      if (assignment.dueDate.slice(2, 5) >= current.dueDate.slice(2, 5)) {
-        if (assignment.dueDate.slice(5, 7) >= current.dueDate.slice(5, 7)) {
-          if (assignment.dueDate.slice(8, 10) > current.dueDate.slice(8, 10)) {
-            current = assignment;
+      // if (count <= 0) {
+      //   current = assignment;
+      // }
+      if (assignment.dueDate.slice(2, 5) >= today.slice(2, 5)) {
+        if (assignment.dueDate.slice(5, 7) >= today.slice(5, 7)) {
+          if (assignment.dueDate.slice(8, 10) > today.slice(8, 10)) {
+            dueAfterToday.push(count);
           }
         }
       }
-      count += 1;
+      count++;
     });
+    if (dueAfterToday.length > 0) {
+      let i = 0;
+      for (i = 0; i < dueAfterToday.length; i++) {
+        if (i <= 0) {
+          current = assignments[dueAfterToday[i]];
+        }
+        if (
+          assignments[dueAfterToday[i]].dueDate.slice(2, 5) <=
+          current.dueDate.slice(2, 5)
+        ) {
+          if (
+            assignments[dueAfterToday[i]].dueDate.slice(5, 7) <=
+            current.dueDate.slice(5, 7)
+          ) {
+            if (
+              assignments[dueAfterToday[i]].dueDate.slice(8, 10) <
+              current.dueDate.slice(8, 10)
+            ) {
+              current = assignments[dueAfterToday[i]];
+            }
+          }
+        }
+      }
+    }
     return current;
   }
 
