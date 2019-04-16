@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import Grades from "./components/Grades";
 import { apiUrl } from "./lib/constants";
 import Instructor from "./components/Instructor";
+import Student from "./components/Student";
 import "./App.css";
 
 class App extends Component {
@@ -164,6 +165,12 @@ class App extends Component {
           />
 
           <Instructor addAssignment={this.addAssignment} />
+          {this.state.user.userName === "Instructor" || (
+            <Student
+              user={this.state.user}
+              assignments={this.state.assignments}
+            />
+          )}
         </div>
       </Router>
     );
