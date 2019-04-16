@@ -10,46 +10,26 @@ export default class Student extends Component {
     };
   }
 
-  //   getImage() {
-  //     const { user } = this.props;
-  //     fetch(`${gitHubApi}/users/${user.userName}`)
-  //       .then(res => res.json())
-  //       .then(json => this.setState({ avatar_url: json }))
-  //       .then(console.log("howdy: " + this.state.avatar_url));
-  //   }
-
-  componentDidMount() {
-    const { user } = this.props;
-    fetch(`${gitHubApi}/users/${user.userName}`)
-      .then(res => res.json())
-      .then(json => this.setState({ info: json }))
-      .then(console.log(user.userName));
-  }
-
   getImage() {
     const { user } = this.props;
     fetch(`${gitHubApi}/users/${user.userName}`)
       .then(res => res.json())
-      .then(json => this.setState({ info: json }))
-      .then(console.log(user.userName));
+      .then(json => this.setState({ info: json }));
   }
 
   render() {
     const { user } = this.props;
-    if (user.userName !== this.state.info.login) {
-      this.getImage();
-    }
     return (
       <Route
         path={`/${user.userName}`}
         exact
-        render={() => (
+        component={() => (
           <div>
             {" "}
             <h1>{user.userName}</h1>
-            {/* <h1>`${this.state.avatar_url}`</h1> */}
+            {this.state.info.login === user.userName || this.getImage()}
             <img
-              src={`${this.state.info.avatar_url}`}
+              src={this.state.info.avatar_url}
               style={{ width: "200px", margin: "1em 0" }}
             />
           </div>
