@@ -119,5 +119,14 @@
 }
 
 .user-grades-page {
-  width: 100%;
+  margin-left: 4em;
+  border: 2px dotted red;
+}
+
+.user-grades-page h2 {
+  margin-left: 4em;
+}
+
+.user-grades-page p {
+  margin-left: 4em;
 }
