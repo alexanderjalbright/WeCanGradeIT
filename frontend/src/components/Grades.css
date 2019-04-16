@@ -101,6 +101,24 @@
   padding: 1em;
 }
 
+.grade-add {
+  grid-area: btn;
+}
+
+.grade-add-btns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.grade-add-form label {
+  text-align: center;
+  display: block;
+  margin-top: 10px;
+  background-color: var(--dark-green);
+  color: white;
+}
+
 .grade-input {
   width: 50%;
   margin-right: 5%;
