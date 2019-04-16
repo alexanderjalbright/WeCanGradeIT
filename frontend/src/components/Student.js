@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import { gitHubApi } from "../lib/constants";
 
 export default class Student extends Component {
@@ -75,10 +75,12 @@ export default class Student extends Component {
         exact
         component={() => (
           <div>
-            {/* {this.state.info.login === user.userName ||
-              this.getNextDueAssignment()} */}{" "}
+            {" "}
             <h1>{user.userName}</h1>
             <h1>Next Assignment Due: {nextDue.dueDate}</h1>
+            <Link to={`/${user.userName}/assignments/${nextDue.assignmentId}`}>
+              {nextDue.name}
+            </Link>
             {this.state.info.login === user.userName || this.getImage()}
             <img
               src={this.state.info.avatar_url}
