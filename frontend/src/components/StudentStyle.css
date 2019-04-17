@@ -2,17 +2,13 @@
   display: grid;
   grid-template-areas: "name due" "pic link";
   grid-template-columns: auto 1fr;
-  grid-template-rows: 100mm 1fr;
+  grid-template-rows: 40px 1fr;
   grid-gap: 5vw;
 }
 
-.student-home {
-  grid-area: pic;
-  text-align: center;
-}
-
-.student-nextdue-zone h1 {
-  grid-area: due;
+.student-name {
+  grid-area: name;
+  justify-self: center;
 }
 
 .student-pic {
@@ -20,14 +16,14 @@
   margin: 0.5vw;
 }
 
-.student-home a {
-  font-size: 1.4em;
-  display: block;
+.student-home div {
+  font-size: 1.8em;
+  /* display: block; */
   grid-area: link;
 }
 
-.student-home h1 {
-  grid-area: name;
+.student-duedate {
+  grid-area: due;
 }
 
 .student-home img {

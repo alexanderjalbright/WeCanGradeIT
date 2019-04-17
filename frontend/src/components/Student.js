@@ -76,7 +76,7 @@ export default class Student extends Component {
         exact
         component={() => (
           <div className="student-home">
-            <h1>
+            <h1 className="student-name">
               {user.firstName} {user.lastName}
             </h1>
             {this.state.info.login === user.userName || this.getImage()}
@@ -86,10 +86,16 @@ export default class Student extends Component {
               alt="Student Avatar"
             />
 
-            <h1>Next Assignment Due: {nextDue.dueDate.slice(5, 10)}</h1>
-            <Link to={`/${user.userName}/assignments/${nextDue.assignmentId}`}>
-              {nextDue.name}
-            </Link>
+            <h1 className="student-duedate">
+              Next Assignment Due: {nextDue.dueDate.slice(5, 10)}
+            </h1>
+            <div>
+              <Link
+                to={`/${user.userName}/assignments/${nextDue.assignmentId}`}
+              >
+                {nextDue.name}
+              </Link>
+            </div>
           </div>
         )}
       />
