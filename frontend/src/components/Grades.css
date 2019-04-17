@@ -34,13 +34,6 @@
   border: none;
 }
 
-/* .assignment-header {
-  display: grid;
-  grid-template-columns: 2fr 2fr 1fr 2fr;
-  padding-left: 100px;
-  align-items: center;
-} */
-
 .assignment-table {
   display: grid;
   width: 100%;
@@ -138,7 +131,6 @@
 
 .user-grades-page {
   margin-left: 4em;
-  border: 2px dotted red;
 }
 
 .user-grades-page h2 {
