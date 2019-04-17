@@ -62,64 +62,68 @@ export default class Students extends Component {
       <div>
         {student.firstName === "Instructor" || (
           <div>
-            <h1>
-              {student.firstName} {student.lastName}
-            </h1>
-            <h2>{student.userName}</h2>
-            {this.state.editingStudent !== student.studentId && (
-              <button
-                className="fancy-btn small-btn"
-                onClick={() =>
-                  this.setState({
-                    editingStudent: student.studentId,
-                    editFirstName: student.firstName,
-                    editLastName: student.lastName,
-                    editUserName: student.userName
-                  })
-                }
-              >
-                Edit
-              </button>
-            )}
+            <div className="each-student">
+              <h1 className="student-name-h1">
+                {student.firstName} {student.lastName}
+              </h1>
+              <h2 className="student-name-h2">{student.userName}</h2>
+              {this.state.editingStudent !== student.studentId && (
+                <button
+                  className="student-btn"
+                  onClick={() =>
+                    this.setState({
+                      editingStudent: student.studentId,
+                      editFirstName: student.firstName,
+                      editLastName: student.lastName,
+                      editUserName: student.userName
+                    })
+                  }
+                >
+                  Edit
+                </button>
+              )}
+            </div>
             {this.state.editingStudent === student.studentId && (
-              <div>
-                <label>First Name:</label>
+              <div className="students-form">
+                <label>First Name</label>
                 <input
                   value={this.state.editFirstName}
                   onChange={this.onChange}
                   name="editFirstName"
                 />
-                <label>Last Name:</label>
+                <label>Last Name</label>
                 <input
                   value={this.state.editLastName}
                   onChange={this.onChange}
                   name="editLastName"
                 />
-                <label>Username:</label>
+                <label>Username</label>
                 <input
                   value={this.state.editUserName}
                   onChange={this.onChange}
                   name="editUserName"
                 />
-                <button
-                  className="fancy-btn small-btn"
-                  onClick={() => this.submitChanges(student.studentId)}
-                >
-                  Submit Changes
-                </button>
-                <button
-                  className="fancy-btn small-btn"
-                  onClick={() =>
-                    this.setState({
-                      editingStudent: 0,
-                      editFirstName: "",
-                      editLastName: "",
-                      editUserName: ""
-                    })
-                  }
-                >
-                  Cancel
-                </button>
+                <div className="students-form-btns">
+                  <button
+                    className="submit-student-btn student-btn"
+                    onClick={() => this.submitChanges(student.studentId)}
+                  >
+                    Submit Changes
+                  </button>
+                  <button
+                    className="cancel-btn"
+                    onClick={() =>
+                      this.setState({
+                        editingStudent: 0,
+                        editFirstName: "",
+                        editLastName: "",
+                        editUserName: ""
+                      })
+                    }
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -131,10 +135,10 @@ export default class Students extends Component {
         path={`/instructor/students`}
         exact
         render={() => (
-          <div>
+          <div className="student-div">
             {studentHome}
             <button
-              className="add-button fancy-btn"
+              className="add-button add-student-btn student-btn"
               onClick={() => {
                 const addForm = document.querySelector(".add-form");
                 addForm.style.display = "block";
@@ -144,23 +148,41 @@ export default class Students extends Component {
             >
               Add Student
             </button>
-            <div className="add-form" style={{ display: "none" }}>
-              <label>First Name:</label>
+            <div className="add-form students-form" style={{ display: "none" }}>
+              <label>First Name</label>
               <input
                 onChange={this.firstNameChange}
                 value={this.state.newFirstName}
               />
-              <label>Last Name:</label>
+              <label>Last Name</label>
               <input
                 onChange={this.lastNameChange}
                 value={this.state.newLastName}
               />
-              <label>Username:</label>
+              <label>Username</label>
               <input
                 onChange={this.userNameChange}
                 value={this.state.newUserName}
               />
-              <button onClick={this.submitClick}>Submit Student</button>
+              <div className="students-form-btns">
+                <button
+                  className="student-btn submit-student-btn"
+                  onClick={this.submitClick}
+                >
+                  Submit Student
+                </button>
+                <button
+                  className="student-btn"
+                  onClick={() => {
+                    const addForm = document.querySelector(".add-form");
+                    addForm.style.display = "none";
+                    const addButton = document.querySelector(".add-button");
+                    addButton.style.display = "block";
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         )}
