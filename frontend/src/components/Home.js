@@ -61,7 +61,7 @@ export default class Home extends Component {
                 <Link
                   to={
                     user.firstName === "Instructor"
-                      ? `/instructor`
+                      ? `/instructor/grades`
                       : `/${user.userName}`
                   }
                 >
