@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { apiUrl } from "../lib/constants";
 import instructor from "../components/Instructor.css";
+import students from "../components/Students.css";
 
 export default class Instructor extends Component {
   constructor() {
