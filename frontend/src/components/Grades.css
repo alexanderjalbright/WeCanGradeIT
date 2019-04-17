@@ -120,7 +120,6 @@
 
 .user-grades-page {
   margin-left: 4em;
-  border: 2px dotted red;
 }
 
 .user-grades-page h2 {
@@ -128,5 +127,9 @@
 }
 
 .user-grades-page p {
-  margin-left: 4em;
+  margin-left: 8em;
+}
+
+.overall-grade {
+  font-size: 0.8em;
 }

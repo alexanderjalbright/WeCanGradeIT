@@ -133,8 +133,11 @@ class Grades extends Component {
       user.firstName !== "Instructor" && user.firstName !== "" ? (
         <div className="user-grades-page">
           <h1>
-            {`${user.firstName} ${user.lastName}`}{" "}
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Overall Grade: {user.avgGrade}%
+            {`${user.firstName} ${user.lastName}`}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+            <span className="overall-grade">
+              Overall Grade: {user.avgGrade}%
+            </span>
           </h1>
           {user.grades.map(grade => (
             <div>
