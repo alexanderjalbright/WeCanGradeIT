@@ -130,13 +130,50 @@
 }
 
 .user-grades-page {
-  margin-left: 4em;
+  margin: 4em;
+  display: grid;
+  border-bottom: 2px solid rgb(66, 156, 211);
+  /* padding: 20px; */
+}
+
+.user-grades-page h1 {
+  margin: 1em 2em;
+  padding: 5px;
 }
 
 .user-grades-page h2 {
-  margin-left: 4em;
+  margin: 0 4em;
+  padding: 5px;
 }
 
 .user-grades-page p {
-  margin-left: 4em;
+  margin: 0 8em;
+  padding-bottom: 1em;
+}
+
+.student-table-header {
+  display: grid;
+  grid-template-areas: "name grade";
+  font-weight: bold;
+  border-top: 2px solid rgb(66, 156, 211);
+  border-bottom: 2px solid rgb(66, 156, 211);
+  align-items: center;
+}
+
+.user-name {
+  grid-area: name;
+}
+
+.user-grade {
+  grid-area: grade;
+}
+
+.student-overall-grade {
+  margin-right: 12em;
+}
+
+.student-table-body {
+  padding: 0;
+  margin: 0;
+  background-color: rgb(212, 232, 245);
 }
