@@ -100,6 +100,7 @@ class Grades extends Component {
     }).then(res => {
       if (res.ok) {
         this.props.gradeSubmitted();
+        this.setState({ editingGrade: 0 });
       }
     });
   };

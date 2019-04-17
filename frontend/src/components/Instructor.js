@@ -48,14 +48,15 @@ export default class Instructor extends Component {
     }).then(res => {
       if (res.ok) {
         this.props.addAssignment();
-        const addAssignmentForm = document.querySelector(
-          ".add-assignment-form"
-        );
-        addAssignmentForm.style.display = "none";
-        const addAssignmentButton = document.querySelector(
-          ".add-assignment-button"
-        );
-        addAssignmentButton.style.display = "block";
+        this.setState({
+          name: "",
+          description: "",
+          requirements: "",
+          dueDate: "",
+          type: "",
+          dueTime: "",
+          requirementsList: []
+        });
       }
     });
   };
