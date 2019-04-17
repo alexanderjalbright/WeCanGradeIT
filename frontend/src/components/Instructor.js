@@ -48,14 +48,15 @@ export default class Instructor extends Component {
     }).then(res => {
       if (res.ok) {
         this.props.addAssignment();
-        const addAssignmentForm = document.querySelector(
-          ".add-assignment-form"
-        );
-        addAssignmentForm.style.display = "none";
-        const addAssignmentButton = document.querySelector(
-          ".add-assignment-button"
-        );
-        addAssignmentButton.style.display = "block";
+        this.setState({
+          name: "",
+          description: "",
+          requirements: "",
+          dueDate: "",
+          type: "",
+          dueTime: "",
+          requirementsList: []
+        });
       }
     });
   };
@@ -92,24 +93,10 @@ export default class Instructor extends Component {
         path={`/instructor/assignments`}
         exact
         render={() => (
-          <div>
-            <button
-              className="add-assignment-button fancy-btn"
-              onClick={() => {
-                const addAssignmentForm = document.querySelector(
-                  ".add-assignment-form"
-                );
-                addAssignmentForm.style.display = "block";
-                const addAssignmentButton = document.querySelector(
-                  ".add-assignment-button"
-                );
-                addAssignmentButton.style.display = "none";
-              }}
-            >
-              Add Assignment
-            </button>
-            <div className="add-assignment-form" style={{ display: "none" }}>
+          <div className="add-assignment-page">
+            <div className="add-assignment-form">
               <div className="add-assignment-name">
+                <label className="form-title">ADD ASSIGNMENT</label>
                 <label>Name&nbsp;</label>
                 <input
                   name="name"
@@ -145,10 +132,7 @@ export default class Instructor extends Component {
                   onChange={this.onChange}
                   value={this.state.requirements}
                 />
-                <button
-                  className="fancy-btn small-btn"
-                  onClick={this.addRequirement}
-                >
+                <button className="add-btn" onClick={this.addRequirement}>
                   Add Requirement
                 </button>
               </div>
@@ -167,10 +151,7 @@ export default class Instructor extends Component {
                   value={this.state.dueTime}
                 />
               </div>
-              <button
-                className="fancy-btn small-btn"
-                onClick={this.submitNewAssignment}
-              >
+              <button className="add-btn" onClick={this.submitNewAssignment}>
                 Submit Assignment
               </button>
             </div>

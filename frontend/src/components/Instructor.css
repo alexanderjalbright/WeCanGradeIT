@@ -1,3 +1,8 @@
+.add-assignment-page {
+  display: flex;
+  justify-content: center;
+}
+
 .add-assignment-form {
   width: 50%;
   text-align: center;
@@ -6,7 +11,8 @@
 
 .add-assignment-form label {
   padding: 0 auto;
-  background-color: #86d8ff;
+  background-color: #04794d;
+  color: white;
   display: block;
   margin-top: 1em;
 }
@@ -17,4 +23,19 @@
 
 .description {
   height: 200px;
+}
+
+.add-btn {
+  margin-top: 5px;
+  width: 150px;
+  height: 30px;
+  align-self: center;
+  background-color: var(--dark-green);
+  color: white;
+  border: none;
+}
+
+.form-title {
+  font-size: 35px;
+  padding: 5px 0;
 }
