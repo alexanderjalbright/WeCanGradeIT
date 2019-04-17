@@ -135,3 +135,16 @@
 .submit-edit-btn {
   width: 150px;
 }
+
+.user-grades-page {
+  margin-left: 4em;
+  border: 2px dotted red;
+}
+
+.user-grades-page h2 {
+  margin-left: 4em;
+}
+
+.user-grades-page p {
+  margin-left: 4em;
+}

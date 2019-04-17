@@ -2,6 +2,7 @@ import { Link, Route } from "react-router-dom";
 
 import { apiUrl } from "../lib/constants";
 import React, { Component } from "react";
+import "../App.css";
 
 export default class Home extends Component {
   componentDidMount() {
@@ -36,42 +37,44 @@ export default class Home extends Component {
     ));
 
     return (
-      <Route
-        path={`/`}
-        exact={true}
-        render={() => (
-          <div className="login">
-            <h2>Select User</h2>
-            <select className="user-select" onChange={this.selectClick}>
-              <option value="" selected disabled hidden>
-                Choose here
-              </option>
-              {selectUserLinks}
-            </select>
+      <div className="home-page">
+        <Route
+          path={`/`}
+          exact={true}
+          render={() => (
+            <div className="login">
+              <h2>Select User</h2>
+              <select className="user-select" onChange={this.selectClick}>
+                <option value="" selected disabled hidden>
+                  Choose here
+                </option>
+                {selectUserLinks}
+              </select>
 
-            <h2>
-              {`${user.firstName} ${user.lastName}`}
-              {`${user.firstName} ${user.lastName}` === " "
-                ? ``
-                : ` has been selected!`}
-            </h2>
-            <Link
-              to={
-                user.firstName === "Instructor"
-                  ? `/instructor`
-                  : `/${user.userName}`
-              }
-            >
-              <button
-                className="user-select-btn enter-site fancy-btn"
-                style={{ width: "200px" }}
+              <h2>
+                {`${user.firstName} ${user.lastName}`}
+                {`${user.firstName} ${user.lastName}` === " "
+                  ? ``
+                  : ` has been selected!`}
+              </h2>
+              <Link
+                to={
+                  user.firstName === "Instructor"
+                    ? `/instructor`
+                    : `/${user.userName}`
+                }
               >
-                Enter
-              </button>
-            </Link>
-          </div>
-        )}
-      />
+                <button
+                  className="user-select-btn enter-site"
+                  style={{ width: "200px" }}
+                >
+                  Enter
+                </button>
+              </Link>
+            </div>
+          )}
+        />
+      </div>
     );
   }
 }
