@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Route, Link } from "react-router-dom";
 import { gitHubApi } from "../lib/constants";
+import StudentStyle from "./StudentStyle.css";
 
 export default class Student extends Component {
   constructor() {
@@ -32,7 +33,7 @@ export default class Student extends Component {
     assignments.forEach(assignment => {
       if (assignment.dueDate.slice(2, 5) >= today.slice(2, 5)) {
         if (assignment.dueDate.slice(5, 7) >= today.slice(5, 7)) {
-          if (assignment.dueDate.slice(8, 10) > today.slice(8, 10)) {
+          if (assignment.dueDate.slice(8, 10) >= today.slice(8, 10)) {
             dueAfterToday.push(count);
           }
         }
@@ -74,19 +75,27 @@ export default class Student extends Component {
         path={`/${user.userName}`}
         exact
         component={() => (
-          <div>
-            {" "}
-            <h1>{user.userName}</h1>
-            <h1>Next Assignment Due: {nextDue.dueDate}</h1>
-            <Link to={`/${user.userName}/assignments/${nextDue.assignmentId}`}>
-              {nextDue.name}
-            </Link>
+          <div className="student-home">
+            <h1 className="student-name">
+              {user.firstName} {user.lastName}
+            </h1>
             {this.state.info.login === user.userName || this.getImage()}
             <img
+              className="student-pic"
               src={this.state.info.avatar_url}
-              style={{ width: "200px", margin: "1em 0" }}
               alt="Student Avatar"
             />
+
+            <h1 className="student-duedate">
+              Next Assignment Due: {nextDue.dueDate.slice(5, 10)}
+            </h1>
+            <div>
+              <Link
+                to={`/${user.userName}/assignments/${nextDue.assignmentId}`}
+              >
+                {nextDue.name}
+              </Link>
+            </div>
           </div>
         )}
       />

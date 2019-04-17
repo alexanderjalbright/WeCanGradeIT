@@ -1,0 +1,31 @@
+.student-home {
+  display: grid;
+  grid-template-areas: "name due" "pic link";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 40px 1fr;
+  grid-gap: 5vw;
+}
+
+.student-name {
+  grid-area: name;
+  justify-self: center;
+}
+
+.student-pic {
+  width: 30vw;
+  margin: 0.5vw;
+}
+
+.student-home div {
+  font-size: 1.8em;
+  /* display: block; */
+  grid-area: link;
+}
+
+.student-duedate {
+  grid-area: due;
+}
+
+.student-home img {
+  grid-area: pic;
+}
