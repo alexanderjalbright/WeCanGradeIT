@@ -1,9 +1,20 @@
 .student-home {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
   display: grid;
   grid-template-areas: "name due" "pic link";
   grid-template-columns: auto 1fr;
   grid-template-rows: 40px 1fr;
   grid-gap: 5vw;
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-left: 8px solid rgb(242, 103, 34);
+  border-right: 8px solid rgb(82, 139, 69);
+  border-top: 8px solid rgb(213, 36, 103);
+  border-bottom: 8px solid rgb(66, 156, 211);
 }
 
 .student-name {
