@@ -177,53 +177,53 @@ class Grades extends Component {
                     Add Grade
                   </button>
                 )}
-              </div>
-              <div>
-                {this.gradesMapper(student.grades)}
                 {this.state.addingGrade === student.studentId && (
-                  <div>
-                    <label>Assignment: </label>
+                  <div className="grade-add-form">
+                    <label>Assignment</label>
                     <select name="addAssignmentId" onChange={this.onChange}>
                       <option value="" selected disabled hidden>
                         Choose here
                       </option>
                       {this.assignmentMapper()}
                     </select>
-                    <label>Value:</label>
+                    <label>Value</label>
                     <input
                       name="editValue"
                       value={this.state.editValue}
                       onChange={this.onChange}
                     />
-                    <label>Comment:</label>
-                    <input
+                    <label>Comment</label>
+                    <textarea
                       name="editComment"
                       value={this.state.editComment}
                       onChange={this.onChange}
                     />
-                    <button
-                      className="grade-btn"
-                      onClick={() => {
-                        this.submitGrade({
-                          assignmentId: this.state.addAssignmentId,
-                          studentId: student.studentId
-                        });
-                        this.setState({
-                          editValue: 0,
-                          editComment: "",
-                          addingGrade: 0,
-                          editingGrade: 0
-                        });
-                      }}
-                    >
-                      Submit Grade
-                    </button>
-                    <button className="grade-btn" onClick={this.cancelEdit}>
-                      Cancel
-                    </button>
+                    <div className="grade-add-btns">
+                      <button
+                        className="grade-btn"
+                        onClick={() => {
+                          this.submitGrade({
+                            assignmentId: this.state.addAssignmentId,
+                            studentId: student.studentId
+                          });
+                          this.setState({
+                            editValue: 0,
+                            editComment: "",
+                            addingGrade: 0,
+                            editingGrade: 0
+                          });
+                        }}
+                      >
+                        Submit Grade
+                      </button>
+                      <button className="grade-btn" onClick={this.cancelEdit}>
+                        Cancel
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>
+              <div>{this.gradesMapper(student.grades)}</div>
             </div>
           )
         )
