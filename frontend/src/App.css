@@ -210,3 +210,9 @@ p {
   font-size: 19.2px;
   font-family: "Roboto", sans-serif;
 }
+
+.enter-site {
+  background-color: #ffffff55;
+  border: 2px solid var(--dark-color);
+  font-family: "Roboto", sans-serif;
+}

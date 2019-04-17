@@ -65,7 +65,7 @@ export default class Home extends Component {
                 }
               >
                 <button
-                  className="user-select-btn enter-site fancy-btn"
+                  className="user-select-btn enter-site"
                   style={{ width: "200px" }}
                 >
                   Enter
