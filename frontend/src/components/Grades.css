@@ -151,3 +151,13 @@
 .overall-grade {
   font-size: 0.8em;
 }
+
+.assigns {
+  padding: 0 auto;
+  background-color: #d4eefa;
+  display: block;
+  /* margin-top: 1em; */
+  /* border: 1em 0 1em 4em; */
+  border-color: #83d8ff;
+  border-top: 2px solid var(--dark-blue);
+}
