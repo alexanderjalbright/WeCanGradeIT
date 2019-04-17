@@ -15,11 +15,6 @@ html {
   text-decoration: none;
   color: var(--dark-color);
   font-family: "Roboto", sans-serif;
-  background-image: url("/Images/shortSplatterCle.jpg");
-  height: 100%;
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: fill;
 }
 
 a {
@@ -30,6 +25,7 @@ nav {
   background-color: var(--dark-color);
   font-size: 1.2em;
   line-height: 1.5em;
+  z-index: 5;
 }
 
 nav ul {
@@ -215,4 +211,17 @@ p {
   background-color: #ffffff55;
   border: 2px solid var(--dark-color);
   font-family: "Roboto", sans-serif;
+}
+
+.home-page {
+  background-image: url("/Images/shortSplatterCle.jpg");
+  height: 100vh;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: fill;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 0;
 }
