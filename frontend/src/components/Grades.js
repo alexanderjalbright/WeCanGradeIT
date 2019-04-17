@@ -47,38 +47,39 @@ class Grades extends Component {
             <span className="comment-title">Comment:</span> <br />
             {grade.comment}
           </p>
+          {this.state.editingGrade === grade.gradeId && (
+            <div className={`grade-edit grade-edit${grade.gradeId}`}>
+              <label>Grade</label>
+              <input
+                className="grade-input grade-input-value"
+                name="editValue"
+                value={this.state.editValue}
+                onChange={this.onChange}
+              />
+              <label>Comment</label>
+              <textarea
+                className="grade-input"
+                name="editComment"
+                value={this.state.editComment}
+                onChange={this.onChange}
+              />
+              <div className="grade-edit-btns">
+                <button
+                  className="grade-btn edit-grade-btn submit-edit-btn"
+                  onClick={() => this.submitGrade(grade)}
+                >
+                  Submit Changes
+                </button>
+                <button
+                  className="grade-btn edit-grade-btn"
+                  onClick={this.cancelEdit}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
         </div>
-
-        {this.state.editingGrade === grade.gradeId && (
-          <div className={`grade-edit grade-edit${grade.gradeId}`}>
-            <label>Grade:</label>
-            <input
-              className="grade-input grade-input-value"
-              name="editValue"
-              value={this.state.editValue}
-              onChange={this.onChange}
-            />
-            <label>Comment:</label>
-            <textarea
-              className="grade-input"
-              name="editComment"
-              value={this.state.editComment}
-              onChange={this.onChange}
-            />
-            <button
-              className="grade-btn edit-grade-btn submit-edit-btn"
-              onClick={() => this.submitGrade(grade)}
-            >
-              Submit Changes
-            </button>
-            <button
-              className="grade-btn edit-grade-btn"
-              onClick={this.cancelEdit}
-            >
-              Cancel
-            </button>
-          </div>
-        )}
       </div>
     ));
 
