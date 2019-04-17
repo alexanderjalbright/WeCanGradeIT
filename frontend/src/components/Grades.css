@@ -40,7 +40,8 @@
   grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
   grid-template-areas:
     "assign repo grade btn"
-    "comment comment comment comment";
+    "comment comment comment comment"
+    "edit edit edit edit";
   align-items: center;
   border-top: 2px solid var(--dark-green);
   border-bottom: 2px solid var(--dark-green);
@@ -90,8 +91,29 @@
 }
 
 .grade-edit {
-  text-align: right;
-  padding: 1em;
+  width: 50%;
+  margin: 10px;
+  justify-self: center;
+  grid-area: edit;
+}
+
+.grade-edit label {
+  display: block;
+  text-align: center;
+  background-color: var(--dark-green);
+  color: white;
+}
+
+.grade-edit input,
+.grade-edit textarea {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.grade-edit-btns {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
 }
 
 .grade-add {
