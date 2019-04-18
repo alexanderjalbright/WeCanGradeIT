@@ -31,7 +31,13 @@ export default class Nav extends Component {
               path={`/${user.userName}`}
               component={() => (
                 <div>
-                  <Link to={`/${user.userName}/assignments`}>ASSIGNMENTS</Link>
+                  {user.userName === "Instructor" ? (
+                    <Link to={`/${user.userName}/assignments`}>
+                      ASSIGNMENTS
+                    </Link>
+                  ) : (
+                    <a>ASSIGNMENTS</a>
+                  )}
                   <ul
                     className="assign-dropdown"
                     style={{ position: "absolute", top: "10" }}
