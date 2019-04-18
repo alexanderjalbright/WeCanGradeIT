@@ -267,10 +267,7 @@ export default class Assignment extends Component {
                 onChange={this.onChange}
                 value={this.state.editRequirements}
               />
-              <button
-                className="fancy-btn small-btn"
-                onClick={this.addRequirement}
-              >
+              <button className="green-btn" onClick={this.addRequirement}>
                 Add Requirement
               </button>
             </div>
@@ -289,27 +286,26 @@ export default class Assignment extends Component {
                 value={this.state.editDueTime}
               />
             </div>
-            <button
-              className="fancy-btn small-btn"
-              onClick={this.submitAssignment}
-            >
-              Submit Assignment
-            </button>
-            <button
-              className="fancy-btn small-btn"
-              onClick={() => {
-                const addAssignmentForm = document.querySelector(
-                  ".edit-assignment-form"
-                );
-                addAssignmentForm.style.display = "none";
-                const addAssignmentButton = document.querySelector(
-                  ".edit-assignment-button"
-                );
-                addAssignmentButton.style.display = "block";
-              }}
-            >
-              Cancel
-            </button>
+            <div className="buttons-flex">
+              <button className="green-btn" onClick={this.submitAssignment}>
+                Submit Assignment
+              </button>
+              <button
+                className="green-btn"
+                onClick={() => {
+                  const addAssignmentForm = document.querySelector(
+                    ".edit-assignment-form"
+                  );
+                  addAssignmentForm.style.display = "none";
+                  const addAssignmentButton = document.querySelector(
+                    ".edit-assignment-button"
+                  );
+                  addAssignmentButton.style.display = "block";
+                }}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       ) : (

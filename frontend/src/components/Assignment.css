@@ -1,3 +1,8 @@
+:root {
+  --dark-green: #04794d;
+  --light-green: #deecdf;
+}
+
 .assignment-page {
   padding: 1em 2em;
   display: grid;
@@ -17,12 +22,12 @@
 .assignment-form {
   text-align: center;
   grid-area: student;
-  padding: 1em 2em;
 }
 
 .assignment-form label {
   padding: 0 auto;
-  background-color: #86d8ff;
+  background-color: var(--dark-green);
+  color: white;
   display: block;
   margin-top: 1em;
 }
@@ -36,4 +41,19 @@
   width: 20px;
   height: 20px;
   padding: 0;
+}
+
+.green-btn {
+  margin-top: 10px;
+  width: 140px;
+  height: 30px;
+  align-self: center;
+  background-color: var(--dark-green);
+  color: white;
+  border: none;
+}
+
+.buttons-flex {
+  display: flex;
+  justify-content: space-between;
 }
