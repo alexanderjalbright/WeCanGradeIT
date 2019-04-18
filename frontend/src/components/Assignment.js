@@ -78,7 +78,7 @@ export default class Assignment extends Component {
 
   submitUrl = () => {
     const { user, assignment } = this.props;
-    const grade = { repoUrl: this.state.url };
+    const grade = { repoUrl: this.state.url, repoName: this.state.url };
     const url = `${apiUrl}/grade/${user.studentId}/${assignment.assignmentId}`;
     fetch(url, {
       method: "POST",
@@ -91,7 +91,7 @@ export default class Assignment extends Component {
         fetch(`${apiUrl}/student`)
           .then(res => res.json())
           .then(json => {
-            this.resetState(json);
+            this.props.resetState(json);
           });
         alert(`Your assignment has been submitted: ${this.state.url}`);
       }
