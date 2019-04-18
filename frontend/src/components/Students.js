@@ -69,7 +69,7 @@ export default class Students extends Component {
               <h2 className="student-name-h2">{student.userName}</h2>
               {this.state.editingStudent !== student.studentId && (
                 <button
-                  className="student-btn"
+                  className="fancy-btn small-btn edit-btn"
                   onClick={() =>
                     this.setState({
                       editingStudent: student.studentId,
@@ -105,13 +105,13 @@ export default class Students extends Component {
                 />
                 <div className="students-form-btns">
                   <button
-                    className="submit-student-btn student-btn"
+                    className="submit-student-btn fancy-btn small-btn student-btn"
                     onClick={() => this.submitChanges(student.studentId)}
                   >
                     Submit Changes
                   </button>
                   <button
-                    className="cancel-btn"
+                    className="fancy-btn small-btn cancel-btn"
                     onClick={() =>
                       this.setState({
                         editingStudent: 0,
@@ -138,7 +138,7 @@ export default class Students extends Component {
           <div className="student-div">
             {studentHome}
             <button
-              className="add-button add-student-btn student-btn"
+              className="add-button add-student-btn fancy-btn small-btn"
               onClick={() => {
                 const addForm = document.querySelector(".add-form");
                 addForm.style.display = "block";
@@ -166,13 +166,13 @@ export default class Students extends Component {
               />
               <div className="students-form-btns">
                 <button
-                  className="student-btn submit-student-btn"
+                  className="fancy-btn small-btn"
                   onClick={this.submitClick}
                 >
                   Submit Student
                 </button>
                 <button
-                  className="student-btn"
+                  className="fancy-btn small-btn"
                   onClick={() => {
                     const addForm = document.querySelector(".add-form");
                     addForm.style.display = "none";

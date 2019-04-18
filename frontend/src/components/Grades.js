@@ -37,7 +37,7 @@ class Grades extends Component {
           </h3>
           {this.state.editingGrade !== grade.gradeId && (
             <button
-              className="grade-btn btn"
+              className="fancy-btn small-btn edit-grade-btn"
               onClick={() => this.editGrade(grade)}
             >
               Edit
@@ -166,7 +166,7 @@ class Grades extends Component {
                 <h1>{student.avgGrade}%</h1>
                 {this.state.addingGrade !== student.studentId && (
                   <button
-                    className={`grade-btn add-grade add-grade${
+                    className={`fancy-btn small-btn grade-btn add-grade add-grade${
                       student.studentId
                     }`}
                     onClick={() =>
@@ -204,7 +204,7 @@ class Grades extends Component {
                     />
                     <div className="grade-add-btns">
                       <button
-                        className="grade-btn"
+                        className="fancy-btn small-btn"
                         onClick={() => {
                           this.submitGrade({
                             assignmentId: this.state.addAssignmentId,
@@ -220,7 +220,10 @@ class Grades extends Component {
                       >
                         Submit Grade
                       </button>
-                      <button className="grade-btn" onClick={this.cancelEdit}>
+                      <button
+                        className="fancy-btn small-btn"
+                        onClick={this.cancelEdit}
+                      >
                         Cancel
                       </button>
                     </div>

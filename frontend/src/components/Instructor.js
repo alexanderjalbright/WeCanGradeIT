@@ -83,7 +83,10 @@ export default class Instructor extends Component {
     const renderArrayToHTMLListWithX = this.state.requirementsList.map(
       (req, index) => (
         <li key={req}>
-          {req} <button onClick={() => this.removeReq(index)}>&times;</button>
+          {req}{" "}
+          <button className="close-btn" onClick={() => this.removeReq(index)}>
+            &times;
+          </button>
         </li>
       )
     );
@@ -124,7 +127,9 @@ export default class Instructor extends Component {
               <div className="add-assignment-requirements">
                 <label>Requirements&nbsp;</label>
                 {this.state.requirementsList.length > 0 && (
-                  <ul>{renderArrayToHTMLListWithX}</ul>
+                  <ul style={{ textAlign: "left" }}>
+                    {renderArrayToHTMLListWithX}
+                  </ul>
                 )}
                 <input
                   placeholder="&#9679; new requirement"
@@ -132,7 +137,10 @@ export default class Instructor extends Component {
                   onChange={this.onChange}
                   value={this.state.requirements}
                 />
-                <button className="add-btn" onClick={this.addRequirement}>
+                <button
+                  className="add-btn fancy-btn small-btn"
+                  onClick={this.addRequirement}
+                >
                   Add Requirement
                 </button>
               </div>
@@ -151,7 +159,10 @@ export default class Instructor extends Component {
                   value={this.state.dueTime}
                 />
               </div>
-              <button className="add-btn" onClick={this.submitNewAssignment}>
+              <button
+                className="add-btn fancy-btn small-btn"
+                onClick={this.submitNewAssignment}
+              >
                 Submit Assignment
               </button>
             </div>

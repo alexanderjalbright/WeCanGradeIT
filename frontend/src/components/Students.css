@@ -1,71 +1,70 @@
 :root {
-    --dark-green: #04794d;
-    --light-green: #deecdf;
+  --dark-green: #04794d;
+  --light-green: #deecdf;
 }
 
 .student-name-h1 {
-    color: var(--dark-green);
-    margin-left: 40px;
-    display: inline;
+  color: var(--dark-green);
+  margin-left: 40px;
+  display: inline;
 }
 
 .student-name-h2 {
-    color: var(--dark-green);
-    font-style: italic;
-    text-align: center;
-    margin-right: 10px;
-    display: inline;
+  color: var(--dark-green);
+  font-style: italic;
+  text-align: center;
+  margin-right: 10px;
+  display: inline;
 }
 
 .student-div {
-    background-color: var(--light-green);
-    height: 100vh;
-}
-
-.student-btn {
-    width: 100px;
-    height: 30px;
-    align-self: center;
-    background-color: var(--dark-green);
-    color: white;
-    border: none;
-    margin-bottom: 20px;
+  background-color: var(--light-green);
+  height: 100vh;
 }
 
 .submit-student-btn {
-    width: 120px;
+  width: 140px;
 }
 
 .cancel-btn {
-    width: 100px;
-    height: 30px;
-    align-self: center;
-    background-color: var(--dark-green);
-    color: white;
-    border: none;
+  width: 100px;
+  height: 30px;
+  align-self: center;
+  background-color: var(--dark-green);
+  color: white;
+  border: none;
 }
 
 .students-form {
-    width: 50%;
-    margin: 0 auto;
+  width: 50%;
+  margin: 0 auto;
 }
 
 .students-form label {
-    display: block;
-    background-color: var(--dark-green);
-    color: white;
-    text-align: center;
-    margin-top: 10px;
+  display: block;
+  background-color: var(--dark-green);
+  color: white;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .students-form-btns {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    margin-right: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-right: 10px;
 }
 
 .each-student {
-    display: grid;
-    grid-template-columns: auto 1fr auto 40px;
+  display: grid;
+  grid-template-columns: auto 1fr auto 40px;
+}
+
+.add-student-btn {
+  margin: 2em 0 0 3em;
+}
+
+.edit-btn {
+  height: 32%;
+  width: 100px;
 }
