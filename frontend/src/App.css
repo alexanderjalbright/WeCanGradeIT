@@ -140,8 +140,8 @@ p {
 }
 
 .fancy-btn {
-  background: var(--button-color);
-  color: black;
+  background: #04794d;
+  color: white;
   border: none;
   position: relative;
   height: 50px;
@@ -155,7 +155,7 @@ p {
 
 .fancy-btn:hover {
   background: #fff;
-  color: rgb(66, 156, 211);
+  color: #04794d;
 }
 
 .fancy-btn:before,
@@ -166,7 +166,7 @@ p {
   right: 0;
   height: 2px;
   width: 0;
-  background: rgb(66, 156, 211);
+  background: #04794d;
   transition: 400ms ease all;
 }
 
@@ -183,8 +183,23 @@ p {
   transition: 800ms ease all;
 }
 
+.fancy-blue-btn {
+  background: var(--button-color);
+  color: black;
+}
+
+.fancy-blue-btn:hover {
+  color: var(--button-color);
+}
+
+.fancy-blue-btn:before,
+.fancy-blue-btn:after {
+  background: var(--button-color);
+  transition: 400ms ease all;
+}
+
 .small-btn {
-  width: 150px;
+  width: auto;
   height: auto;
   font-size: 14px;
   padding: 5px 10px;

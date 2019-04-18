@@ -26,8 +26,6 @@
 
 .assignment-form label {
   padding: 0 auto;
-  background-color: var(--dark-green);
-  color: white;
   display: block;
   margin-top: 1em;
 }
@@ -56,4 +54,19 @@
 .buttons-flex {
   display: flex;
   justify-content: space-between;
+}
+
+.blue {
+  color: black;
+  background-color: #83d8ff;
+}
+
+.student-label {
+  background-color: #83d8ff;
+  color: black;
+}
+
+.instructor-label {
+  background-color: var(--dark-green);
+  color: white;
 }

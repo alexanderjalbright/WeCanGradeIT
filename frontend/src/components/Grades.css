@@ -199,3 +199,8 @@
   margin: 0;
   background-color: rgb(212, 232, 245);
 }
+
+.edit-grade-btn {
+  height: 45%;
+  width: 100px;
+}

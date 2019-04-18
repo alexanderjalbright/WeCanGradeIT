@@ -137,7 +137,10 @@ export default class Instructor extends Component {
                   onChange={this.onChange}
                   value={this.state.requirements}
                 />
-                <button className="add-btn" onClick={this.addRequirement}>
+                <button
+                  className="add-btn fancy-btn small-btn"
+                  onClick={this.addRequirement}
+                >
                   Add Requirement
                 </button>
               </div>
@@ -156,7 +159,10 @@ export default class Instructor extends Component {
                   value={this.state.dueTime}
                 />
               </div>
-              <button className="add-btn" onClick={this.submitNewAssignment}>
+              <button
+                className="add-btn fancy-btn small-btn"
+                onClick={this.submitNewAssignment}
+              >
                 Submit Assignment
               </button>
             </div>
