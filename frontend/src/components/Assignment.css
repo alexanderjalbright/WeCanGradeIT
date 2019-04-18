@@ -1,11 +1,11 @@
 .assignment-page {
+  padding: 1em 2em;
   display: grid;
   grid-template-areas: "assign student";
   grid-template-columns: 1fr 1fr;
 }
 
 .assignment {
-  padding: 1em 2em;
   grid-area: assign;
 }
 
