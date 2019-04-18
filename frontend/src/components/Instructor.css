@@ -11,7 +11,7 @@
 
 .add-assignment-form label {
   padding: 0 auto;
-  background-color: #04794d;
+  background-color: var(--grade);
   color: white;
   display: block;
   margin-top: 1em;
@@ -30,7 +30,7 @@
   width: 150px;
   height: 30px;
   align-self: center;
-  background-color: var(--dark-green);
+  background-color: var(--grade);
   color: white;
   border: none;
 }
