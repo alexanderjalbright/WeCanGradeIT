@@ -58,14 +58,22 @@ namespace WeCanGradeIT.Repositories
         {
             var existingGrade = db.Grades.Single(grade => grade.StudentId == sId && grade.AssignmentId == aId);
 
-            if (theGrade.RepoUrl != "")
+            if (theGrade.RepoUrl != "" && theGrade.RepoUrl != null)
             {
                 existingGrade.RepoUrl = theGrade.RepoUrl;
+            }
+
+            if (theGrade.RepoName != "" && theGrade.RepoName != null)
+            {
                 existingGrade.RepoName = theGrade.RepoName;
+            }
+
+            if (theGrade.BranchName != "" && theGrade.BranchName != null)
+            {
                 existingGrade.BranchName = theGrade.BranchName;
             }
 
-            if (theGrade.Comment != "")
+            if (theGrade.Comment != "" && theGrade.Comment != null)
             {
                 existingGrade.Comment = theGrade.Comment;
             }
